@@ -1,1 +1,1 @@
-class AppRepostory {}
+class AppRepository {}
