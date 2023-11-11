@@ -2,7 +2,16 @@ import 'package:book_store_manager/themes/texts.dart';
 import 'package:flutter/material.dart';
 
 class HomeCell extends StatelessWidget {
-  const HomeCell({super.key});
+  final String content;
+  final Color color1;
+  final Color color2;
+
+  const HomeCell({
+    super.key,
+    required this.content,
+    required this.color1,
+    required this.color2,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +21,16 @@ class HomeCell extends StatelessWidget {
       ),
       color: Colors.white,
       elevation: 2,
-      child: SizedBox(
+      child: Container(
         height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(
+            colors: [color1, color2],
+          ),
+        ),
         child: Center(
-          child: Text('Sản phẩm', style: AppTexts.homeCell),
+          child: Text(content, style: AppTexts.homeCell),
         ),
       ),
     );

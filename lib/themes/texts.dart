@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class AppTexts {
-  static TextStyle homeTitle = TextStyle(
-    color: AppColors.themeColor,
+  static TextStyle homeTitle = const TextStyle(
+    color: Colors.black87,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle homeCell = TextStyle(
-    color: AppColors.themeColor,
+    color: AppColors.contentColor,
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );

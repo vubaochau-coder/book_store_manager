@@ -1,7 +1,7 @@
+import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import 'views/home_background.dart';
 import 'views/home_statistic.dart';
-import 'package:book_store_manager/themes/colors.dart';
 import 'package:gap/gap.dart';
 import 'views/home_cell.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -18,22 +18,21 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: AppColors.themeColor,
         actions: [
           IconButton(
             onPressed: () {},
             icon: Badge(
               smallSize: 8,
-              backgroundColor: Colors.blue,
-              child: Icon(MdiIcons.bell),
+              backgroundColor: AppColors.themeColor,
+              child: Icon(MdiIcons.bell, color: Colors.black),
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: Badge(
               smallSize: 8,
-              backgroundColor: Colors.blue,
-              child: Icon(MdiIcons.facebookMessenger),
+              backgroundColor: AppColors.themeColor,
+              child: Icon(MdiIcons.facebookMessenger, color: Colors.black),
             ),
           ),
         ],
@@ -46,32 +45,37 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // TimeShower(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'Thống kê trong tháng',
-                    style: AppTexts.homeTitle,
-                  ),
+                  child: Text('Tháng này', style: AppTexts.homeTitle),
                 ),
                 const Gap(10),
                 const HomeStatistic(),
                 const Gap(30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'Quản lý cửa hàng',
-                    style: AppTexts.homeTitle,
-                  ),
+                  child: Text('Quản lý', style: AppTexts.homeTitle),
                 ),
                 const Gap(10),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
-                      Expanded(child: HomeCell()),
+                      Expanded(
+                        child: HomeCell(
+                          content: 'Sản phẩm',
+                          color1: Color(0xff6190E8),
+                          color2: Color(0xffA7BFE8),
+                        ),
+                      ),
                       Gap(10),
-                      Expanded(child: HomeCell()),
+                      Expanded(
+                        child: HomeCell(
+                          content: 'Đơn hàng',
+                          color1: Color(0xffFFAFBD),
+                          color2: Color(0xffffc3a0),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -80,9 +84,21 @@ class HomePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
-                      Expanded(child: HomeCell()),
+                      Expanded(
+                        child: HomeCell(
+                          content: 'Sản phẩm',
+                          color1: Color(0xffa1ffce),
+                          color2: Color(0xfffaffd1),
+                        ),
+                      ),
                       Gap(10),
-                      Expanded(child: HomeCell()),
+                      Expanded(
+                        child: HomeCell(
+                          content: 'Sản phẩm',
+                          color1: Color(0xff6190E8),
+                          color2: Color(0xffA7BFE8),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -1,11 +1,10 @@
 class AppImages {
-  static String authBackground = "assets/images/auth_background.png";
+  static const String _prePath = "assets/images/";
 
-  static String logoTrans = "assets/images/logo_trans.png";
-  static String logoCrop = "assets/images/logo_fill_crop.png";
-  static String logoTransCrop = "assets/images/logo_trans_crop.png";
-
-  static String blocUser = "assets/images/block_user.png";
-
-  static String homeBackground = "assets/images/home_background.png";
+  static String authBackground = "${_prePath}auth_background.png";
+  static String logoTrans = "${_prePath}logo_trans.png";
+  static String logoCrop = "${_prePath}logo_fill_crop.png";
+  static String logoTransCrop = "${_prePath}logo_trans_crop.png";
+  static String blocUser = "${_prePath}block_user.png";
+  static String homeBackground = "${_prePath}home_background.png";
 }
