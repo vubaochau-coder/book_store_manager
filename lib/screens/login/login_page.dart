@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
           },
           child: Container(
             width: double.infinity,
-            height: double.infinity,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               color: AppColors.themeColor.withAlpha(200),
               image: DecorationImage(
@@ -64,7 +64,9 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 24),
+                      horizontal: 10,
+                      vertical: 24,
+                    ),
                     margin: const EdgeInsets.only(bottom: 60, top: 34),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

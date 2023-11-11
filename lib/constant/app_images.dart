@@ -6,4 +6,6 @@ class AppImages {
   static String logoTransCrop = "assets/images/logo_trans_crop.png";
 
   static String blocUser = "assets/images/block_user.png";
+
+  static String homeBackground = "assets/images/home_background.png";
 }

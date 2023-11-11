@@ -1,4 +1,5 @@
 import 'package:book_store_manager/constant/app_fonts.dart';
+import 'package:book_store_manager/repositories/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constant/app_images.dart';
@@ -40,10 +41,19 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text(
-              'Đăng xuất',
+              'Tài khoản',
               style: TextStyle(fontSize: 14),
             ),
-            leading: const Icon(Icons.logout, size: 20),
+            leading: const Icon(Icons.account_box_outlined, size: 20),
+            style: ListTileStyle.drawer,
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text(
+              'Đổi mật khẩu',
+              style: TextStyle(fontSize: 14),
+            ),
+            leading: const Icon(Icons.password_outlined, size: 20),
             style: ListTileStyle.drawer,
             onTap: () {},
           ),
@@ -54,16 +64,9 @@ class HomeDrawer extends StatelessWidget {
             ),
             leading: const Icon(Icons.logout, size: 20),
             style: ListTileStyle.drawer,
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text(
-              'Đăng xuất',
-              style: TextStyle(fontSize: 14),
-            ),
-            leading: const Icon(Icons.logout, size: 20),
-            style: ListTileStyle.drawer,
-            onTap: () {},
+            onTap: () {
+              AuthenticationService.signOut();
+            },
           ),
         ],
       ),
