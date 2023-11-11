@@ -14,7 +14,7 @@ class HomeStatistic extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 80,
+            height: 70,
             child: Row(
               children: [
                 StatisticItem(
@@ -26,7 +26,7 @@ class HomeStatistic extends StatelessWidget {
                 StatisticItem(
                   title: 'Đơn xong',
                   content: '98%',
-                  color: Colors.blue,
+                  color: Colors.lightBlueAccent[700],
                   imgPath: AppIcons.complete,
                 ),
               ],
@@ -34,13 +34,13 @@ class HomeStatistic extends StatelessWidget {
           ),
           const Gap(4),
           SizedBox(
-            height: 80,
+            height: 70,
             child: Row(
               children: [
                 StatisticItem(
                   title: 'Doanh thu',
                   content: '100.8tr',
-                  color: Colors.amber,
+                  color: Colors.amber[700],
                   imgPath: AppIcons.coin,
                   isFullWidth: true,
                 ),

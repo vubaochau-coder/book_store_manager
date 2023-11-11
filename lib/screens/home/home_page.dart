@@ -1,3 +1,4 @@
+import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import 'views/home_background.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
             icon: Badge(
               smallSize: 8,
               backgroundColor: AppColors.themeColor,
-              child: Icon(MdiIcons.bell, color: Colors.black),
+              child: Icon(MdiIcons.bellOutline, color: Colors.black),
             ),
           ),
           IconButton(
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
             icon: Badge(
               smallSize: 8,
               backgroundColor: AppColors.themeColor,
-              child: Icon(MdiIcons.facebookMessenger, color: Colors.black),
+              child: Icon(MdiIcons.chatOutline, color: Colors.black),
             ),
           ),
         ],
@@ -57,46 +58,56 @@ class HomePage extends StatelessWidget {
                   child: Text('Quản lý', style: AppTexts.homeTitle),
                 ),
                 const Gap(10),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
                       Expanded(
                         child: HomeCell(
                           content: 'Sản phẩm',
-                          color1: Color(0xff6190E8),
-                          color2: Color(0xffA7BFE8),
+                          color: Colors.orangeAccent[700]!,
+                          img: AppIcons.inventory,
+                          imgBg: AppIcons.inventoryFill,
                         ),
                       ),
-                      Gap(10),
+                      const Gap(4),
                       Expanded(
                         child: HomeCell(
                           content: 'Đơn hàng',
-                          color1: Color(0xffFFAFBD),
-                          color2: Color(0xffffc3a0),
+                          color: Colors.purpleAccent[700]!,
+                          img: AppIcons.order,
+                          imgBg: AppIcons.orderFill,
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Gap(10),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                const Gap(4),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
                       Expanded(
                         child: HomeCell(
-                          content: 'Sản phẩm',
-                          color1: Color(0xffa1ffce),
-                          color2: Color(0xfffaffd1),
+                          content: 'Đánh giá',
+                          color: Colors.greenAccent[700]!,
+                          img: AppIcons.feedback,
+                          imgBg: AppIcons.feedbackFill,
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
                         ),
                       ),
-                      Gap(10),
+                      const Gap(4),
                       Expanded(
                         child: HomeCell(
-                          content: 'Sản phẩm',
-                          color1: Color(0xff6190E8),
-                          color2: Color(0xffA7BFE8),
+                          content: 'Khách hàng',
+                          color: Colors.blueAccent[700]!,
+                          img: AppIcons.userGroup,
+                          imgBg: AppIcons.userGroupFill,
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
                         ),
                       ),
                     ],

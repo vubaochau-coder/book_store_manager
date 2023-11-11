@@ -25,12 +25,12 @@ class StatisticItem extends StatelessWidget {
         : Expanded(
             child: Card(
               color: Colors.white,
-              elevation: 2,
+              elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Container(
-                height: 80,
+                height: 70,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -38,8 +38,8 @@ class StatisticItem extends StatelessWidget {
                     colors: [
                       color ?? Colors.green,
                       color != null
-                          ? color!.withOpacity(0.2)
-                          : Colors.green.withOpacity(0.2),
+                          ? color!.withOpacity(0.4)
+                          : Colors.green.withOpacity(0.4),
                     ],
                   ),
                 ),
@@ -51,8 +51,8 @@ class StatisticItem extends StatelessWidget {
                       left: 8,
                       child: Image.asset(
                         imgPath,
-                        height: 56,
-                        width: 56,
+                        height: 46,
+                        width: 46,
                         fit: BoxFit.contain,
                         color: Colors.white.withOpacity(0.8),
                       ),
@@ -63,27 +63,24 @@ class StatisticItem extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            flex: 2,
                             child: Center(
                               child: Text(
                                 content,
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 26,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                title,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
+                          Center(
+                            child: Text(
+                              title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Colors.black54,
                               ),
                             ),
                           ),
