@@ -12,4 +12,7 @@ class AppIcons {
   static String feedbackFill = "${_prePath}feedback_fill.png";
   static String userGroup = "${_prePath}user_group.png";
   static String userGroupFill = "${_prePath}user_group_fill.png";
+  static String exclamation = "${_prePath}exclamation.png";
+  static String exclamationFill = "${_prePath}exclamation_fill.png";
+  static String up = "${_prePath}up.png";
 }

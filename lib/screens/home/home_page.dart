@@ -1,4 +1,5 @@
 import 'package:book_store_manager/constant/app_icons.dart';
+import 'package:book_store_manager/screens/home/views/home_tile.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import 'views/home_background.dart';
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                           imgBg: AppIcons.inventoryFill,
                         ),
                       ),
-                      const Gap(4),
+                      const Gap(8),
                       Expanded(
                         child: HomeCell(
                           content: 'Đơn hàng',
@@ -84,7 +85,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Gap(4),
+                const Gap(8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
@@ -99,7 +100,7 @@ class HomePage extends StatelessWidget {
                           end: Alignment.topRight,
                         ),
                       ),
-                      const Gap(4),
+                      const Gap(8),
                       Expanded(
                         child: HomeCell(
                           content: 'Khách hàng',
@@ -112,6 +113,23 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                const Gap(30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text('Khác', style: AppTexts.homeTitle),
+                ),
+                const Gap(10),
+                HomeTile(
+                  title: 'Thống kê',
+                  img: AppIcons.chart,
+                  color: Colors.orangeAccent[700]!,
+                ),
+                const Gap(8),
+                HomeTile(
+                  title: 'Báo cáo của khách hàng',
+                  img: AppIcons.exclamation,
+                  color: Colors.redAccent,
                 ),
               ],
             ),

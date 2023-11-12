@@ -28,6 +28,7 @@ class HomeCell extends StatelessWidget {
       ),
       color: Colors.white,
       elevation: 2,
+      margin: EdgeInsets.zero,
       child: Container(
         height: 100,
         padding: const EdgeInsets.symmetric(horizontal: 10),

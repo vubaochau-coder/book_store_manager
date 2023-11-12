@@ -10,7 +10,7 @@ class AppTexts {
 
   static TextStyle homeCell = TextStyle(
     color: AppColors.contentColor,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 }

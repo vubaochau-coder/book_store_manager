@@ -29,20 +29,12 @@ class HomeStatistic extends StatelessWidget {
                   color: Colors.lightBlueAccent[700],
                   imgPath: AppIcons.complete,
                 ),
-              ],
-            ),
-          ),
-          const Gap(4),
-          SizedBox(
-            height: 70,
-            child: Row(
-              children: [
+                const Gap(4),
                 StatisticItem(
                   title: 'Doanh thu',
                   content: '100.8tr',
                   color: Colors.amber[700],
                   imgPath: AppIcons.coin,
-                  isFullWidth: true,
                 ),
               ],
             ),
