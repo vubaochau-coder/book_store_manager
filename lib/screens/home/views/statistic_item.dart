@@ -36,7 +36,7 @@ class StatisticItem extends StatelessWidget {
                   width: 26,
                   color: color != null
                       ? color!.withOpacity(0.4)
-                      : Colors.tealAccent[400]!.withOpacity(0.4),
+                      : Colors.tealAccent[700]!.withOpacity(0.4),
                 ),
                 const Gap(4),
                 Text(
@@ -54,7 +54,7 @@ class StatisticItem extends StatelessWidget {
                 child: Text(
                   content,
                   style: TextStyle(
-                    color: color != null ? color! : Colors.tealAccent[400],
+                    color: color != null ? color! : Colors.tealAccent[700],
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),

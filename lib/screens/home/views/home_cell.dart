@@ -9,6 +9,7 @@ class HomeCell extends StatelessWidget {
   final String imgBg;
   final AlignmentGeometry? begin;
   final AlignmentGeometry? end;
+  final VoidCallback? onTap;
 
   const HomeCell({
     super.key,
@@ -18,6 +19,7 @@ class HomeCell extends StatelessWidget {
     this.begin,
     this.end,
     required this.imgBg,
+    this.onTap,
   });
 
   @override
@@ -31,7 +33,6 @@ class HomeCell extends StatelessWidget {
       margin: EdgeInsets.zero,
       child: Container(
         height: 100,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -46,17 +47,25 @@ class HomeCell extends StatelessWidget {
             alignment: Alignment.centerRight,
           ),
         ),
-        child: Center(
-          child: Row(
-            children: [
-              Image.asset(
-                img,
-                height: 24,
-                fit: BoxFit.fitHeight,
-              ),
-              const Gap(10),
-              Expanded(child: Text(content, style: AppTexts.homeCell)),
-            ],
+        child: InkWell(
+          onTap: onTap,
+          splashColor: Colors.grey,
+          borderRadius: BorderRadius.circular(16),
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Gap(10),
+                Image.asset(
+                  img,
+                  height: 24,
+                  fit: BoxFit.fitHeight,
+                ),
+                const Gap(10),
+                Expanded(child: Text(content, style: AppTexts.homeCell)),
+                const Gap(10),
+              ],
+            ),
           ),
         ),
       ),

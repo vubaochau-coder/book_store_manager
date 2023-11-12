@@ -1,5 +1,9 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
+import 'package:book_store_manager/screens/manage_feedback/manage_feedback_page.dart';
+import 'package:book_store_manager/screens/manage_order/manage_order_page.dart';
+import 'package:book_store_manager/screens/manage_product/manage_product_page.dart';
+import 'package:book_store_manager/screens/manage_user/manage_user_page.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import 'views/home_background.dart';
@@ -47,6 +51,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Gap(10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text('Tháng này', style: AppTexts.homeTitle),
@@ -69,6 +74,13 @@ class HomePage extends StatelessWidget {
                           color: Colors.orangeAccent[700]!,
                           img: AppIcons.inventory,
                           imgBg: AppIcons.inventoryFill,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const ManageProductPage();
+                              },
+                            ));
+                          },
                         ),
                       ),
                       const Gap(8),
@@ -80,6 +92,13 @@ class HomePage extends StatelessWidget {
                           imgBg: AppIcons.orderFill,
                           begin: Alignment.topRight,
                           end: Alignment.bottomLeft,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const ManageOrderPage();
+                              },
+                            ));
+                          },
                         ),
                       ),
                     ],
@@ -98,6 +117,13 @@ class HomePage extends StatelessWidget {
                           imgBg: AppIcons.feedbackFill,
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const ManageFeedbackPage();
+                              },
+                            ));
+                          },
                         ),
                       ),
                       const Gap(8),
@@ -109,6 +135,13 @@ class HomePage extends StatelessWidget {
                           imgBg: AppIcons.userGroupFill,
                           begin: Alignment.bottomRight,
                           end: Alignment.topLeft,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const ManageUserPage();
+                              },
+                            ));
+                          },
                         ),
                       ),
                     ],
@@ -124,12 +157,14 @@ class HomePage extends StatelessWidget {
                   title: 'Thống kê',
                   img: AppIcons.chart,
                   color: Colors.orangeAccent[700]!,
+                  onTap: () {},
                 ),
                 const Gap(8),
                 HomeTile(
                   title: 'Báo cáo của khách hàng',
                   img: AppIcons.exclamation,
                   color: Colors.redAccent,
+                  onTap: () {},
                 ),
               ],
             ),

@@ -13,4 +13,10 @@ class AppTexts {
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle appbarTitle = TextStyle(
+    color: AppColors.contentColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+  );
 }
