@@ -15,4 +15,5 @@ class AppIcons {
   static String exclamation = "${_prePath}exclamation.png";
   static String exclamationFill = "${_prePath}exclamation_fill.png";
   static String up = "${_prePath}up.png";
+  static String add = "${_prePath}add.png";
 }
