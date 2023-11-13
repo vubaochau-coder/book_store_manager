@@ -1,3 +1,4 @@
+import 'package:book_store_manager/models/product_model.dart';
 import 'package:book_store_manager/utils/number_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,7 +6,13 @@ import 'package:gap/gap.dart';
 
 class ProductItem extends StatelessWidget {
   final int index;
-  const ProductItem({super.key, required this.index});
+  final ProductModel productModel;
+
+  const ProductItem({
+    super.key,
+    required this.index,
+    required this.productModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +37,7 @@ class ProductItem extends StatelessWidget {
                   height: 42,
                   width: 42,
                   child: CachedNetworkImage(
-                    imageUrl:
-                        "https://firebasestorage.googleapis.com/v0/b/da1-bookstore.appspot.com/o/Book%2Fbook_dx001%2F6.jpg?alt=media&token=88002ca4-ec45-4fd4-a331-eaff20e429dc",
+                    imageUrl: productModel.images[0],
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -41,14 +47,14 @@ class ProductItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản 2021)',
+                      Text(
+                        productModel.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                       Text(
-                        'Kho: 82',
+                        'Kho: ${productModel.stock}',
                         style: TextStyle(
                           color: Colors.redAccent[400],
                           fontSize: 12,

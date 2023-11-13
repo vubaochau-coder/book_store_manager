@@ -1,5 +1,7 @@
+import '../bloc/manage_product_bloc.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductSeatchField extends StatefulWidget {
   const ProductSeatchField({super.key});
@@ -35,6 +37,9 @@ class _ProductSeatchFieldState extends State<ProductSeatchField> {
         fontWeight: FontWeight.w600,
       ),
       onChanged: (value) {
+        context
+            .read<ManageProductBloc>()
+            .add(SearchProductEvent(query: value.trim()));
         if (value.isNotEmpty) {
           if (!showClearButton) {
             setState(() {
@@ -62,6 +67,9 @@ class _ProductSeatchFieldState extends State<ProductSeatchField> {
             ? IconButton(
                 onPressed: () {
                   _controller.text = "";
+                  context
+                      .read<ManageProductBloc>()
+                      .add(const SearchProductEvent(query: ''));
                   setState(() {
                     showClearButton = false;
                   });

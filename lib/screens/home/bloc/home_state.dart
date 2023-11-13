@@ -1,28 +1,24 @@
 part of 'home_bloc.dart';
 
 class HomeState extends Equatable {
-  final String orderNumber;
-  final String orderCompleteNumber;
-  final double revenue;
+  final bool isLoading;
+  final HomeStatisticModel? homeStatistic;
 
   const HomeState({
-    this.orderNumber = "XX",
-    this.orderCompleteNumber = "XX",
-    this.revenue = 0,
+    this.isLoading = true,
+    this.homeStatistic,
   });
 
   @override
-  List<Object> get props => [orderNumber, orderCompleteNumber, revenue];
+  List<Object?> get props => [isLoading, homeStatistic];
 
   HomeState copyWith({
-    String? orderNumber,
-    String? orderCompleteNumber,
-    double? revenue,
+    bool? isLoading,
+    HomeStatisticModel? homeStatistic,
   }) {
     return HomeState(
-      orderNumber: orderNumber ?? this.orderNumber,
-      orderCompleteNumber: orderCompleteNumber ?? this.orderCompleteNumber,
-      revenue: revenue ?? this.revenue,
+      isLoading: isLoading ?? this.isLoading,
+      homeStatistic: homeStatistic ?? this.homeStatistic,
     );
   }
 }

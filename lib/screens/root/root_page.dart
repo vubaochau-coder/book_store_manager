@@ -1,3 +1,5 @@
+import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/home/bloc/home_bloc.dart';
 import 'package:book_store_manager/screens/home/home_page.dart';
 
 import 'require_sign_out_page.dart';
@@ -41,7 +43,12 @@ class _RootContent extends StatelessWidget {
         }
 
         if (state.isAdmin) {
-          return const HomePage();
+          return BlocProvider(
+            create: (context) => HomeBloc(
+              RepositoryProvider.of<AppRepository>(context).orderRepository,
+            )..add(HomeLoading()),
+            child: const HomePage(),
+          );
         }
 
         return const RequireSignOutPage();
