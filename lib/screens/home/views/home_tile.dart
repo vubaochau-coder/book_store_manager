@@ -40,8 +40,9 @@ class HomeTile extends StatelessWidget {
               const Gap(8),
               Text(
                 title,
-                style: TextStyle(
-                  color: color.withOpacity(0.8),
+                style: const TextStyle(
+                  color: Colors.black87,
+                  // color: color.withOpacity(0.8),
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),

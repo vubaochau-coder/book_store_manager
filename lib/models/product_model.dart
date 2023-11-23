@@ -40,7 +40,7 @@ class ProductModel {
       author: cvToString(json['author']),
       type: cvToString(json['type']),
       publisher: cvToString(json['publisher']),
-      publishingYear: cvToString(json['publisingYear']),
+      publishingYear: cvToString(json['publishingYear']),
       price: cvToDouble(json['price']),
       discount: cvToDouble(json['discount']),
       images: img,

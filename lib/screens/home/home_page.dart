@@ -159,7 +159,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.orangeAccent[700]!,
                   onTap: () {},
                 ),
-                const Gap(10),
+                const Gap(8),
                 HomeTile(
                   title: 'Thống kê',
                   img: AppIcons.chart,

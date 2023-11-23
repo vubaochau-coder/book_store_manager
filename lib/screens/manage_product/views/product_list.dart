@@ -1,11 +1,9 @@
+import 'package:book_store_manager/themes/colors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import '../bloc/manage_product_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'product_item.dart';
 import 'package:flutter/material.dart';
-
 import 'styles.dart';
 
 class ProductList extends StatelessWidget {
@@ -20,7 +18,7 @@ class ProductList extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Colors.grey[300],
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -64,9 +62,9 @@ class ProductList extends StatelessWidget {
                   physics: const ClampingScrollPhysics(),
                   separatorBuilder: (context, index) {
                     return Divider(
-                      color: Colors.grey[200],
-                      height: 1,
-                      thickness: 1,
+                      color: AppColors.background,
+                      height: 2,
+                      thickness: 2,
                     );
                   },
                   itemBuilder: (context, index) {

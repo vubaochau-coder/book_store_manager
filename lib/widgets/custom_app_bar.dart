@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final String imgBg;
+  final String? imgBg;
   final Color color;
 
   const CustomAppBar({
     super.key,
     required this.title,
-    required this.imgBg,
+    this.imgBg,
     required this.color,
   });
 
@@ -29,11 +29,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          image: DecorationImage(
-            image: AssetImage(imgBg),
-            opacity: 0.2,
-            alignment: Alignment.centerRight,
-          ),
+          image: imgBg != null
+              ? DecorationImage(
+                  image: AssetImage(imgBg!),
+                  opacity: 0.2,
+                  alignment: Alignment.centerRight,
+                )
+              : null,
         ),
       ),
     );

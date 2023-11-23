@@ -1,6 +1,7 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/repositories/repository.dart';
-import 'package:book_store_manager/screens/manage_product/views/total_product.dart';
+import 'package:book_store_manager/themes/colors.dart';
+import 'views/total_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/manage_product_bloc.dart';
 import 'views/product_list.dart';
@@ -20,6 +21,7 @@ class ManageProductPage extends StatelessWidget {
         RepositoryProvider.of<AppRepository>(context).productRepository,
       )..add(ManageProductLoading()),
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: CustomAppBar(
           title: 'Quản lý sản phẩm',
           imgBg: AppIcons.inventoryFill,

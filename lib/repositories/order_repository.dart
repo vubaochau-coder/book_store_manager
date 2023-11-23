@@ -1,5 +1,5 @@
-import 'package:book_store_manager/repositories/services/order_service.dart';
-import 'package:book_store_manager/repositories/services/transaction_service.dart';
+import 'services/order_service.dart';
+import 'services/transaction_service.dart';
 
 import '../models/home_statistic_model.dart';
 

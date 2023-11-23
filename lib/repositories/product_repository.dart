@@ -1,5 +1,5 @@
 import 'package:book_store_manager/models/product_model.dart';
-import 'package:book_store_manager/repositories/services/product_service.dart';
+import 'services/product_service.dart';
 
 class ProductRepository {
   late ProductService _service;

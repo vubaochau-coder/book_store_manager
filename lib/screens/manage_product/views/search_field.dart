@@ -60,7 +60,7 @@ class _ProductSeatchFieldState extends State<ProductSeatchField> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
-        fillColor: Colors.grey[100],
+        fillColor: Colors.white,
         filled: true,
         prefixIcon: const Icon(Icons.search),
         suffixIcon: showClearButton
