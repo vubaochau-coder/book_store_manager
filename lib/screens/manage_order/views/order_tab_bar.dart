@@ -38,12 +38,13 @@ class OrderTabBar extends StatelessWidget {
         ),
         labelPadding: EdgeInsets.zero,
         indicatorWeight: 0,
-        indicator: const BoxDecoration(
+        indicator: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
           ),
+          border: Border.all(color: AppColors.themeColor),
         ),
         tabs: [
           customTab('Hỏa tốc'),

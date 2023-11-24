@@ -66,21 +66,25 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                 OrderStatusItem(
                   icon: MdiIcons.cartArrowDown,
                   title: "Đang chuẩn bị",
+                  onTap: () {},
                 ),
                 const Gap(4),
                 OrderStatusItem(
                   icon: MdiIcons.cartCheck,
                   title: "Chuẩn bị xong",
+                  onTap: () {},
                 ),
                 const Gap(4),
                 OrderStatusItem(
                   icon: MdiIcons.truckFastOutline,
                   title: "Đang vận chuyển",
+                  onTap: () {},
                 ),
                 const Gap(4),
                 OrderStatusItem(
                   icon: MdiIcons.clipboardCheckOutline,
                   title: "Đơn đã xong",
+                  onTap: () {},
                 ),
               ],
             ),
@@ -107,7 +111,6 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                 ],
               ),
             ),
-            const Gap(6),
             OrderTabBar(tabController: tabController),
             Expanded(
               child: TabBarView(
