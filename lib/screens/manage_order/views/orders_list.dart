@@ -1,16 +1,17 @@
+import 'package:book_store_manager/models/order_model.dart';
+import 'await_confirm_order_item.dart';
+
 import 'package:flutter/material.dart';
 
-import 'order_item.dart';
-
 class OrdersList extends StatelessWidget {
-  final int itemCount;
-  const OrdersList({super.key, required this.itemCount});
+  final List<OrderModel> orders;
+  const OrdersList({super.key, required this.orders});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: const ClampingScrollPhysics(),
-      itemCount: itemCount,
+      itemCount: orders.length,
       padding: const EdgeInsets.symmetric(vertical: 0),
       separatorBuilder: (context, index) {
         return Divider(
@@ -20,7 +21,9 @@ class OrdersList extends StatelessWidget {
         );
       },
       itemBuilder: (context, index) {
-        return const OrderItem();
+        return AwaitConfirmOrderItem(
+          order: orders[index],
+        );
       },
     );
   }

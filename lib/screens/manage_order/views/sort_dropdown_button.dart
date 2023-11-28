@@ -1,5 +1,7 @@
+import '../bloc/manage_order_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class SortDropdownButton extends StatelessWidget {
@@ -28,26 +30,39 @@ class SortDropdownButton extends StatelessWidget {
             color: Colors.white.withOpacity(0.5),
             border: Border.all(color: Colors.grey, width: 0),
           ),
-          child: const Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                "Mới nhất",
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 12,
-                ),
-                maxLines: 1,
+              BlocBuilder<ManageOrderBloc, ManageOrderState>(
+                buildWhen: (previous, current) {
+                  return previous.sortType != current.sortType;
+                },
+                builder: (context, state) {
+                  return Text(
+                    state.sortType == SortType.newest ? "Mới nhất" : "Cũ nhất",
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 12,
+                    ),
+                    maxLines: 1,
+                  );
+                },
               ),
-              Gap(8),
-              Icon(Icons.keyboard_arrow_down_rounded, size: 16),
+              const Gap(8),
+              const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
             ],
           ),
         ),
-        onChanged: (value) {},
+        onChanged: (value) {
+          if (value != null) {
+            context
+                .read<ManageOrderBloc>()
+                .add(UpdateSortTypeEvent(sortType: value));
+          }
+        },
         items: const [
           DropdownMenuItem(
-            value: 1,
+            value: SortType.newest,
             alignment: Alignment.center,
             child: Text(
               'Mới nhất',
@@ -59,7 +74,7 @@ class SortDropdownButton extends StatelessWidget {
             ),
           ),
           DropdownMenuItem(
-            value: 1,
+            value: SortType.oldest,
             alignment: Alignment.center,
             child: Text(
               'Cũ nhất',

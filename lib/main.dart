@@ -1,6 +1,7 @@
 import 'package:book_store_manager/firebase_options.dart';
 import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/themes/colors.dart';
+import 'package:book_store_manager/utils/dialog_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'IBOO Manager',
           debugShowCheckedModeBanner: false,
+          navigatorKey: DialogUtils.navigatorKey,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: AppColors.themeColor),
             useMaterial3: true,

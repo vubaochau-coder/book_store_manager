@@ -17,9 +17,9 @@ class DialogLoading extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
-              child: LoadingAnimationWidget.horizontalRotatingDots(
+              child: LoadingAnimationWidget.hexagonDots(
                 color: Colors.white,
-                size: 12,
+                size: 40,
               ),
             ),
           ),

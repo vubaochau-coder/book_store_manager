@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'services/order_service.dart';
 import 'services/transaction_service.dart';
 
@@ -14,5 +16,21 @@ class OrderRepository {
 
   Future<HomeStatisticModel> getMonthStatistic(DateTime dateTime) async {
     return _transactionService.getMonthStatistic(dateTime);
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> ordersStream(int status) {
+    return _orderService.ordersStream(status);
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> orderStream(String orderId) {
+    return _orderService.orderStream(orderId);
+  }
+
+  Future<Map<String, dynamic>> getProductInOrder(String productId) async {
+    return _orderService.getProductInOrder(productId);
+  }
+
+  Future<void> confirmOrder(String orderId) async {
+    return _orderService.confirmOrder(orderId);
   }
 }

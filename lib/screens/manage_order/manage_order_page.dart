@@ -1,7 +1,12 @@
 import 'package:book_store_manager/constant/app_icons.dart';
+import 'package:book_store_manager/repositories/repository.dart';
+import 'views/basic_orders.dart';
+import 'views/express_orders.dart';
+import 'views/fast_orders.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bloc/manage_order_bloc.dart';
 import 'views/sort_dropdown_button.dart';
 import 'package:book_store_manager/themes/colors.dart';
-import 'views/orders_list.dart';
 import 'views/order_tab_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'views/order_status_item.dart';
@@ -38,91 +43,102 @@ class _ManageOrderPageState extends State<ManageOrderPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: CustomAppBar(
-        title: 'Quản lý đơn hàng',
-        imgBg: AppIcons.orderFill,
-        color: Colors.purpleAccent[700]!,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Gap(12),
-            Text(
-              'Theo dõi đơn hàng',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.lightBlueAccent[700],
-                fontWeight: FontWeight.w600,
+    return BlocProvider(
+      create: (context) => ManageOrderBloc(
+        RepositoryProvider.of<AppRepository>(context).orderRepository,
+      )..add(LoadingEvent()),
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        appBar: CustomAppBar(
+          title: 'Quản lý đơn hàng',
+          imgBg: AppIcons.orderFill,
+          color: Colors.purpleAccent[700]!,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Gap(12),
+              Text(
+                'Theo dõi đơn hàng',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.lightBlueAccent[700],
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const Gap(6),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                OrderStatusItem(
-                  icon: MdiIcons.cartArrowDown,
-                  title: "Đang chuẩn bị",
-                  onTap: () {},
-                ),
-                const Gap(4),
-                OrderStatusItem(
-                  icon: MdiIcons.cartCheck,
-                  title: "Chuẩn bị xong",
-                  onTap: () {},
-                ),
-                const Gap(4),
-                OrderStatusItem(
-                  icon: MdiIcons.truckFastOutline,
-                  title: "Đang vận chuyển",
-                  onTap: () {},
-                ),
-                const Gap(4),
-                OrderStatusItem(
-                  icon: MdiIcons.clipboardCheckOutline,
-                  title: "Đơn đã xong",
-                  onTap: () {},
-                ),
-              ],
-            ),
-            const Gap(12),
-            SizedBox(
-              height: 42,
-              child: Row(
+              const Gap(6),
+              Row(
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    child: Text(
-                      'Đơn chờ duyệt (12)',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.lightBlueAccent[700],
-                        fontWeight: FontWeight.w600,
+                  OrderStatusItem(
+                    icon: MdiIcons.cartArrowDown,
+                    title: "Đang chuẩn bị",
+                    onTap: () {},
+                  ),
+                  const Gap(4),
+                  OrderStatusItem(
+                    icon: MdiIcons.cartCheck,
+                    title: "Chuẩn bị xong",
+                    onTap: () {},
+                  ),
+                  const Gap(4),
+                  OrderStatusItem(
+                    icon: MdiIcons.truckFastOutline,
+                    title: "Đang vận chuyển",
+                    onTap: () {},
+                  ),
+                  const Gap(4),
+                  OrderStatusItem(
+                    icon: MdiIcons.clipboardCheckOutline,
+                    title: "Đơn đã xong",
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              const Gap(12),
+              SizedBox(
+                height: 42,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: BlocBuilder<ManageOrderBloc, ManageOrderState>(
+                        builder: (context, state) {
+                          return Text(
+                            state.isLoading
+                                ? 'Đơn chờ duyệt'
+                                : 'Đơn chờ duyệt (${state.orders.length.toStringAsFixed(0)})',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.lightBlueAccent[700],
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  ),
-                  const Text(
-                    'Sắp xếp: ',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  const SortDropdownButton(),
-                ],
+                    const Text(
+                      'Sắp xếp: ',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    const SortDropdownButton(),
+                  ],
+                ),
               ),
-            ),
-            OrderTabBar(tabController: tabController),
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  OrdersList(itemCount: 12),
-                  OrdersList(itemCount: 10),
-                  OrdersList(itemCount: 4),
-                ],
+              OrderTabBar(tabController: tabController),
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: const [
+                    ExpressOrders(),
+                    FastOrders(),
+                    BasicOrders(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,6 @@
+import '../bloc/manage_order_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constant/app_fonts.dart';
 import '../../../themes/colors.dart';
@@ -38,30 +40,56 @@ class OrderTabBar extends StatelessWidget {
         ),
         labelPadding: EdgeInsets.zero,
         indicatorWeight: 0,
-        indicator: BoxDecoration(
+        indicator: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
           ),
-          border: Border.all(color: AppColors.themeColor),
         ),
         tabs: [
-          customTab('Hỏa tốc'),
-          customTab('Nhanh'),
-          customTab('Cơ bản'),
+          BlocBuilder<ManageOrderBloc, ManageOrderState>(
+            buildWhen: (previous, current) {
+              return previous.expressOrders.length !=
+                  current.expressOrders.length;
+            },
+            builder: (context, state) {
+              return customTab('Hỏa tốc', state.expressOrders.length);
+            },
+          ),
+          BlocBuilder<ManageOrderBloc, ManageOrderState>(
+            buildWhen: (previous, current) {
+              return previous.fastOrders.length != current.fastOrders.length;
+            },
+            builder: (context, state) {
+              return customTab('Nhanh', state.fastOrders.length);
+            },
+          ),
+          BlocBuilder<ManageOrderBloc, ManageOrderState>(
+            buildWhen: (previous, current) {
+              return previous.basicOrders.length != current.basicOrders.length;
+            },
+            builder: (context, state) {
+              return customTab('Cơ bản', state.basicOrders.length);
+            },
+          ),
         ],
       ),
     );
   }
 
-  Widget customTab(String title) {
+  Widget customTab(String title, int length) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Center(
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 13),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      child: Badge(
+        isLabelVisible: length != 0,
+        label: Text(length.toStringAsFixed(0)),
+        backgroundColor: AppColors.themeColor,
+        child: Center(
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 13),
+          ),
         ),
       ),
     );

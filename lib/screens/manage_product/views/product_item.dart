@@ -1,4 +1,5 @@
 import 'package:book_store_manager/models/product_model.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
 import '../../product_detail/product_detail_page.dart';
 import 'package:book_store_manager/utils/number_utils.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +20,11 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return ProductDetailPage(product: productModel);
-          },
-        ));
+        Navigator.of(context).push(
+          PageRouteSlideTransition(
+            child: ProductDetailPage(product: productModel),
+          ),
+        );
       },
       child: Container(
         color: Colors.white,

@@ -7,4 +7,6 @@ class AppImages {
   static String logoTransCrop = "${_prePath}logo_trans_crop.png";
   static String blocUser = "${_prePath}block_user.png";
   static String homeBackground = "${_prePath}home_background.png";
+
+  static String clipboard = "${_prePath}clipboard.png";
 }
