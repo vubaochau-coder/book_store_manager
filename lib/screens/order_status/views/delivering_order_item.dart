@@ -1,7 +1,6 @@
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/widgets/abstract_order_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class DeliveringOrderItem extends AbstractOrderItem {
   const DeliveringOrderItem({super.key, required super.order});
