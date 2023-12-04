@@ -1,5 +1,7 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/order_status/order_status_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'views/basic_orders.dart';
 import 'views/express_orders.dart';
 import 'views/fast_orders.dart';
@@ -43,19 +45,24 @@ class _ManageOrderPageState extends State<ManageOrderPage>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ManageOrderBloc(
-        RepositoryProvider.of<AppRepository>(context).orderRepository,
-      )..add(LoadingEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ManageOrderBloc(
+            RepositoryProvider.of<AppRepository>(context).orderRepository,
+          )..add(LoadingEvent()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: AppColors.background,
         appBar: CustomAppBar(
           title: 'Quản lý đơn hàng',
           imgBg: AppIcons.orderFill,
-          color: Colors.purpleAccent[700]!,
+          color: Colors.orangeAccent[700]!,
+          // color: Colors.purpleAccent[700]!,
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -75,21 +82,39 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                   OrderStatusItem(
                     icon: MdiIcons.cartArrowDown,
                     title: "Đang chuẩn bị",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteSlideTransition(
+                          child: const OrderStatusPage(tabIndex: 0),
+                        ),
+                      );
+                    },
                   ),
-                  const Gap(4),
+                  const Gap(6),
                   OrderStatusItem(
                     icon: MdiIcons.cartCheck,
                     title: "Chuẩn bị xong",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteSlideTransition(
+                          child: const OrderStatusPage(tabIndex: 1),
+                        ),
+                      );
+                    },
                   ),
-                  const Gap(4),
+                  const Gap(6),
                   OrderStatusItem(
                     icon: MdiIcons.truckFastOutline,
                     title: "Đang vận chuyển",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteSlideTransition(
+                          child: const OrderStatusPage(tabIndex: 2),
+                        ),
+                      );
+                    },
                   ),
-                  const Gap(4),
+                  const Gap(6),
                   OrderStatusItem(
                     icon: MdiIcons.clipboardCheckOutline,
                     title: "Đơn đã xong",

@@ -1,5 +1,6 @@
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final Widget child;
@@ -21,7 +22,7 @@ class ConfirmDialog extends StatelessWidget {
         child: Container(
           width: MediaQuery.sizeOf(context).width * 0.8,
           padding:
-              const EdgeInsets.only(top: 28, bottom: 20, left: 10, right: 10),
+              const EdgeInsets.only(top: 24, bottom: 16, left: 10, right: 10),
           margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -31,6 +32,15 @@ class ConfirmDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               child,
+              const Text(
+                'Bạn có muốn tiếp tục?',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.blue,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+              const Gap(20),
               Row(
                 children: [
                   Expanded(
@@ -47,7 +57,7 @@ class ConfirmDialog extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                             side: BorderSide(
                               color: AppColors.themeColor,
-                              width: 2,
+                              width: 1,
                             ),
                           ),
                         ),

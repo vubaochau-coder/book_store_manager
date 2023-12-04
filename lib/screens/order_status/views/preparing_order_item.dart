@@ -1,4 +1,4 @@
-import '../bloc/manage_order_bloc.dart';
+import '../preparing/bloc/preparing_order_bloc.dart';
 import 'package:book_store_manager/widgets/abstract_order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,22 +7,8 @@ import 'package:gap/gap.dart';
 import '../../../themes/colors.dart';
 import '../../../widgets/dialogs/confirm_dialog.dart';
 
-class AwaitConfirmOrderItem extends AbstractOrderItem {
-  const AwaitConfirmOrderItem({
-    super.key,
-    required super.order,
-  });
-
-  @override
-  buildStatusBanner() {
-    return Text(
-      'Chờ xác nhận',
-      style: TextStyle(
-        color: AppColors.themeColor,
-        fontSize: 12,
-      ),
-    );
-  }
+class PreparingOrderItem extends AbstractOrderItem {
+  const PreparingOrderItem({super.key, required super.order});
 
   @override
   buildActionButton(BuildContext context) {
@@ -39,7 +25,7 @@ class AwaitConfirmOrderItem extends AbstractOrderItem {
                 child: Column(
                   children: [
                     Text(
-                      'Xác nhận đơn hàng',
+                      'Xác nhận chuẩn bị xong đơn hàng',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -47,7 +33,7 @@ class AwaitConfirmOrderItem extends AbstractOrderItem {
                     ),
                     Gap(12),
                     Text(
-                      'Đơn hàng sẽ được chuyển sang trạng thái đang chuẩn bị',
+                      'Tiếp tục sẽ chuyển đơn hàng sang trạng thái chờ lấy hàng',
                       textAlign: TextAlign.center,
                       style: TextStyle(),
                     ),
@@ -57,9 +43,9 @@ class AwaitConfirmOrderItem extends AbstractOrderItem {
               );
             },
           ).then((value) {
-            if (value != null && value == true) {
-              context.read<ManageOrderBloc>().add(
-                    ConfirmOrderEvent(orderId: order.orderId),
+            if (value == true) {
+              context.read<PreparingOrderBloc>().add(
+                    PreparingConfirmEvent(orderId: order.orderId),
                   );
             }
           });
@@ -72,9 +58,20 @@ class AwaitConfirmOrderItem extends AbstractOrderItem {
           ),
         ),
         child: const Text(
-          'Xác nhận',
+          'Chuẩn bị xong',
           style: TextStyle(color: Colors.white, fontSize: 13),
         ),
+      ),
+    );
+  }
+
+  @override
+  buildStatusBanner() {
+    return Text(
+      'Đang chuẩn bị',
+      style: TextStyle(
+        color: AppColors.themeColor,
+        fontSize: 12,
       ),
     );
   }

@@ -1,5 +1,10 @@
 import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'views/prepare_button.dart';
+import 'views/confirm_button.dart';
+import 'package:book_store_manager/utils/currency_utils.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../models/order_product_model.dart';
 import 'bloc/order_details_bloc.dart';
 import 'views/order_status.dart';
 import 'package:book_store_manager/utils/date_time.dart';
@@ -32,7 +37,7 @@ class OrderDetailsPage extends StatelessWidget {
         appBar: CustomAppBar(
           title: 'Chi tiết đơn hàng',
           imgBg: AppIcons.orderFill,
-          color: Colors.purpleAccent[700]!,
+          color: Colors.orangeAccent[700]!,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -93,6 +98,10 @@ class OrderDetailsPage extends StatelessWidget {
                       title: 'Trạng thái',
                       content:
                           orderData.paid ? 'Đã thanh toán' : 'Chưa thanh toán',
+                      contentStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: orderData.paid ? Colors.green : Colors.red,
+                      ),
                     ),
                     const Divider(color: Colors.grey),
                     const OrderStatus(),
@@ -103,56 +112,61 @@ class OrderDetailsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Sản phẩm (4)',
-                      style: TextStyle(
+                    Text(
+                      'Sản phẩm (${orderData.products.length.toStringAsFixed(0)})',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
                     ),
                     const Gap(10),
                     ListView.separated(
-                      itemCount: 4,
+                      itemCount: orderData.products.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) {
                         return const Divider(color: Colors.grey, height: 10);
                       },
                       itemBuilder: (context, index) {
-                        return const OrderDetailsProductItem();
+                        return OrderDetailsProductItem(
+                          product: orderData.products[index],
+                        );
                       },
                     ),
                   ],
                 ),
               ),
-              const DataForm(
+              DataForm(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Thành tiền',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
                     ),
-                    Gap(6),
+                    const Gap(6),
                     OrderDetailsRowInfoSpace(
                       title: 'Phí vận chuyển',
-                      content: '15.000đ',
+                      content:
+                          "${CurrencyUtils.convertDoubleToCurrency(orderData.transportPrice)}đ",
                     ),
                     OrderDetailsRowInfoSpace(
                       title: 'Sản phẩm',
-                      content: '136.000đ',
+                      content:
+                          "${CurrencyUtils.convertDoubleToCurrency(productPrice(orderData.products))}đ",
                     ),
                     OrderDetailsRowInfoSpace(
                       title: 'Giảm',
-                      content: '0đ',
+                      content:
+                          "${CurrencyUtils.convertDoubleToCurrency(productPrice(orderData.products) - orderData.productPrice)}đ",
                     ),
-                    Divider(color: Colors.grey),
+                    const Divider(color: Colors.grey),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "Tổng đơn: ",
                           style: TextStyle(
                             fontSize: 13,
@@ -161,11 +175,11 @@ class OrderDetailsPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            '151.000đ',
+                            "${CurrencyUtils.convertDoubleToCurrency(orderData.totalPrice)}đ",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
@@ -179,28 +193,39 @@ class OrderDetailsPage extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
+                  left: 6,
+                  right: 6,
                   bottom: MediaQuery.of(context).padding.bottom + 10,
                   top: 4,
                 ),
                 child: SizedBox(
                   height: 44,
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.themeColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'Xác nhận đơn',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
+                  child: BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                    builder: (context, state) {
+                      if (state.isLoading) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                          ),
+                          child: Center(
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        );
+                      }
+                      if (state.status == 0) {
+                        return const ConfirmOrderButton();
+                      }
+
+                      if (state.status == 1) {
+                        return const PrepareOrderButton();
+                      }
+
+                      return const ConfirmOrderButton();
+                    },
                   ),
                 ),
               )
@@ -209,5 +234,13 @@ class OrderDetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double productPrice(List<OrderProductModel> products) {
+    double total = 0;
+    for (var ele in products) {
+      total += ele.count * ele.priceBPDiscount;
+    }
+    return total;
   }
 }

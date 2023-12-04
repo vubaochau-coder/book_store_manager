@@ -1,4 +1,4 @@
-import '../../../constant/app_images.dart';
+import '../constant/app_images.dart';
 import 'package:flutter/material.dart';
 
 class EmptyOrdersList extends StatelessWidget {

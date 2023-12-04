@@ -1,4 +1,4 @@
-import 'package:book_store_manager/screens/order_details/bloc/order_details_bloc.dart';
+import '../bloc/order_details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +26,16 @@ class OrderStatus extends StatelessWidget {
                               : state.status == 4
                                   ? 'Đã hoàn thành'
                                   : 'Đã hủy',
+          contentStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: state.status == 0
+                ? Colors.red
+                : state.status < 4
+                    ? Colors.blue
+                    : state.status == 4
+                        ? Colors.green
+                        : Colors.red,
+          ),
         );
       },
     );

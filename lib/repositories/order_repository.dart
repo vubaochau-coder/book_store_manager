@@ -33,4 +33,12 @@ class OrderRepository {
   Future<void> confirmOrder(String orderId) async {
     return _orderService.confirmOrder(orderId);
   }
+
+  Future<void> preparingConfirmOrder(String orderId) async {
+    return _orderService.preparingConfirmOrder(orderId);
+  }
+
+  Future<void> preparedConfirmOrder(String orderId) async {
+    return _orderService.preparedConfirmOrder(orderId);
+  }
 }

@@ -62,9 +62,13 @@ class ManageOrderBloc extends Bloc<ManageOrderEvent, ManageOrderState> {
 
         orders.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
 
-        add(StreamUpdateEvent(orders: orders));
+        if (!isClosed) {
+          add(StreamUpdateEvent(orders: orders));
+        }
       } else {
-        add(const StreamUpdateEvent(orders: []));
+        if (!isClosed) {
+          add(const StreamUpdateEvent(orders: []));
+        }
       }
     });
   }
@@ -127,7 +131,6 @@ class ManageOrderBloc extends Bloc<ManageOrderEvent, ManageOrderState> {
 
   _onConfirmOrder(ConfirmOrderEvent event, Emitter emit) async {
     DialogUtils.showLoading();
-
     await _orderRepository.confirmOrder(event.orderId);
     DialogUtils.hideLoading();
     Fluttertoast.showToast(

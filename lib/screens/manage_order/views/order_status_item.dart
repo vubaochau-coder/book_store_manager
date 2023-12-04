@@ -5,6 +5,7 @@ class OrderStatusItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
+
   const OrderStatusItem({
     super.key,
     required this.icon,

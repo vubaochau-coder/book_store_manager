@@ -37,9 +37,29 @@ class OrderService {
         .doc(orderId);
 
     await docRef.set(
-      {
-        'status': 1,
-      },
+      {'status': 1},
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> preparingConfirmOrder(String orderId) async {
+    final docRef = FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .doc(orderId);
+
+    await docRef.set(
+      {'status': 2},
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> preparedConfirmOrder(String orderId) async {
+    final docRef = FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .doc(orderId);
+
+    await docRef.set(
+      {'status': 3},
       SetOptions(merge: true),
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/loading_list.dart';
 import '../bloc/manage_order_bloc.dart';
-import 'empty_orders_list.dart';
+import '../../../widgets/empty_orders_list.dart';
 import 'orders_list.dart';
 
 class BasicOrders extends StatelessWidget {

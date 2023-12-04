@@ -1,20 +1,32 @@
+import 'package:book_store_manager/utils/currency_utils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../models/order_product_model.dart';
+
 class OrderDetailsProductItem extends StatelessWidget {
-  const OrderDetailsProductItem({super.key});
+  final OrderProductModel product;
+
+  const OrderDetailsProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 50,
-          height: 60,
-          color: Colors.amber,
+        CachedNetworkImage(
+          height: 50,
+          width: 60,
+          fit: BoxFit.contain,
+          imageUrl: product.imgUrl,
         ),
+        // Container(
+        //   width: 50,
+        //   height: 60,
+        //   color: Colors.amber,
+        // ),
         const Gap(8),
-        const Expanded(
+        Expanded(
           child: SizedBox(
             height: 60,
             child: Column(
@@ -22,10 +34,10 @@ class OrderDetailsProductItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Kỹ Thuật Sửa Chữa Ô Tô Cơ Bản (Tái Bản 2019)',
+                  product.productName,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     height: 1.2,
@@ -35,8 +47,8 @@ class OrderDetailsProductItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '34.000đ',
-                      style: TextStyle(
+                      "${CurrencyUtils.convertDoubleToCurrency(product.price)}đ",
+                      style: const TextStyle(
                         fontSize: 13,
                         height: 1.2,
                         color: Colors.red,
@@ -44,8 +56,8 @@ class OrderDetailsProductItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'x1',
-                      style: TextStyle(
+                      'x${product.count.toStringAsFixed(0)}',
+                      style: const TextStyle(
                         fontSize: 12,
                         height: 1.2,
                         color: Colors.grey,

@@ -83,7 +83,12 @@ class OrderTabBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: Badge(
         isLabelVisible: length != 0,
-        label: Text(length.toStringAsFixed(0)),
+        padding: EdgeInsets.zero,
+        label: SizedBox(
+          height: 16,
+          width: 16,
+          child: Center(child: Text(length.toStringAsFixed(0))),
+        ),
         backgroundColor: AppColors.themeColor,
         child: Center(
           child: Text(
