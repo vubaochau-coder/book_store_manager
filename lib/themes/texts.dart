@@ -10,7 +10,19 @@ class AppTexts {
 
   static TextStyle homeCell = TextStyle(
     color: AppColors.contentColor,
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle appbarTitle = TextStyle(
+    color: AppColors.contentColor,
+    fontSize: 18,
     fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle dataTitle = TextStyle(
+    color: Colors.blueAccent[700],
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
   );
 }

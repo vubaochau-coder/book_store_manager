@@ -1,4 +1,7 @@
 import 'package:book_store_manager/constant/app_icons.dart';
+import 'package:book_store_manager/screens/home/bloc/home_bloc.dart';
+import 'package:book_store_manager/utils/currency_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'statistic_item.dart';
 import 'package:flutter/material.dart';
@@ -11,44 +14,51 @@ class HomeStatistic extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 80,
-            child: Row(
+      child: SizedBox(
+        height: 70,
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Row(
               children: [
                 StatisticItem(
                   title: 'Đơn',
-                  content: '302',
+                  content: state.isLoading
+                      ? "-/-"
+                      : state.homeStatistic!.totalOrder.toString(),
                   imgPath: AppIcons.order,
                 ),
                 const Gap(4),
                 StatisticItem(
                   title: 'Đơn xong',
-                  content: '98%',
-                  color: Colors.blue,
+                  content: state.isLoading
+                      ? "-/-"
+                      : calcuteCompleteRate(state.homeStatistic!.totalOrder,
+                          state.homeStatistic!.completeOrder),
+                  color: Colors.lightBlueAccent[700],
                   imgPath: AppIcons.complete,
                 ),
-              ],
-            ),
-          ),
-          const Gap(4),
-          SizedBox(
-            height: 80,
-            child: Row(
-              children: [
+                const Gap(4),
                 StatisticItem(
                   title: 'Doanh thu',
-                  content: '100.8tr',
-                  color: Colors.amber,
+                  content: state.isLoading
+                      ? "-/-"
+                      : CurrencyUtils.convertDoubletoKMB(
+                          state.homeStatistic!.revenue),
+                  color: Colors.amber[700],
                   imgPath: AppIcons.coin,
-                  isFullWidth: true,
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
+  }
+
+  String calcuteCompleteRate(int total, int complete) {
+    if (total == 0) {
+      return "100%";
+    }
+    return "${(complete * 100 / total).toStringAsFixed(1)}%";
   }
 }

@@ -12,11 +12,11 @@ class HomeBackground extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        color: Colors.white /*AppColors.themeColor*/,
+        color: Colors.white,
         image: DecorationImage(
           image: AssetImage(AppImages.homeBackground),
           fit: BoxFit.cover,
-          opacity: 0.1,
+          opacity: 0.2,
         ),
       ),
       child: child,
