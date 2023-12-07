@@ -30,3 +30,15 @@ class CancelOrderEvent extends OrderDetailsEvent {
 
   const CancelOrderEvent({required this.orderId});
 }
+
+class PrepareConfirmOrderEvent extends OrderDetailsEvent {
+  final String orderId;
+
+  const PrepareConfirmOrderEvent({required this.orderId});
+}
+
+class DeliverConfirmOrderEvent extends OrderDetailsEvent {
+  final String orderId;
+
+  const DeliverConfirmOrderEvent({required this.orderId});
+}

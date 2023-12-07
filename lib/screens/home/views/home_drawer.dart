@@ -41,15 +41,6 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text(
-              'Tài khoản',
-              style: TextStyle(fontSize: 14),
-            ),
-            leading: const Icon(Icons.account_box_outlined, size: 20),
-            style: ListTileStyle.drawer,
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text(
               'Đổi mật khẩu',
               style: TextStyle(fontSize: 14),
             ),

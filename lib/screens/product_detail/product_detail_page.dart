@@ -1,4 +1,5 @@
 import 'package:book_store_manager/models/product_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../widgets/title.dart';
 import '../../constant/app_icons.dart';
 import '../../widgets/data_form.dart';
@@ -65,10 +66,11 @@ class ProductDetailPage extends StatelessWidget {
                         ),
                       ),
                       const Gap(6),
-                      Container(
+                      CachedNetworkImage(
+                        imageUrl: product.mainImage,
                         width: 80,
                         height: 100,
-                        color: Colors.amber,
+                        fit: BoxFit.contain,
                       ),
                     ],
                   ),
@@ -97,7 +99,10 @@ class ProductDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyTitle(text: 'Hình ảnh'),
+                  MyTitle(
+                    text:
+                        'Hình ảnh (${product.allImages.length.toStringAsFixed(0)})',
+                  ),
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -109,9 +114,17 @@ class ProductDetailPage extends StatelessWidget {
                       mainAxisSpacing: 4,
                     ),
                     itemBuilder: (context, index) {
-                      return Container(color: Colors.amber);
+                      return CachedNetworkImage(
+                        imageUrl: product.allImages[index],
+                        fit: BoxFit.contain,
+                        placeholder: (context, url) {
+                          return Container(
+                            color: Colors.grey[300],
+                          );
+                        },
+                      );
                     },
-                    itemCount: 11,
+                    itemCount: product.allImages.length,
                   ),
                 ],
               ),
@@ -124,11 +137,12 @@ class ProductDetailPage extends StatelessWidget {
                   const SizedBox(width: double.infinity),
                   RowData(
                     title: 'Giá bán',
-                    content: CurrencyUtils.convertDoubletoKMB(product.price),
+                    content:
+                        '${CurrencyUtils.convertDoubleToCurrency(product.price)}đ',
                   ),
                   RowData(
                     title: 'Khuyến mãi',
-                    content: "${product.discount * 100}%",
+                    content: "${(product.discount * 100).toStringAsFixed(0)}%",
                   ),
                   const RowData(title: 'Số lượt bán', content: "102"),
                 ],

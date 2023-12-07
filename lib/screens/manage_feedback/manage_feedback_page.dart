@@ -11,7 +11,7 @@ class ManageFeedbackPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Quản lý đánh giá',
         imgBg: AppIcons.feedbackFill,
-        color: Colors.greenAccent[700]!,
+        color: Colors.orangeAccent[700]!,
       ),
     );
   }

@@ -47,7 +47,7 @@ class ProductItem extends StatelessWidget {
                     height: 42,
                     width: 42,
                     child: CachedNetworkImage(
-                      imageUrl: productModel.images[0],
+                      imageUrl: productModel.mainImage,
                       fit: BoxFit.contain,
                     ),
                   ),

@@ -26,6 +26,11 @@ class OrderRepository {
     return _orderService.orderStream(orderId);
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> userOrderStream(
+      String userId, List<int> status) {
+    return _orderService.userOrderStream(userId, status);
+  }
+
   Future<Map<String, dynamic>> getProductInOrder(String productId) async {
     return _orderService.getProductInOrder(productId);
   }
@@ -40,5 +45,9 @@ class OrderRepository {
 
   Future<void> preparedConfirmOrder(String orderId) async {
     return _orderService.preparedConfirmOrder(orderId);
+  }
+
+  Future<void> cancelOrder(String orderId) async {
+    return _orderService.cancelOrder(orderId);
   }
 }

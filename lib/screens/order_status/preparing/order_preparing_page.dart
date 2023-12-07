@@ -1,9 +1,9 @@
 import 'package:book_store_manager/widgets/empty_orders_list.dart';
-import 'package:book_store_manager/widgets/loading_list.dart';
+import 'package:book_store_manager/widgets/loading/loading_list.dart';
 import 'bloc/preparing_order_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../views/preparing_order_item.dart';
+import '../../../widgets/abstract/preparing_order_item.dart';
 import 'package:flutter/material.dart';
 
 class OrderPreparingPage extends StatelessWidget {
@@ -37,6 +37,13 @@ class OrderPreparingPage extends StatelessWidget {
             itemBuilder: (context, index) {
               return PreparingOrderItem(
                 order: state.preparingOrders[index],
+                onAction: () {
+                  context.read<PreparingOrderBloc>().add(
+                        PreparingConfirmEvent(
+                          orderId: state.preparingOrders[index].orderId,
+                        ),
+                      );
+                },
               );
             },
           ),

@@ -6,3 +6,11 @@ sealed class ManageUserEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class InitialEvent extends ManageUserEvent {}
+
+class SearchingEvent extends ManageUserEvent {
+  final String query;
+
+  const SearchingEvent({required this.query});
+}

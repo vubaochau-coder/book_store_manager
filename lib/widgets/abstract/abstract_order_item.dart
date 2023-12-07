@@ -2,20 +2,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../models/order_model.dart';
-import '../screens/order_details/order_details_page.dart';
-import '../themes/colors.dart';
-import '../utils/currency_utils.dart';
-import '../utils/date_time.dart';
-import 'flag_cllip_path.dart';
-import 'page_route_transition.dart';
+import '../../models/order_model.dart';
+import '../../screens/order_details/order_details_page.dart';
+import '../../themes/colors.dart';
+import '../../utils/currency_utils.dart';
+import '../../utils/date_time.dart';
+import '../flag_cllip_path.dart';
+import '../page_route_transition.dart';
 
 abstract class AbstractOrderItem extends StatelessWidget {
   final OrderModel order;
+  final VoidCallback? onAction;
 
   const AbstractOrderItem({
     super.key,
     required this.order,
+    this.onAction,
   });
 
   @override

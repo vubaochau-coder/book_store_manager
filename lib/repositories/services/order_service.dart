@@ -17,6 +17,15 @@ class OrderService {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> userOrderStream(
+      String userId, List<int> status) {
+    return FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .where('userId', isEqualTo: userId)
+        .where('status', whereIn: status)
+        .snapshots();
+  }
+
   Future<Map<String, dynamic>> getProductInOrder(String productId) async {
     final query = await FirebaseFirestore.instance
         .collection(DataCollection.book)
@@ -60,6 +69,17 @@ class OrderService {
 
     await docRef.set(
       {'status': 3},
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> cancelOrder(String orderId) async {
+    final docRef = FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .doc(orderId);
+
+    await docRef.set(
+      {'status': -1},
       SetOptions(merge: true),
     );
   }

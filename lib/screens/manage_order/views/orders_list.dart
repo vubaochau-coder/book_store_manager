@@ -1,5 +1,7 @@
 import 'package:book_store_manager/models/order_model.dart';
-import 'await_confirm_order_item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/manage_order_bloc.dart';
+import '../../../widgets/abstract/await_confirm_order_item.dart';
 
 import 'package:flutter/material.dart';
 
@@ -23,6 +25,11 @@ class OrdersList extends StatelessWidget {
       itemBuilder: (context, index) {
         return AwaitConfirmOrderItem(
           order: orders[index],
+          onAction: () {
+            context.read<ManageOrderBloc>().add(
+                  ConfirmOrderEvent(orderId: orders[index].orderId),
+                );
+          },
         );
       },
     );

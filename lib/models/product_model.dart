@@ -12,8 +12,11 @@ class ProductModel {
 
   final double price;
   final double discount;
-  final List<String> images;
   final int stock;
+
+  final List<String> allImages;
+  final List<String> showImages;
+  final String mainImage;
 
   ProductModel({
     required this.id,
@@ -25,13 +28,16 @@ class ProductModel {
     required this.publishingYear,
     required this.price,
     required this.discount,
-    required this.images,
+    required this.allImages,
+    required this.showImages,
+    required this.mainImage,
     required this.searchKey,
     required this.stock,
   });
 
   factory ProductModel.fromJson(String id, Map<String, dynamic> json) {
     List<String> img = List.from(json['listURL']);
+    List<String> showImg = List.from(json['showedURL']);
 
     return ProductModel(
       id: id,
@@ -43,7 +49,9 @@ class ProductModel {
       publishingYear: cvToString(json['publishingYear']),
       price: cvToDouble(json['price']),
       discount: cvToDouble(json['discount']),
-      images: img,
+      allImages: img,
+      showImages: showImg,
+      mainImage: cvToString(json['mainURL']),
       searchKey: cvToString(json['searchKey']),
       stock: cvToInt(json['stock']),
     );

@@ -1,10 +1,10 @@
 import 'package:book_store_manager/widgets/empty_orders_list.dart';
-import 'package:book_store_manager/widgets/loading_list.dart';
+import 'package:book_store_manager/widgets/loading/loading_list.dart';
 
 import 'bloc/delivering_order_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../views/delivering_order_item.dart';
+import '../../../widgets/abstract/delivering_order_item.dart';
 import 'package:flutter/material.dart';
 
 class OrderDeliveringPage extends StatelessWidget {

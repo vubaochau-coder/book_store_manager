@@ -1,5 +1,6 @@
 import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'views/deliver_button.dart';
 import 'views/prepare_button.dart';
 import 'views/confirm_button.dart';
 import 'package:book_store_manager/utils/currency_utils.dart';
@@ -216,15 +217,75 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
                         );
                       }
+
+                      if (state.status == -1) {
+                        return Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                          ),
+                          child: const Text(
+                            'Đơn hàng đã bị hủy',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }
+
                       if (state.status == 0) {
-                        return const ConfirmOrderButton();
+                        return ConfirmOrderButton(orderId: orderData.orderId);
                       }
 
                       if (state.status == 1) {
-                        return const PrepareOrderButton();
+                        return PrepareOrderButton(orderId: orderData.orderId);
                       }
 
-                      return const ConfirmOrderButton();
+                      if (state.status == 2) {
+                        return DeliverButton(orderId: orderData.orderId);
+                      }
+
+                      if (state.status == 3) {
+                        return Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            color: Colors.grey,
+                          ),
+                          child: const Text(
+                            'Đơn hàng đang được vận chuyển',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }
+
+                      if (state.status == 4) {
+                        return Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.green[400],
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Đơn hàng đã được giao thành công',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Gap(4),
+                              Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        );
+                      }
+
+                      return const SizedBox();
                     },
                   ),
                 ),

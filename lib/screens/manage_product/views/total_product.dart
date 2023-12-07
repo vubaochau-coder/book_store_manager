@@ -8,7 +8,7 @@ class TotalProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
       child: BlocBuilder<ManageProductBloc, ManageProductState>(
         buildWhen: (previous, current) {
           return previous.showedProducts.length !=

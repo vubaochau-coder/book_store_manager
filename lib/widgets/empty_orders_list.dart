@@ -12,7 +12,7 @@ class EmptyOrdersList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 112,
+            height: 102,
             margin: const EdgeInsets.only(bottom: 12),
             decoration: BoxDecoration(
               image: DecorationImage(

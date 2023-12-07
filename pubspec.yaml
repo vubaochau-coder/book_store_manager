@@ -20,6 +20,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.1.1 <4.0.0'
+  flutter: ^3.16.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -54,6 +55,9 @@ dependencies:
   expandable_text: ^2.3.0
   dropdown_button2: ^2.3.9
   fluttertoast: ^8.2.4
+  rxdart: ^0.27.7
+  url_launcher: ^6.2.1
+  fl_chart: ^0.65.0
 
 dev_dependencies:
   flutter_test:

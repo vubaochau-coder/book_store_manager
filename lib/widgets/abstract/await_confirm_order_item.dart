@@ -1,16 +1,15 @@
-import '../bloc/manage_order_bloc.dart';
-import 'package:book_store_manager/widgets/abstract_order_item.dart';
+import 'abstract_order_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import '../../../themes/colors.dart';
-import '../../../widgets/dialogs/confirm_dialog.dart';
+import '../../themes/colors.dart';
+import '../dialogs/confirm_dialog.dart';
 
 class AwaitConfirmOrderItem extends AbstractOrderItem {
   const AwaitConfirmOrderItem({
     super.key,
     required super.order,
+    required super.onAction,
   });
 
   @override
@@ -58,9 +57,7 @@ class AwaitConfirmOrderItem extends AbstractOrderItem {
             },
           ).then((value) {
             if (value != null && value == true) {
-              context.read<ManageOrderBloc>().add(
-                    ConfirmOrderEvent(orderId: order.orderId),
-                  );
+              onAction!();
             }
           });
         },

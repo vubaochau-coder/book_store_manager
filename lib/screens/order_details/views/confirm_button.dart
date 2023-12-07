@@ -1,11 +1,14 @@
+import '../bloc/order_details_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../themes/colors.dart';
 import '../../../widgets/dialogs/confirm_dialog.dart';
 
 class ConfirmOrderButton extends StatelessWidget {
-  const ConfirmOrderButton({super.key});
+  final String orderId;
+  const ConfirmOrderButton({super.key, required this.orderId});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,11 @@ class ConfirmOrderButton extends StatelessWidget {
                   );
                 },
               ).then((value) {
-                if (value != null && value == true) {}
+                if (value != null && value == true) {
+                  context.read<OrderDetailsBloc>().add(
+                        CancelOrderEvent(orderId: orderId),
+                      );
+                }
               });
             },
             style: ElevatedButton.styleFrom(
@@ -95,7 +102,11 @@ class ConfirmOrderButton extends StatelessWidget {
                   );
                 },
               ).then((value) {
-                if (value != null && value == true) {}
+                if (value != null && value == true) {
+                  context.read<OrderDetailsBloc>().add(
+                        ConfirmOrderEvent(orderId: orderId),
+                      );
+                }
               });
             },
             style: ElevatedButton.styleFrom(

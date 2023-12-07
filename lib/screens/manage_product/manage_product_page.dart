@@ -38,7 +38,7 @@ class ManageProductPage extends StatelessWidget {
             const Gap(12),
             Row(
               children: [
-                const Gap(10),
+                const Gap(6),
                 const Expanded(child: ProductSeatchField()),
                 IconButton(
                   onPressed: () {},

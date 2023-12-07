@@ -1,14 +1,16 @@
-import '../prepared/bloc/prepared_order_bloc.dart';
-import 'package:book_store_manager/themes/colors.dart';
-import 'package:book_store_manager/widgets/abstract_order_item.dart';
+import 'abstract_order_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import '../../../widgets/dialogs/confirm_dialog.dart';
+import '../../themes/colors.dart';
+import '../dialogs/confirm_dialog.dart';
 
-class PreparedOrderItem extends AbstractOrderItem {
-  const PreparedOrderItem({super.key, required super.order});
+class PreparingOrderItem extends AbstractOrderItem {
+  const PreparingOrderItem({
+    super.key,
+    required super.order,
+    required super.onAction,
+  });
 
   @override
   buildActionButton(BuildContext context) {
@@ -25,7 +27,7 @@ class PreparedOrderItem extends AbstractOrderItem {
                 child: Column(
                   children: [
                     Text(
-                      'Bắt đầu giao hàng',
+                      'Xác nhận chuẩn bị xong đơn hàng',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -33,7 +35,7 @@ class PreparedOrderItem extends AbstractOrderItem {
                     ),
                     Gap(12),
                     Text(
-                      'Đơn hàng từ giờ sẽ được vận chuyển đến người mua, bạn sẽ không thể thay đổi đơn hàng',
+                      'Tiếp tục sẽ chuyển đơn hàng sang trạng thái chờ lấy hàng',
                       textAlign: TextAlign.center,
                       style: TextStyle(),
                     ),
@@ -44,9 +46,7 @@ class PreparedOrderItem extends AbstractOrderItem {
             },
           ).then((value) {
             if (value == true) {
-              context.read<PreparedOrderBloc>().add(
-                    PreparedConfirmEvent(orderId: order.orderId),
-                  );
+              onAction!();
             }
           });
         },
@@ -58,7 +58,7 @@ class PreparedOrderItem extends AbstractOrderItem {
           ),
         ),
         child: const Text(
-          'Giao hàng',
+          'Chuẩn bị xong',
           style: TextStyle(color: Colors.white, fontSize: 13),
         ),
       ),
@@ -68,7 +68,7 @@ class PreparedOrderItem extends AbstractOrderItem {
   @override
   buildStatusBanner() {
     return Text(
-      'Chờ lấy hàng',
+      'Đang chuẩn bị',
       style: TextStyle(
         color: AppColors.themeColor,
         fontSize: 12,
