@@ -1,5 +1,6 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/done_order/done_order_page.dart';
 import 'package:book_store_manager/screens/order_status/order_status_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'views/basic_orders.dart';
@@ -118,7 +119,13 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                   OrderStatusItem(
                     icon: MdiIcons.clipboardCheckOutline,
                     title: "Đơn đã xong",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteSlideTransition(
+                          child: const DoneOrderPage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -1,12 +1,11 @@
-import '../../../constant/enum.dart';
-import '../bloc/manage_order_bloc.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class SortDropdownButton extends StatelessWidget {
-  const SortDropdownButton({super.key});
+import '../../../constant/enum.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
+
+class FilterButton extends StatelessWidget {
+  const FilterButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +20,13 @@ class SortDropdownButton extends StatelessWidget {
             color: Colors.black.withOpacity(0.8),
           ),
         ),
-        menuItemStyleData: const MenuItemStyleData(height: 32),
+        menuItemStyleData: const MenuItemStyleData(
+          height: 32,
+          padding: EdgeInsets.symmetric(horizontal: 4),
+        ),
         customButton: Container(
           height: 32,
+          // width: 92,
           padding: const EdgeInsets.only(left: 12, right: 6),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -31,44 +34,33 @@ class SortDropdownButton extends StatelessWidget {
             color: Colors.white.withOpacity(0.5),
             border: Border.all(color: Colors.grey, width: 0),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BlocBuilder<ManageOrderBloc, ManageOrderState>(
-                buildWhen: (previous, current) {
-                  return previous.sortType != current.sortType;
-                },
-                builder: (context, state) {
-                  return Text(
-                    state.sortType == ManageOrderSortType.newest
-                        ? "Mới nhất"
-                        : "Cũ nhất",
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      fontSize: 12,
-                    ),
-                    maxLines: 1,
-                  );
-                },
+              Text(
+                "Đã hủy",
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 12,
+                ),
+                maxLines: 1,
               ),
-              const Gap(8),
-              const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
+              Gap(8),
+              Icon(Icons.keyboard_arrow_down_rounded, size: 16),
             ],
           ),
         ),
         onChanged: (value) {
           if (value != null) {
-            context
-                .read<ManageOrderBloc>()
-                .add(UpdateSortTypeEvent(sortType: value));
+            //TODO
           }
         },
         items: const [
           DropdownMenuItem(
-            value: ManageOrderSortType.newest,
+            value: OrderHistorySortType.all,
             alignment: Alignment.center,
             child: Text(
-              'Mới nhất',
+              'Tất cả',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.white,
@@ -77,10 +69,22 @@ class SortDropdownButton extends StatelessWidget {
             ),
           ),
           DropdownMenuItem(
-            value: ManageOrderSortType.oldest,
+            value: OrderHistorySortType.complete,
             alignment: Alignment.center,
             child: Text(
-              'Cũ nhất',
+              'Hoàn thành',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          DropdownMenuItem(
+            value: OrderHistorySortType.cancel,
+            alignment: Alignment.center,
+            child: Text(
+              'Đã hủy',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.white,

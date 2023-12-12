@@ -1,4 +1,5 @@
 import 'package:book_store_manager/repositories/repository.dart';
+import '../../themes/texts.dart';
 import '../user_order_history/user_order_history_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'views/user_information.dart';
@@ -11,7 +12,6 @@ import 'package:gap/gap.dart';
 
 import '../../models/user_model.dart';
 import 'views/user_statistic_item.dart';
-import 'package:book_store_manager/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class UserDetailsPage extends StatelessWidget {
@@ -27,141 +27,165 @@ class UserDetailsPage extends StatelessWidget {
         RepositoryProvider.of<AppRepository>(context).orderRepository,
       )..add(InititalEvent(userId: user.userId)),
       child: Scaffold(
-        backgroundColor: AppColors.background,
-        appBar: CustomAppBar(
-          title: 'Khách hàng',
-          color: Colors.orangeAccent[700]!,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 72,
-                    height: 72,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(user.avatar),
-                        fit: BoxFit.cover,
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                centerTitle: true,
+                elevation: 0,
+                floating: true,
+                snap: true,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.white,
+                title: Text('Khách hàng', style: AppTexts.appbarTitle),
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.orangeAccent[700]!,
+                        Colors.orangeAccent[700]!.withOpacity(0.6),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                ),
+              ),
+            ];
+          },
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 72,
+                      height: 72,
+                      decoration: BoxDecoration(
+                        // shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(user.avatar),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  BlocBuilder<UserDetailsBloc, UserDetailsState>(
-                    buildWhen: (previous, current) {
-                      return previous.totalOrders != current.totalOrders;
-                    },
-                    builder: (context, state) {
-                      return UserStatisticItem(
-                        value: state.totalOrders.toStringAsFixed(0),
-                        title: 'Đơn đã đặt',
-                      );
-                    },
-                  ),
-                  BlocBuilder<UserDetailsBloc, UserDetailsState>(
-                    buildWhen: (previous, current) {
-                      return previous.orders != current.orders;
-                    },
-                    builder: (context, state) {
-                      return UserStatisticItem(
-                        value: state.orders.length.toStringAsFixed(0),
-                        title: 'Đang chờ',
-                      );
-                    },
-                  ),
-                  BlocBuilder<UserDetailsBloc, UserDetailsState>(
-                    buildWhen: (previous, current) {
-                      return previous.completeOrders != current.completeOrders;
-                    },
-                    builder: (context, state) {
-                      return UserStatisticItem(
-                        value: state.completeOrders.toStringAsFixed(0),
-                        title: 'Đơn xong',
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    UserInformation(user: user),
-                    const Gap(4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Danh sách đơn chờ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 38,
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                PageRouteSlideTransition(
-                                  child: UserOrderHistoryPage(user: user),
-                                ),
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4,
-                                horizontal: 4,
-                              ),
-                              foregroundColor: AppColors.themeColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: AppColors.themeColor,
-                                  ),
-                                ),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    'Lịch sử mua hàng',
-                                    style: TextStyle(
-                                      color: AppColors.themeColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.keyboard_double_arrow_right,
-                                    color: AppColors.themeColor,
-                                    size: 16,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    BlocBuilder<UserDetailsBloc, UserDetailsState>(
+                      buildWhen: (previous, current) {
+                        return previous.totalOrders != current.totalOrders;
+                      },
+                      builder: (context, state) {
+                        return UserStatisticItem(
+                          value: state.totalOrders.toStringAsFixed(0),
+                          title: 'Đơn đã đặt',
+                        );
+                      },
                     ),
-                    const Expanded(child: UserOrderList()),
+                    BlocBuilder<UserDetailsBloc, UserDetailsState>(
+                      buildWhen: (previous, current) {
+                        return previous.orders != current.orders;
+                      },
+                      builder: (context, state) {
+                        return UserStatisticItem(
+                          value: state.orders.length.toStringAsFixed(0),
+                          title: 'Đang chờ',
+                        );
+                      },
+                    ),
+                    BlocBuilder<UserDetailsBloc, UserDetailsState>(
+                      buildWhen: (previous, current) {
+                        return previous.completeOrders !=
+                            current.completeOrders;
+                      },
+                      builder: (context, state) {
+                        return UserStatisticItem(
+                          value: state.completeOrders.toStringAsFixed(0),
+                          title: 'Đơn xong',
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      UserInformation(user: user),
+                      const Gap(4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Danh sách đơn chờ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 38,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteSlideTransition(
+                                    child: UserOrderHistoryPage(user: user),
+                                  ),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                  horizontal: 4,
+                                ),
+                                foregroundColor: AppColors.themeColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: AppColors.themeColor,
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Lịch sử mua hàng',
+                                      style: TextStyle(
+                                        color: AppColors.themeColor,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_double_arrow_right,
+                                      color: AppColors.themeColor,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Expanded(child: UserOrderList()),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,12 +1,13 @@
+import 'package:gap/gap.dart';
+
 import '../../../constant/enum.dart';
-import '../bloc/manage_order_bloc.dart';
+import '../bloc/user_order_history_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
-class SortDropdownButton extends StatelessWidget {
-  const SortDropdownButton({super.key});
+class FilterButton extends StatelessWidget {
+  const FilterButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,13 @@ class SortDropdownButton extends StatelessWidget {
             color: Colors.black.withOpacity(0.8),
           ),
         ),
-        menuItemStyleData: const MenuItemStyleData(height: 32),
+        menuItemStyleData: const MenuItemStyleData(
+          height: 32,
+          padding: EdgeInsets.symmetric(horizontal: 4),
+        ),
         customButton: Container(
           height: 32,
+          // width: 92,
           padding: const EdgeInsets.only(left: 12, right: 6),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -32,17 +37,19 @@ class SortDropdownButton extends StatelessWidget {
             border: Border.all(color: Colors.grey, width: 0),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BlocBuilder<ManageOrderBloc, ManageOrderState>(
+              BlocBuilder<UserOrderHistoryBloc, UserOrderHistoryState>(
                 buildWhen: (previous, current) {
-                  return previous.sortType != current.sortType;
+                  return previous.viewType != current.viewType;
                 },
                 builder: (context, state) {
                   return Text(
-                    state.sortType == ManageOrderSortType.newest
-                        ? "Mới nhất"
-                        : "Cũ nhất",
+                    state.viewType == OrderHistorySortType.all
+                        ? "Tất cả"
+                        : state.viewType == OrderHistorySortType.complete
+                            ? "Hoàn thành"
+                            : "Đã hủy",
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 12,
@@ -58,17 +65,17 @@ class SortDropdownButton extends StatelessWidget {
         ),
         onChanged: (value) {
           if (value != null) {
-            context
-                .read<ManageOrderBloc>()
-                .add(UpdateSortTypeEvent(sortType: value));
+            context.read<UserOrderHistoryBloc>().add(
+                  UpdateViewTypeEvent(viewType: value),
+                );
           }
         },
         items: const [
           DropdownMenuItem(
-            value: ManageOrderSortType.newest,
+            value: OrderHistorySortType.all,
             alignment: Alignment.center,
             child: Text(
-              'Mới nhất',
+              'Tất cả',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.white,
@@ -77,10 +84,22 @@ class SortDropdownButton extends StatelessWidget {
             ),
           ),
           DropdownMenuItem(
-            value: ManageOrderSortType.oldest,
+            value: OrderHistorySortType.complete,
             alignment: Alignment.center,
             child: Text(
-              'Cũ nhất',
+              'Hoàn thành',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          DropdownMenuItem(
+            value: OrderHistorySortType.cancel,
+            alignment: Alignment.center,
+            child: Text(
+              'Đã hủy',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.white,

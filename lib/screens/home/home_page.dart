@@ -1,5 +1,6 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
+import 'package:flutter/services.dart';
 import '../manage_feedback/manage_feedback_page.dart';
 import '../manage_order/manage_order_page.dart';
 import '../manage_product/manage_product_page.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
           IconButton(
             onPressed: () {},

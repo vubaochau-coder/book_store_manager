@@ -16,7 +16,7 @@ class StreamUpdateEvent extends ManageOrderEvent {
 }
 
 class UpdateSortTypeEvent extends ManageOrderEvent {
-  final SortType sortType;
+  final ManageOrderSortType sortType;
 
   const UpdateSortTypeEvent({required this.sortType});
 }

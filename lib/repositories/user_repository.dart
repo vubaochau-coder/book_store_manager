@@ -10,8 +10,9 @@ class UserRepository {
     _userService = UserService();
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> userProfileStream(String uid) {
-    return _userService.userProfileStream(uid);
+  Stream<QuerySnapshot<Map<String, dynamic>>> userTransactionStream(
+      String uid) {
+    return _userService.userTransactionStream(uid);
   }
 
   Future<List<UserModel>> getAllUsers() async {
@@ -20,5 +21,17 @@ class UserRepository {
 
   Future<Map<String, dynamic>> getUserOrderStatistic(String userId) async {
     return _userService.getUserOrderStatistic(userId);
+  }
+
+  Future<int> getUserTotalOrder(String userId) async {
+    return _userService.getUserTotalOrder(userId);
+  }
+
+  Future<int> getUserCompleteOrder(String userId) async {
+    return _userService.getUserCompleteOrder(userId);
+  }
+
+  Future<int> getUserCancelOrder(String userId) async {
+    return _userService.getUserCancelOrder(userId);
   }
 }

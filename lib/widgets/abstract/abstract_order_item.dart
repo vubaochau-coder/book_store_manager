@@ -37,22 +37,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClipPath(
-                  clipper: FlagClipPath(),
-                  child: Container(
-                    color: order.paid ? Colors.blue[300] : Colors.red[400],
-                    padding: const EdgeInsets.only(
-                      top: 2,
-                      bottom: 2,
-                      left: 8,
-                      right: 8 * 3,
-                    ),
-                    child: Text(
-                      order.paid ? 'Đã thanh toán' : 'Chưa thanh toán',
-                      style: const TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                  ),
-                ),
+                buildFlag(),
                 const Spacer(),
                 buildStatusBanner(),
                 const Gap(10),
@@ -66,17 +51,25 @@ abstract class AbstractOrderItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Khách hàng: ",
-                          style: TextStyle(fontSize: 13)),
-                      Expanded(
-                        child: Text(
-                          order.userName,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      const Text(
+                        "Khách hàng: ",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      Text(
+                        order.userName,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
+                      const Spacer(),
+                      Text(
+                        " (${order.phone})",
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey,
+                        ),
+                      )
                     ],
                   ),
                   Row(
@@ -192,6 +185,25 @@ abstract class AbstractOrderItem extends StatelessWidget {
             ),
             const Gap(4),
           ],
+        ),
+      ),
+    );
+  }
+
+  buildFlag() {
+    return ClipPath(
+      clipper: FlagClipPath(),
+      child: Container(
+        color: order.paid ? Colors.blue[300] : Colors.red[400],
+        padding: const EdgeInsets.only(
+          top: 2,
+          bottom: 2,
+          left: 8,
+          right: 8 * 3,
+        ),
+        child: Text(
+          order.paid ? 'Đã thanh toán' : 'Chưa thanh toán',
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/order_model.dart';
+import '../models/order_product_model.dart';
 import 'services/order_service.dart';
 import 'services/transaction_service.dart';
 
@@ -49,5 +51,14 @@ class OrderRepository {
 
   Future<void> cancelOrder(String orderId) async {
     return _orderService.cancelOrder(orderId);
+  }
+
+  Future<List<OrderProductModel>> getAllProductInOrder(
+      List<Map<String, dynamic>> productRaw) async {
+    return _orderService.getAllProductInOrder(productRaw);
+  }
+
+  Future<List<OrderModel>> getUserDoneOrders(String userId) async {
+    return _orderService.getUserDoneOrders(userId);
   }
 }

@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_store_manager/constant/data_document.dart';
 import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/order_repository.dart';
 import 'package:book_store_manager/repositories/user_repository.dart';
-import 'package:book_store_manager/utils/converter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../models/order_product_model.dart';
 import '../../../utils/dialog_utils.dart';
 
 part 'user_details_event.dart';
@@ -41,50 +39,78 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
   }
 
   _onInitial(InititalEvent event, Emitter emit) async {
-    Map<String, dynamic> userData =
-        await _userRepository.getUserOrderStatistic(event.userId);
+    // Map<String, dynamic> userData =
+    //     await _userRepository.getUserOrderStatistic(event.userId);
 
-    int totalOrders = userData['totalOrders'];
-    int completeOrders = userData['completeOrders'];
+    // int totalOrders = userData['totalOrders'];
+    // int completeOrders = userData['completeOrders'];
 
-    emit(state.copyWith(
-      totalOrders: totalOrders,
-      completeOrders: completeOrders,
-    ));
+    // emit(state.copyWith(
+    //   totalOrders: totalOrders,
+    //   completeOrders: completeOrders,
+    // ));
 
     _userDetailsStream = CombineLatestStream.list([
-      _userRepository.userProfileStream(event.userId),
+      _userRepository.userTransactionStream(event.userId),
       _orderRepository.userOrderStream(event.userId, [0, 1, 2, 3]),
     ]).listen((value) async {
-      final userProfile = value[0] as DocumentSnapshot<Map<String, dynamic>>;
-      final userOrders = value[1] as QuerySnapshot<Map<String, dynamic>>;
+      final userProfile = value[0];
+      final userOrders = value[1];
 
-      int totalOrders = cvToInt(userProfile.data()!['totalOrders']);
-      int completeOrders = cvToInt(userProfile.data()!['completeOrders']);
-
-      List<OrderModel> orders = [];
-      for (var ele in userOrders.docs) {
-        List<OrderProductModel> products = [];
-
-        List<Map<String, dynamic>> rawJson = List.from(ele.data()['products']);
-
-        final productsInfo = await Future.wait(
-          rawJson.map(
-            (e) => _orderRepository.getProductInOrder(e['productID']),
-          ),
-        );
-
-        for (int i = 0; i < rawJson.length; i++) {
-          OrderProductModel temp = OrderProductModel.fromJson(
-            rawJson[i],
-            productsInfo[i]['productName'],
-            productsInfo[i]['imgURL'],
-          );
-          products.add(temp);
+      int totalOrders = 0;
+      int completeOrders = 0;
+      for (var doc in userProfile.docs) {
+        if (doc.id == DataDocument.allOrders) {
+          totalOrders = doc.data().length;
         }
 
-        orders.add(OrderModel.fromJson(ele.id, ele.data(), products));
+        if (doc.id == DataDocument.completeOrders) {
+          completeOrders = doc.data().length;
+        }
       }
+
+      List<OrderModel> orders = [];
+
+      final test = await Future.wait(
+        userOrders.docs.map(
+          (e) => _orderRepository.getAllProductInOrder(
+            List.from(e.data()['products']),
+          ),
+        ),
+      );
+
+      for (int i = 0; i < userOrders.docs.length; i++) {
+        orders.add(
+          OrderModel.fromJson(
+            userOrders.docs[i].id,
+            userOrders.docs[i].data(),
+            test[i],
+          ),
+        );
+      }
+
+      // for (var ele in userOrders.docs) {
+      //   List<OrderProductModel> products = [];
+
+      //   List<Map<String, dynamic>> rawJson = List.from(ele.data()['products']);
+
+      //   final productsInfo = await Future.wait(
+      //     rawJson.map(
+      //       (e) => _orderRepository.getProductInOrder(e['productID']),
+      //     ),
+      //   );
+
+      //   for (int i = 0; i < rawJson.length; i++) {
+      //     OrderProductModel temp = OrderProductModel.fromJson(
+      //       rawJson[i],
+      //       productsInfo[i]['productName'],
+      //       productsInfo[i]['imgURL'],
+      //     );
+      //     products.add(temp);
+      //   }
+
+      //   orders.add(OrderModel.fromJson(ele.id, ele.data(), products));
+      // }
 
       if (!isClosed) {
         add(UserStreamUpdate(

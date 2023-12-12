@@ -234,7 +234,7 @@ class OrderDetailsPage extends StatelessWidget {
                       }
 
                       if (state.status == 0) {
-                        return ConfirmOrderButton(orderId: orderData.orderId);
+                        return ConfirmOrderButton(order: orderData);
                       }
 
                       if (state.status == 1) {

@@ -1,6 +1,7 @@
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -19,6 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       foregroundColor: AppColors.contentColor,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       elevation: 0,
       title: Text(title, style: AppTexts.appbarTitle),
       centerTitle: true,

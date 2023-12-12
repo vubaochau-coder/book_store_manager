@@ -82,6 +82,8 @@ class _OrderStatusPageState extends State<OrderStatusPage>
                 isScrollable: true,
                 labelColor: AppColors.themeColor,
                 unselectedLabelColor: Colors.grey[400],
+                padding: EdgeInsets.zero,
+                tabAlignment: TabAlignment.start,
                 indicator: BoxDecoration(
                   color: Colors.transparent,
                   border: Border(
