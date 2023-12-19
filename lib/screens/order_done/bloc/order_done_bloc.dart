@@ -1,26 +1,85 @@
 import 'package:bloc/bloc.dart';
 import 'package:book_store_manager/constant/enum.dart';
+import 'package:book_store_manager/extensions/datetime_ex.dart';
 import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/order_repository.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:equatable/equatable.dart';
 
-part 'done_order_event.dart';
-part 'done_order_state.dart';
+part 'order_done_event.dart';
+part 'order_done_state.dart';
 
-class DoneOrderBloc extends Bloc<DoneOrderEvent, DoneOrderState> {
+class OrderDoneBloc extends Bloc<OrderDoneEvent, OrderDoneState> {
   final OrderRepository _orderRepository;
 
-  DoneOrderBloc(this._orderRepository) : super(const DoneOrderState()) {
+  OrderDoneBloc(this._orderRepository) : super(const OrderDoneState()) {
     on<InitialEvent>(_onInitital);
     on<UpdateSelectedMonthEvent>(_onUpdateSelectedMonth);
     on<UpdateViewTypeEvent>(_onUpdateViewType);
     on<SearchingOrderEvent>(_onSearching);
   }
 
-  _onInitital(InitialEvent event, Emitter emit) async {}
+  _onInitital(InitialEvent event, Emitter emit) async {
+    DateTime current = DateTime.now().getMonthAndYear();
 
-  _onUpdateSelectedMonth(UpdateSelectedMonthEvent event, Emitter emit) async {}
+    List<OrderModel> doneOrders =
+        await _orderRepository.getDoneOrdersOfMonth(current);
+
+    doneOrders.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
+    List<OrderModel> showedOrders = List.from(doneOrders);
+    List<OrderModel> completedOrders = [];
+    List<OrderModel> cancelledOrders = [];
+
+    for (var ele in doneOrders) {
+      if (ele.status == 4) {
+        completedOrders.add(ele);
+      } else {
+        cancelledOrders.add(ele);
+      }
+    }
+
+    emit(state.copyWith(
+      isLoading: false,
+      cancelOrders: cancelledOrders,
+      completeOrders: completedOrders,
+      orders: doneOrders,
+      showedOrders: showedOrders,
+      selectedMonth: current,
+      viewType: OrderHistorySortType.all,
+    ));
+  }
+
+  _onUpdateSelectedMonth(UpdateSelectedMonthEvent event, Emitter emit) async {
+    DateTime newTime = event.selectedMonth.getMonthAndYear();
+
+    if (newTime != state.selectedMonth) {
+      emit(state.copyWith(selectedMonth: newTime, isLoading: true));
+
+      List<OrderModel> doneOrders =
+          await _orderRepository.getDoneOrdersOfMonth(newTime);
+      List<OrderModel> showedOrders = List.from(doneOrders);
+      List<OrderModel> completedOrders = [];
+      List<OrderModel> cancelledOrders = [];
+
+      for (var ele in doneOrders) {
+        if (ele.status == 4) {
+          completedOrders.add(ele);
+        } else {
+          cancelledOrders.add(ele);
+        }
+      }
+
+      emit(state.copyWith(
+        isLoading: false,
+        cancelOrders: cancelledOrders,
+        completeOrders: completedOrders,
+        orders: doneOrders,
+        showedOrders: showedOrders,
+        viewType: OrderHistorySortType.all,
+        searchQuery: '',
+      ));
+    }
+  }
 
   _onUpdateViewType(UpdateViewTypeEvent event, Emitter emit) {
     if (event.viewType != state.viewType) {

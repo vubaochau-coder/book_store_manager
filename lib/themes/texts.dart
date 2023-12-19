@@ -20,9 +20,8 @@ class AppTexts {
     fontWeight: FontWeight.w600,
   );
 
-  static TextStyle dataTitle = TextStyle(
-    color: Colors.blueAccent[700],
+  static TextStyle dataTitle = const TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 15,
+    fontSize: 14,
   );
 }

@@ -1,4 +1,5 @@
 import 'package:book_store_manager/constant/data_collections.dart';
+import 'package:book_store_manager/extensions/datetime_ex.dart';
 import 'package:book_store_manager/utils/converter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -116,6 +117,37 @@ class OrderService {
         .collection(DataCollection.orders)
         .where('userId', isEqualTo: userId)
         .where('status', whereIn: [-1, 4]).get();
+
+    final test = await Future.wait(
+      query.docs.map(
+        (e) => getAllProductInOrder(
+          List.from(e.data()['products']),
+        ),
+      ),
+    );
+
+    for (int i = 0; i < query.docs.length; i++) {
+      res.add(
+        OrderModel.fromJson(
+          query.docs[i].id,
+          query.docs[i].data(),
+          test[i],
+        ),
+      );
+    }
+
+    return res;
+  }
+
+  Future<List<OrderModel>> getDoneOrdersOfMonth(DateTime month) async {
+    List<OrderModel> res = [];
+
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .where('status', whereIn: [-2, -1, 4])
+        .where('dateCreated', isGreaterThanOrEqualTo: month.startOfMonth())
+        .where('dateCreated', isLessThanOrEqualTo: month.endOfMonth())
+        .get();
 
     final test = await Future.wait(
       query.docs.map(

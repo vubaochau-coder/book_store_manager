@@ -1,6 +1,6 @@
-part of 'done_order_bloc.dart';
+part of 'order_done_bloc.dart';
 
-class DoneOrderState extends Equatable {
+class OrderDoneState extends Equatable {
   final bool isLoading;
   final DateTime? selectedMonth;
   final List<OrderModel> orders;
@@ -10,7 +10,7 @@ class DoneOrderState extends Equatable {
   final OrderHistorySortType viewType;
   final String searchQuery;
 
-  const DoneOrderState({
+  const OrderDoneState({
     this.isLoading = true,
     this.selectedMonth,
     this.orders = const [],
@@ -25,7 +25,7 @@ class DoneOrderState extends Equatable {
   List<Object?> get props =>
       [isLoading, selectedMonth, orders, showedOrders, viewType, searchQuery];
 
-  DoneOrderState copyWith({
+  OrderDoneState copyWith({
     bool? isLoading,
     DateTime? selectedMonth,
     List<OrderModel>? orders,
@@ -35,7 +35,7 @@ class DoneOrderState extends Equatable {
     OrderHistorySortType? viewType,
     String? searchQuery,
   }) {
-    return DoneOrderState(
+    return OrderDoneState(
       isLoading: isLoading ?? this.isLoading,
       selectedMonth: selectedMonth ?? this.selectedMonth,
       orders: orders ?? this.orders,

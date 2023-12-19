@@ -16,6 +16,15 @@ class ProductItem extends StatelessWidget {
     required this.productModel,
   });
 
+  static const Map<String, String> bookTypes = {
+    'bt001': 'Sách giáo khoa',
+    'bt002': 'Văn học',
+    'bt003': 'Truyện tranh',
+    'bt004': 'Trẻ em',
+    'bt005': 'KH - KT',
+    'bt006': 'Khác',
+  };
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -66,13 +75,25 @@ class ProductItem extends StatelessWidget {
                             style: const TextStyle(fontSize: 13),
                           ),
                           const Gap(2),
-                          Text(
-                            'Kho: ${productModel.stock}',
-                            style: TextStyle(
-                              color: Colors.redAccent[400],
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Kho: ${productModel.stock}',
+                                style: TextStyle(
+                                  color: Colors.redAccent[400],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                bookTypes[productModel.type] ?? 'NullType',
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

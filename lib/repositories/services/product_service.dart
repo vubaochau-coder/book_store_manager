@@ -14,4 +14,36 @@ class ProductService {
 
     return res;
   }
+
+  Future<void> updateOverviewProduct({
+    required String productId,
+    required String title,
+    required String author,
+    required String publisher,
+    required String publishingYear,
+    required String type,
+    required String description,
+  }) async {
+    final ref = FirebaseFirestore.instance
+        .collection(DataCollection.book)
+        .doc(productId);
+
+    await ref.set({
+      'title': title,
+      'author': author,
+      'publisher': publisher,
+      'publishingYear': publishingYear,
+      'type': type,
+      'description': description,
+    }, SetOptions(merge: true));
+  }
+
+  Future<ProductModel> getProduct(String productId) async {
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.book)
+        .doc(productId)
+        .get();
+
+    return ProductModel.fromJson(query.id, query.data()!);
+  }
 }

@@ -1,27 +1,27 @@
-part of 'done_order_bloc.dart';
+part of 'order_done_bloc.dart';
 
-sealed class DoneOrderEvent extends Equatable {
-  const DoneOrderEvent();
+sealed class OrderDoneEvent extends Equatable {
+  const OrderDoneEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class InitialEvent extends DoneOrderEvent {}
+class InitialEvent extends OrderDoneEvent {}
 
-class UpdateSelectedMonthEvent extends DoneOrderEvent {
+class UpdateSelectedMonthEvent extends OrderDoneEvent {
   final DateTime selectedMonth;
 
   const UpdateSelectedMonthEvent({required this.selectedMonth});
 }
 
-class UpdateViewTypeEvent extends DoneOrderEvent {
+class UpdateViewTypeEvent extends OrderDoneEvent {
   final OrderHistorySortType viewType;
 
   const UpdateViewTypeEvent({required this.viewType});
 }
 
-class SearchingOrderEvent extends DoneOrderEvent {
+class SearchingOrderEvent extends OrderDoneEvent {
   final String query;
 
   const SearchingOrderEvent({required this.query});

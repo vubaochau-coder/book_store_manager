@@ -1,8 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../constant/enum.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+
+import '../bloc/order_done_bloc.dart';
 
 class FilterButton extends StatelessWidget {
   const FilterButton({super.key});
@@ -34,25 +37,35 @@ class FilterButton extends StatelessWidget {
             color: Colors.white.withOpacity(0.5),
             border: Border.all(color: Colors.grey, width: 0),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Đã hủy",
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 12,
-                ),
-                maxLines: 1,
+              BlocBuilder<OrderDoneBloc, OrderDoneState>(
+                builder: (context, state) {
+                  return Text(
+                    state.viewType == OrderHistorySortType.all
+                        ? 'Tất cả'
+                        : state.viewType == OrderHistorySortType.complete
+                            ? 'Hoàn thành'
+                            : 'Đã hủy',
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 12,
+                    ),
+                    maxLines: 1,
+                  );
+                },
               ),
-              Gap(8),
-              Icon(Icons.keyboard_arrow_down_rounded, size: 16),
+              const Gap(8),
+              const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
             ],
           ),
         ),
         onChanged: (value) {
           if (value != null) {
-            //TODO
+            context.read<OrderDoneBloc>().add(
+                  UpdateViewTypeEvent(viewType: value),
+                );
           }
         },
         items: const [

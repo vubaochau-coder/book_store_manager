@@ -13,6 +13,7 @@ class ProductModel {
   final double price;
   final double discount;
   final int stock;
+  final int totalSold;
 
   final List<String> allImages;
   final List<String> showImages;
@@ -33,6 +34,7 @@ class ProductModel {
     required this.mainImage,
     required this.searchKey,
     required this.stock,
+    required this.totalSold,
   });
 
   factory ProductModel.fromJson(String id, Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class ProductModel {
       mainImage: cvToString(json['mainURL']),
       searchKey: cvToString(json['searchKey']),
       stock: cvToInt(json['stock']),
+      totalSold: cvToInt(json['totalSold']),
     );
   }
 }

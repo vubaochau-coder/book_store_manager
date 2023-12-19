@@ -11,4 +11,28 @@ class ProductRepository {
   Future<List<ProductModel>> getAllProduct() async {
     return _service.getAllProduct();
   }
+
+  Future<void> updateOverviewProduct({
+    required String productId,
+    required String title,
+    required String author,
+    required String publisher,
+    required String publishingYear,
+    required String type,
+    required String description,
+  }) async {
+    return _service.updateOverviewProduct(
+      productId: productId,
+      title: title,
+      author: author,
+      publisher: publisher,
+      publishingYear: publishingYear,
+      type: type,
+      description: description,
+    );
+  }
+
+  Future<ProductModel> getProduct(String productId) async {
+    return _service.getProduct(productId);
+  }
 }
