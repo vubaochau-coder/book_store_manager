@@ -1,5 +1,7 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
+import 'package:book_store_manager/screens/import_product/import_product_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'package:flutter/services.dart';
 import '../manage_feedback/manage_feedback_page.dart';
 import '../manage_order/manage_order_page.dart';
@@ -159,7 +161,13 @@ class HomePage extends StatelessWidget {
                   title: 'Nhập hàng',
                   img: AppIcons.add,
                   color: Colors.orangeAccent[700]!,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(
+                        child: const ImportProductPage(),
+                      ),
+                    );
+                  },
                 ),
                 const Gap(8),
                 HomeTile(

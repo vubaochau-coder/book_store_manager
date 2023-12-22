@@ -42,8 +42,14 @@ class _ManageProductContent extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            PageRouteSlideTransition(child: const CreateProductPage()),
+          Navigator.of(context)
+              .push(PageRouteSlideTransition(child: const CreateProductPage()))
+              .then(
+            (value) {
+              if (value == true) {
+                context.read<ManageProductBloc>().add(ManageProductLoading());
+              }
+            },
           );
         },
         backgroundColor: Colors.orangeAccent[400]!,

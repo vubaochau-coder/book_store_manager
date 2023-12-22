@@ -60,3 +60,23 @@ class ProductModel {
     );
   }
 }
+
+class ProductLiteModel {
+  final String productId;
+  final String productName;
+  final String mainUrl;
+
+  ProductLiteModel({
+    required this.productId,
+    required this.productName,
+    required this.mainUrl,
+  });
+
+  factory ProductLiteModel.fromJson(String id, Map<String, dynamic> json) {
+    return ProductLiteModel(
+      productId: id,
+      productName: cvToString(json['title']),
+      mainUrl: cvToString(json['mainURL']),
+    );
+  }
+}

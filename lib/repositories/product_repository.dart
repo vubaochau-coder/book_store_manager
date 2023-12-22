@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:book_store_manager/models/product_model.dart';
+import '../models/product_create_model.dart';
 import 'services/product_service.dart';
 
 class ProductRepository {
@@ -34,5 +37,14 @@ class ProductRepository {
 
   Future<ProductModel> getProduct(String productId) async {
     return _service.getProduct(productId);
+  }
+
+  createNewProduct(ProductCreateModel product, List<File> imgs) async {
+    return _service.createNewProduct(product, imgs);
+  }
+
+  updatePriceAndDiscount(
+      String productId, double price, double discount) async {
+    return _service.updatePriceAndDiscount(productId, price, discount);
   }
 }

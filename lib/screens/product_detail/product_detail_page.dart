@@ -24,7 +24,26 @@ class ProductDetailPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ProductDetailBloc(
         RepositoryProvider.of<AppRepository>(context).productRepository,
-      )..add(InitialEvent(productId: product.id)),
+      )..add(InitialEvent(productId: product.id, callAfterDataChange: false)),
+      child: const _ProductDetailContent(),
+    );
+  }
+}
+
+class _ProductDetailContent extends StatelessWidget {
+  const _ProductDetailContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) return;
+
+        Navigator.of(context).pop(
+          context.read<ProductDetailBloc>().state.haveChange,
+        );
+      },
       child: Scaffold(
         backgroundColor: AppColors.background,
         body: NestedScrollView(

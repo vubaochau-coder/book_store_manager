@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/dialogs/dialog_loading.dart';
+import '../widgets/dialogs/loading_dialog.dart';
 
 class DialogUtils {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -15,7 +15,7 @@ class DialogUtils {
         context: navigatorKey.currentContext!,
         barrierDismissible: false,
         builder: (context) {
-          return const DialogLoading();
+          return const LoadingDialog();
         },
       ).then((value) => isShowDialog = false);
     }

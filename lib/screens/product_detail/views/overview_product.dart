@@ -70,13 +70,24 @@ class OverviewProduct extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context)
+                          .push(
                         PageRouteSlideTransition(
                           child: EditOverviewProductPage(
                             product: state.productData!,
                           ),
                         ),
-                      );
+                      )
+                          .then((value) {
+                        if (value == true) {
+                          context.read<ProductDetailBloc>().add(
+                                InitialEvent(
+                                  productId: state.productData!.id,
+                                  callAfterDataChange: true,
+                                ),
+                              );
+                        }
+                      });
                     },
                     icon: const Row(
                       children: [

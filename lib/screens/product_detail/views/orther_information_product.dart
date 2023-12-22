@@ -73,7 +73,18 @@ class OrderInformationProduct extends StatelessWidget {
                             price: state.productData!.price,
                           );
                         },
-                      );
+                      ).then((value) {
+                        if (value != null) {
+                          value as Map<String, double>;
+
+                          context.read<ProductDetailBloc>().add(
+                                UpdatePriceAndDiscountEvent(
+                                  price: value['price']!,
+                                  discount: value['discount']!,
+                                ),
+                              );
+                        }
+                      });
                     },
                     icon: const Row(
                       children: [

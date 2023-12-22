@@ -1,5 +1,7 @@
 import 'package:book_store_manager/models/product_model.dart';
+import '../bloc/manage_product_bloc.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../product_detail/product_detail_page.dart';
 import 'package:book_store_manager/utils/number_utils.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +31,16 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          PageRouteSlideTransition(
-            child: ProductDetailPage(product: productModel),
-          ),
+        Navigator.of(context)
+            .push(PageRouteSlideTransition(
+          child: ProductDetailPage(product: productModel),
+        ))
+            .then(
+          (value) {
+            if (value == true) {
+              context.read<ManageProductBloc>().add(ManageProductLoading());
+            }
+          },
         );
       },
       child: Container(
@@ -69,7 +77,7 @@ class ProductItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            productModel.title,
+                            "${productModel.title}\n",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),

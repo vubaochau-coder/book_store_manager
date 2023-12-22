@@ -1,5 +1,6 @@
 import 'package:book_store_manager/utils/currency_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 
 import '../../../themes/colors.dart';
@@ -18,11 +19,16 @@ class UpdateOrtherInforDialog extends StatefulWidget {
 
 class _UpdateOrtherInforDialogState extends State<UpdateOrtherInforDialog> {
   late TextEditingController _priceController, _discountController;
+  String? priceErr;
 
   @override
   void initState() {
-    _priceController = TextEditingController();
-    _discountController = TextEditingController();
+    _priceController = TextEditingController(
+      text: widget.price.toStringAsFixed(0),
+    );
+    _discountController = TextEditingController(
+      text: (widget.discount * 100).toStringAsFixed(0),
+    );
     super.initState();
   }
 
@@ -54,56 +60,98 @@ class _UpdateOrtherInforDialogState extends State<UpdateOrtherInforDialog> {
               const Center(
                 child: Text(
                   'Cập nhật giá sản phẩm',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               const Gap(16),
-              const Text(
-                'Giá gốc',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const Gap(4),
-              TextField(
-                controller: _priceController,
-                style: const TextStyle(fontSize: 14),
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: false,
-                  signed: false,
-                ),
-                decoration: _customDecoration(
-                  hint: CurrencyUtils.convertDoubleToCurrency(widget.price),
-                ).copyWith(
-                  suffixText: 'Vnđ',
-                  suffixStyle: const TextStyle(color: Colors.grey),
-                ),
-              ),
-              const Gap(16),
-              const Text(
-                'Giảm giá',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const Gap(4),
-              TextField(
-                controller: _discountController,
-                style: const TextStyle(fontSize: 14),
-                keyboardType: const TextInputType.numberWithOptions(),
-                decoration: _customDecoration(
-                  hint: CurrencyUtils.convertDoubleToCurrency(
-                    widget.discount * 100,
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Giá gốc:',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ).copyWith(
-                  suffixText: '%',
-                  suffixStyle: const TextStyle(color: Colors.grey),
-                ),
+                  const Gap(4),
+                  Expanded(
+                    flex: 2,
+                    child: SizedBox(
+                      height: 44,
+                      child: TextField(
+                        controller: _priceController,
+                        onChanged: (value) {
+                          setState(() {
+                            priceErr = null;
+                          });
+                        },
+                        style: const TextStyle(fontSize: 14),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: _customDecoration(
+                          hint: CurrencyUtils.convertDoubleToCurrency(
+                              widget.price),
+                        ).copyWith(
+                          suffixText: 'Vnđ',
+                          suffixStyle: const TextStyle(color: Colors.grey),
+                          errorText: priceErr,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(12),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Giảm giá:',
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        Gap(4),
+                        Text('(Tối đa: 99%)', style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                  const Gap(4),
+                  Expanded(
+                    flex: 2,
+                    child: SizedBox(
+                      height: 44,
+                      child: TextField(
+                        controller: _discountController,
+                        style: const TextStyle(fontSize: 14),
+                        keyboardType: TextInputType.number,
+                        maxLength: 2,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        ],
+                        decoration: _customDecoration(hint: '0').copyWith(
+                          suffixText: '%',
+                          counterText: '',
+                          suffixStyle: const TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
               const Gap(32),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
+                        backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: BorderSide(
@@ -121,7 +169,33 @@ class _UpdateOrtherInforDialogState extends State<UpdateOrtherInforDialog> {
                   const Gap(10),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        bool hasErr = false;
+                        if (_priceController.text.isEmpty) {
+                          hasErr = true;
+                          setState(() {
+                            priceErr = '*Required';
+                          });
+                        }
+
+                        if (hasErr == false) {
+                          double discount = 0;
+                          if (_discountController.text.isEmpty) {
+                            discount = 0;
+                          } else {
+                            discount =
+                                double.parse(_discountController.text) / 100;
+                          }
+
+                          Navigator.pop(
+                            context,
+                            {
+                              'price': double.parse(_priceController.text),
+                              'discount': discount,
+                            },
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         backgroundColor: AppColors.themeColor,

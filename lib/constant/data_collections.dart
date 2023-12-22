@@ -4,4 +4,5 @@ class DataCollection {
   static String book = "Book";
   static String orders = "Orders";
   static String user = "User";
+  static String import = "Import";
 }

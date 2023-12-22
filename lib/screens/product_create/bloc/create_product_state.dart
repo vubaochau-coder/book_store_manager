@@ -13,7 +13,10 @@ class CreateProductState extends Equatable {
   final String descriptionErr;
   final double price;
   final double discount;
+  final String priceErr;
+  final String discountErr;
   final List<File> images;
+  final String imageErr;
 
   const CreateProductState({
     this.productTitle = '',
@@ -28,20 +31,30 @@ class CreateProductState extends Equatable {
     this.descriptionErr = '',
     this.price = 0,
     this.discount = 0,
+    this.priceErr = '',
+    this.discountErr = '',
     this.images = const [],
+    this.imageErr = '',
   });
 
   @override
   List<Object> get props => [
         productTitle,
+        titleErr,
         author,
+        authorErr,
         type,
         publisher,
+        publisherErr,
         publishingYear,
         description,
+        descriptionErr,
         price,
         discount,
-        images
+        priceErr,
+        discountErr,
+        images,
+        imageErr,
       ];
 
   CreateProductState copyWith({
@@ -57,7 +70,10 @@ class CreateProductState extends Equatable {
     String? descriptionErr,
     double? price,
     double? discount,
+    String? priceErr,
+    String? discountErr,
     List<File>? images,
+    String? imageErr,
   }) {
     return CreateProductState(
       productTitle: productTitle ?? this.productTitle,
@@ -72,7 +88,12 @@ class CreateProductState extends Equatable {
       descriptionErr: descriptionErr ?? this.descriptionErr,
       price: price ?? this.price,
       discount: discount ?? this.discount,
+      priceErr: priceErr ?? this.priceErr,
+      discountErr: discountErr ?? this.discountErr,
       images: images ?? this.images,
+      imageErr: imageErr ?? this.imageErr,
     );
   }
 }
+
+class CreateSuccessState extends CreateProductState {}
