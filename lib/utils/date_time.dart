@@ -22,6 +22,11 @@ class DateTimeUtils {
     return dateFormat.format(dateTime);
   }
 
+  static String importTime(DateTime dateTime) {
+    DateFormat dateFormat = DateFormat('HH:mm dd/MM/yyyy');
+    return dateFormat.format(dateTime);
+  }
+
   static String getYear(DateTime dateTime) {
     DateFormat dateFormat = DateFormat('yyyy');
     return dateFormat.format(dateTime);

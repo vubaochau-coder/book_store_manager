@@ -111,17 +111,33 @@ abstract class AbstractOrderItem extends StatelessWidget {
                   SizedBox(
                     height: 48,
                     child: ListView.separated(
-                      itemCount: order.products.length % 6,
+                      itemCount:
+                          order.products.length > 6 ? 6 : order.products.length,
                       scrollDirection: Axis.horizontal,
                       separatorBuilder: (context, index) {
                         return const SizedBox(width: 4);
                       },
                       itemBuilder: (context, index) {
-                        if (index == 5 && order.products.length > 5) {
+                        if (index == 5 && order.products.length > 6) {
                           return Container(
-                            width: 42,
-                            height: 42,
-                            color: Colors.grey,
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(4),
+                              image: DecorationImage(
+                                fit: BoxFit.contain,
+                                opacity: 0.2,
+                                image: CachedNetworkImageProvider(
+                                  order.products[index].imgUrl,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "+${(order.products.length - 5).toStringAsFixed(0)}",
+                            ),
                           );
                         }
 

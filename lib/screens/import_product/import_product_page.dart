@@ -1,5 +1,9 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import '../import_product_create/create_import_product_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
+import 'views/import_history_item.dart';
+import 'package:book_store_manager/widgets/empty_import_list.dart';
 import 'package:book_store_manager/widgets/loading/loading_list.dart';
 import 'bloc/import_product_bloc.dart';
 import 'package:book_store_manager/themes/colors.dart';
@@ -18,7 +22,6 @@ class ImportProductPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ImportProductBloc(
         RepositoryProvider.of<AppRepository>(context).importRepository,
-        RepositoryProvider.of<AppRepository>(context).productRepository,
       )..add(LoadImportProductHistory(time: DateTime.now())),
       child: Scaffold(
         backgroundColor: AppColors.background,
@@ -30,7 +33,12 @@ class ImportProductPage extends StatelessWidget {
         floatingActionButton: SizedBox(
           height: 56,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteSlideTransition(
+                    child: const CreateImportProductPage()),
+              );
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               backgroundColor: Colors.orangeAccent[400],
@@ -82,20 +90,23 @@ class ImportProductPage extends StatelessWidget {
                     return const LoadingList();
                   }
 
+                  if (state.history.isEmpty) {
+                    return const EmptyImportList();
+                  }
+
                   return ListView.separated(
-                    itemCount: 24,
+                    itemCount: state.history.length,
+                    padding: const EdgeInsets.only(bottom: 56),
                     separatorBuilder: (context, index) {
                       return Divider(
-                        color: Colors.grey[200],
+                        color: AppColors.background,
                         thickness: 4,
                         height: 4,
                       );
                     },
                     itemBuilder: (context, index) {
-                      return Container(
-                        width: double.infinity,
-                        height: 88,
-                        color: Colors.amber,
+                      return ImportHistoryItem(
+                        importProductModel: state.history[index],
                       );
                     },
                   );

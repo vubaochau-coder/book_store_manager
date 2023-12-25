@@ -65,11 +65,13 @@ class ProductLiteModel {
   final String productId;
   final String productName;
   final String mainUrl;
+  final int stock;
 
   ProductLiteModel({
     required this.productId,
     required this.productName,
     required this.mainUrl,
+    required this.stock,
   });
 
   factory ProductLiteModel.fromJson(String id, Map<String, dynamic> json) {
@@ -77,6 +79,7 @@ class ProductLiteModel {
       productId: id,
       productName: cvToString(json['title']),
       mainUrl: cvToString(json['mainURL']),
+      stock: cvToInt(json['stock']),
     );
   }
 }

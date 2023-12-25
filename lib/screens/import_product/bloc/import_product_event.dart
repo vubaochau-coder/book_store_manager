@@ -12,3 +12,9 @@ class LoadImportProductHistory extends ImportProductEvent {
 
   const LoadImportProductHistory({required this.time});
 }
+
+class StreamUpdateEvent extends ImportProductEvent {
+  final List<ImportProductModel> imports;
+
+  const StreamUpdateEvent({required this.imports});
+}

@@ -3,7 +3,7 @@ import 'package:book_store_manager/models/product_model.dart';
 class ImportProductModel {
   final String id;
   final DateTime time;
-  final List<Map<ProductLiteModel, int>> products;
+  final Map<ProductLiteModel, int> products;
 
   ImportProductModel({
     required this.id,

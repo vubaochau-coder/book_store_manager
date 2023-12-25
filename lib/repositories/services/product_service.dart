@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:book_store_manager/constant/data_collections.dart';
 import 'package:book_store_manager/models/product_create_model.dart';
 import 'package:book_store_manager/models/product_model.dart';
+import 'package:book_store_manager/utils/converter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -97,5 +98,38 @@ class ProductService {
       'price': price,
       'discount': discount,
     });
+  }
+
+  Future<List<ProductLiteModel>> getAllLiteProduct() async {
+    List<ProductLiteModel> res = [];
+
+    final query =
+        await FirebaseFirestore.instance.collection(DataCollection.book).get();
+    for (var ele in query.docs) {
+      res.add(ProductLiteModel.fromJson(ele.id, ele.data()));
+    }
+
+    return res;
+  }
+
+  Future<void> importProduct(Map<ProductLiteModel, int> product) async {
+    await Future.wait(
+      product.entries.map(
+        (e) => addProductToInventory(e.key.productId, e.value),
+      ),
+    );
+  }
+
+  Future<void> addProductToInventory(String productId, int number) async {
+    final docRef = FirebaseFirestore.instance
+        .collection(DataCollection.book)
+        .doc(productId);
+
+    final data = await docRef.get();
+
+    int currentQuantity = cvToInt(data.data()?['stock']);
+    int newQuantity = currentQuantity + number;
+
+    await docRef.set({'stock': newQuantity}, SetOptions(merge: true));
   }
 }

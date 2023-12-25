@@ -47,4 +47,12 @@ class ProductRepository {
       String productId, double price, double discount) async {
     return _service.updatePriceAndDiscount(productId, price, discount);
   }
+
+  Future<List<ProductLiteModel>> getAllLiteProduct() async {
+    return _service.getAllLiteProduct();
+  }
+
+  Future<void> importProduct(Map<ProductLiteModel, int> product) async {
+    return _service.importProduct(product);
+  }
 }
