@@ -7,12 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String? imgBg;
   final Color color;
+  final List<Widget> actions;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.imgBg,
     required this.color,
+    this.actions = const [],
   });
 
   @override
@@ -24,6 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Text(title, style: AppTexts.appbarTitle),
       centerTitle: true,
+      actions: actions,
       flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

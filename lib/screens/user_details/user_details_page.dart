@@ -1,4 +1,5 @@
 import 'package:book_store_manager/repositories/repository.dart';
+import '../../constant/app_icons.dart';
 import '../../themes/texts.dart';
 import '../user_order_history/user_order_history_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
@@ -27,6 +28,7 @@ class UserDetailsPage extends StatelessWidget {
         RepositoryProvider.of<AppRepository>(context).orderRepository,
       )..add(InititalEvent(userId: user.userId)),
       child: Scaffold(
+        backgroundColor: AppColors.background,
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
@@ -47,6 +49,11 @@ class UserDetailsPage extends StatelessWidget {
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(AppIcons.userGroupFill),
+                      opacity: 0.2,
+                      alignment: Alignment.centerRight,
                     ),
                   ),
                 ),
@@ -111,79 +118,77 @@ class UserDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      UserInformation(user: user),
-                      const Gap(4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Danh sách đơn chờ',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UserInformation(user: user),
+                    const Gap(4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Danh sách đơn chờ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
                           ),
-                          SizedBox(
-                            height: 38,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  PageRouteSlideTransition(
-                                    child: UserOrderHistoryPage(user: user),
-                                  ),
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 4,
+                        ),
+                        SizedBox(
+                          height: 38,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                PageRouteSlideTransition(
+                                  child: UserOrderHistoryPage(user: user),
                                 ),
-                                foregroundColor: AppColors.themeColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4,
+                                horizontal: 4,
+                              ),
+                              foregroundColor: AppColors.themeColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: AppColors.themeColor,
+                                  ),
                                 ),
                               ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'Lịch sử mua hàng',
+                                    style: TextStyle(
                                       color: AppColors.themeColor,
+                                      fontSize: 12,
                                     ),
                                   ),
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Lịch sử mua hàng',
-                                      style: TextStyle(
-                                        color: AppColors.themeColor,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_double_arrow_right,
-                                      color: AppColors.themeColor,
-                                      size: 16,
-                                    ),
-                                  ],
-                                ),
+                                  Icon(
+                                    Icons.keyboard_double_arrow_right,
+                                    color: AppColors.themeColor,
+                                    size: 16,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      const Expanded(child: UserOrderList()),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
+              const Expanded(child: UserOrderList()),
             ],
           ),
         ),

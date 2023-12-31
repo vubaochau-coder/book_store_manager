@@ -96,7 +96,9 @@ class ImportProductPage extends StatelessWidget {
 
                   return ListView.separated(
                     itemCount: state.history.length,
-                    padding: const EdgeInsets.only(bottom: 56),
+                    padding: EdgeInsets.only(
+                      bottom: 56 + MediaQuery.of(context).padding.bottom,
+                    ),
                     separatorBuilder: (context, index) {
                       return Divider(
                         color: AppColors.background,

@@ -37,10 +37,12 @@ class OrderService {
         .get();
     String productName = cvToString(query.data()?['title']);
     String imgURL = cvToString(query.data()?['mainURL']);
+    String type = cvToString(query.data()?['type']);
     return {
       'productId': productId,
       'productName': productName,
       'imgURL': imgURL,
+      'type': type,
     };
   }
 
@@ -103,6 +105,7 @@ class OrderService {
         productRaw[i],
         productsInfo[i]['productName'],
         productsInfo[i]['imgURL'],
+        productsInfo[i]['type'],
       );
       res.add(temp);
     }

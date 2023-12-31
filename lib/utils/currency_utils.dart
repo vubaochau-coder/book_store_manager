@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class CurrencyUtils {
   static String convertDoubletoKMB(double currency) {
     if (currency < 1000) {
-      return currency.toString();
+      return currency.toStringAsFixed(0);
     } else if (currency < 1000000) {
       double result = currency / 1000;
       return '${result.toStringAsFixed(result.truncateToDouble() == result ? 0 : 1)}K';

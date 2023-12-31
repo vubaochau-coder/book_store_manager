@@ -33,7 +33,7 @@ class BookTypesModel {
     'bt002': 'Văn học',
     'bt003': 'Truyện tranh',
     'bt004': 'Trẻ em',
-    'bt005': 'Sách Khoa học - Kỹ thuật',
+    'bt005': 'Khoa học - Kỹ thuật',
     'bt006': 'Khác',
   };
 }

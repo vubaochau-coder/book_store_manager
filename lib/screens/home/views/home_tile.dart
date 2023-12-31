@@ -34,8 +34,8 @@ class HomeTile extends StatelessWidget {
               Image.asset(
                 img,
                 color: color.withOpacity(0.8),
-                width: 24,
-                height: 24,
+                width: 26,
+                height: 26,
               ),
               const Gap(8),
               Text(

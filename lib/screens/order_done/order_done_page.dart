@@ -56,12 +56,12 @@ class OrderDonePage extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -73,69 +73,78 @@ class OrderDonePage extends StatelessWidget {
                           CalendarButton(),
                         ],
                       ),
-                      const Gap(12),
-                      const Text(
-                        'Tỷ lệ hoàn thành đơn',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const Gap(12),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
                         children: [
-                          SizedBox(
-                            height: 140,
-                            width: 140,
-                            child: BlocBuilder<OrderDoneBloc, OrderDoneState>(
-                              buildWhen: (previous, current) {
-                                return previous.isLoading != current.isLoading;
-                              },
-                              builder: (context, state) {
-                                if (state.isLoading) {
-                                  return Center(
-                                    child: LoadingAnimationWidget.waveDots(
-                                      color: AppColors.themeColor,
-                                      size: 40,
-                                    ),
-                                  );
-                                }
+                          const Text(
+                            'Tỷ lệ hoàn thành đơn',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const Gap(12),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 140,
+                                width: 140,
+                                child:
+                                    BlocBuilder<OrderDoneBloc, OrderDoneState>(
+                                  buildWhen: (previous, current) {
+                                    return previous.isLoading !=
+                                        current.isLoading;
+                                  },
+                                  builder: (context, state) {
+                                    if (state.isLoading) {
+                                      return Center(
+                                        child: LoadingAnimationWidget.waveDots(
+                                          color: AppColors.themeColor,
+                                          size: 40,
+                                        ),
+                                      );
+                                    }
 
-                                return PieChart(
-                                  mainData(
-                                    state.completeOrders.length,
-                                    state.cancelOrders.length,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Gap(38),
-                          const Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Indicator(
-                                  color: Color(0xFFFFC300),
-                                  text: 'Đơn hoàn thành',
-                                  isSquare: true,
-                                  size: 14,
+                                    return PieChart(
+                                      mainData(
+                                        state.completeOrders.length,
+                                        state.cancelOrders.length,
+                                      ),
+                                    );
+                                  },
                                 ),
-                                Gap(8),
-                                Indicator(
-                                  color: Color(0xFF2196F3),
-                                  text: 'Đơn hủy',
-                                  isSquare: true,
-                                  size: 14,
+                              ),
+                              const Gap(38),
+                              const Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Indicator(
+                                      color: Color(0xFFFFC300),
+                                      text: 'Đơn hoàn thành',
+                                      isSquare: true,
+                                      size: 14,
+                                    ),
+                                    Gap(8),
+                                    Indicator(
+                                      color: Color(0xFF2196F3),
+                                      text: 'Đơn hủy',
+                                      isSquare: true,
+                                      size: 14,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ];
@@ -143,7 +152,7 @@ class OrderDonePage extends StatelessWidget {
           body: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(20),
+              Gap(8),
               Padding(
                 padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                 child: Row(

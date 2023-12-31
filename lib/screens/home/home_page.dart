@@ -1,6 +1,8 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
 import 'package:book_store_manager/screens/import_product/import_product_page.dart';
+import 'package:book_store_manager/screens/notification/notification_page.dart';
+import 'package:book_store_manager/screens/statistic/statistic_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'package:flutter/services.dart';
 import '../manage_feedback/manage_feedback_page.dart';
@@ -30,7 +32,11 @@ class HomePage extends StatelessWidget {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteSlideTransition(child: const NotificationPage()),
+              );
+            },
             icon: Badge(
               smallSize: 8,
               backgroundColor: AppColors.themeColor,
@@ -174,15 +180,19 @@ class HomePage extends StatelessWidget {
                   title: 'Thống kê',
                   img: AppIcons.chart,
                   color: Colors.blue[700]!,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(child: const StatisticPage()),
+                    );
+                  },
                 ),
-                const Gap(8),
-                HomeTile(
-                  title: 'Báo cáo của khách hàng',
-                  img: AppIcons.exclamation,
-                  color: Colors.redAccent,
-                  onTap: () {},
-                ),
+                // const Gap(8),
+                // HomeTile(
+                //   title: 'Báo cáo của khách hàng',
+                //   img: AppIcons.exclamation,
+                //   color: Colors.redAccent,
+                //   onTap: () {},
+                // ),
               ],
             ),
           ),

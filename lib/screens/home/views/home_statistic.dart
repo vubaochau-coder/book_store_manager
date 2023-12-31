@@ -3,7 +3,7 @@ import 'package:book_store_manager/screens/home/bloc/home_bloc.dart';
 import 'package:book_store_manager/utils/currency_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'statistic_item.dart';
+import '../../../widgets/statistic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

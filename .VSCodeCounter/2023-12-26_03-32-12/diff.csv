@@ -1,0 +1,17 @@
+"filename", "language", "Dart", "comment", "blank", "total"
+"d:\Flutter Application\book_store_manager\lib\models\product_model.dart", "Dart", 3, 0, 0, 3
+"d:\Flutter Application\book_store_manager\lib\repositories\import_repository.dart", "Dart", 3, 0, 1, 4
+"d:\Flutter Application\book_store_manager\lib\repositories\product_repository.dart", "Dart", 3, 0, 1, 4
+"d:\Flutter Application\book_store_manager\lib\repositories\services\import_service.dart", "Dart", 10, 0, 2, 12
+"d:\Flutter Application\book_store_manager\lib\repositories\services\product_service.dart", "Dart", 17, 0, 5, 22
+"d:\Flutter Application\book_store_manager\lib\screens\import_product\import_product_page.dart", "Dart", 1, 0, 0, 1
+"d:\Flutter Application\book_store_manager\lib\screens\import_product\views\import_history_item.dart", "Dart", 2, 0, 0, 2
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_bloc.dart", "Dart", 39, 0, 6, 45
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_event.dart", "Dart", 5, 0, 3, 8
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_state.dart", "Dart", 1, 0, 1, 2
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\create_import_product_page.dart", "Dart", 97, 0, 3, 100
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\create_import_item.dart", "Dart", 75, 0, 3, 78
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\dialog_item.dart", "Dart", 61, 0, 5, 66
+"d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\product_picker_dialog.dart", "Dart", 26, 0, 2, 28
+"d:\Flutter Application\book_store_manager\lib\widgets\abstract\abstract_order_item.dart", "Dart", 1, 0, 0, 1
+"Total", "-", 344, 0, 32, 376

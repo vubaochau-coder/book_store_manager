@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:book_store_manager/models/user_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/utils/converter.dart';
+import '../../constant/app_icons.dart';
 import 'bloc/user_order_history_bloc.dart';
 import 'views/filter_button.dart';
 import 'views/order_history_list.dart';
@@ -49,6 +50,11 @@ class UserOrderHistoryPage extends StatelessWidget {
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(AppIcons.userGroupFill),
+                      opacity: 0.2,
+                      alignment: Alignment.centerRight,
                     ),
                   ),
                 ),
@@ -123,32 +129,38 @@ class UserOrderHistoryPage extends StatelessWidget {
               ),
             ];
           },
-          body: Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(20),
-                const Text(
-                  'Thống kê lịch sử mua hàng (trong năm)',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
+          body: Column(
+            children: [
+              const Gap(20),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Thống kê lịch sử mua hàng (trong năm)',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Gap(8),
+                    SizedBox(
+                      height: 200,
+                      child: BlocBuilder<UserOrderHistoryBloc,
+                          UserOrderHistoryState>(
+                        builder: (context, state) {
+                          return LineChart(
+                            mainData(state.chartData),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                const Gap(8),
-                SizedBox(
-                  height: 200,
-                  child:
-                      BlocBuilder<UserOrderHistoryBloc, UserOrderHistoryState>(
-                    builder: (context, state) {
-                      return LineChart(
-                        mainData(state.chartData),
-                      );
-                    },
-                  ),
-                ),
-                const Gap(8),
-                const Row(
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
                   children: [
                     Expanded(
                       child: Text(
@@ -165,10 +177,9 @@ class UserOrderHistoryPage extends StatelessWidget {
                     FilterButton(),
                   ],
                 ),
-                const Gap(4),
-                const Expanded(child: OrderHistoryList()),
-              ],
-            ),
+              ),
+              const Expanded(child: OrderHistoryList()),
+            ],
           ),
         ),
       ),

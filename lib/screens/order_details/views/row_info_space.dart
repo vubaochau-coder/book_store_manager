@@ -36,7 +36,7 @@ class OrderDetailsRowInfoSpace extends StatelessWidget {
               textAlign: TextAlign.right,
               style: contentStyle ??
                   const TextStyle(
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
             ),

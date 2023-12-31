@@ -21,21 +21,24 @@ class ImportHistoryItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('Mã đơn: ', style: TextStyle(fontSize: 13)),
+              const Text('Mã đơn: ', style: TextStyle(fontSize: 12)),
               Text(
                 importProductModel.id,
-                style: const TextStyle(fontSize: 13),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
           const Divider(),
           Row(
             children: [
-              const Text('Thời gian: ', style: TextStyle(fontSize: 13)),
+              const Text('Thời gian: ', style: TextStyle(fontSize: 12)),
               Text(
                 DateTimeUtils.importTime(importProductModel.time),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -43,11 +46,11 @@ class ImportHistoryItem extends StatelessWidget {
           ),
           Row(
             children: [
-              const Text('Số loại sản phẩm: ', style: TextStyle(fontSize: 13)),
+              const Text('Số loại sản phẩm: ', style: TextStyle(fontSize: 12)),
               Text(
                 importProductModel.products.length.toStringAsFixed(0),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -55,11 +58,11 @@ class ImportHistoryItem extends StatelessWidget {
           ),
           Row(
             children: [
-              const Text('Tổng số lượng: ', style: TextStyle(fontSize: 13)),
+              const Text('Tổng số lượng: ', style: TextStyle(fontSize: 12)),
               Text(
                 calculateTotal(importProductModel.products).toStringAsFixed(0),
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -84,7 +87,7 @@ class ImportHistoryItem extends StatelessWidget {
                     height: 48,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey[200]!),
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(4),
                       image: DecorationImage(
@@ -107,7 +110,7 @@ class ImportHistoryItem extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: Colors.grey[200]!),
                     borderRadius: BorderRadius.circular(4),
                     image: DecorationImage(
                       fit: BoxFit.contain,

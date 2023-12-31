@@ -53,7 +53,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                     children: [
                       const Text(
                         "Khách hàng: ",
-                        style: TextStyle(fontSize: 13),
+                        style: TextStyle(fontSize: 12),
                       ),
                       Text(
                         order.userName,
@@ -75,7 +75,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Thời gian: ", style: TextStyle(fontSize: 13)),
+                      const Text("Thời gian: ", style: TextStyle(fontSize: 12)),
                       Expanded(
                         child: Text(
                           DateTimeUtils.orderTime(order.dateCreated),
@@ -92,7 +92,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                     children: [
                       const Text(
                         "Vận chuyển: ",
-                        style: TextStyle(fontSize: 13),
+                        style: TextStyle(fontSize: 12),
                       ),
                       Expanded(
                         child: Text(
@@ -105,7 +105,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                   ),
                   Text(
                     "Sản phẩm (${order.products.length.toStringAsFixed(0)}): ",
-                    style: const TextStyle(fontSize: 13),
+                    style: const TextStyle(fontSize: 12),
                   ),
                   const Gap(4),
                   SizedBox(
@@ -124,7 +124,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                             height: 48,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
+                              border: Border.all(color: Colors.grey[200]!),
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(4),
                               image: DecorationImage(
@@ -145,7 +145,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.grey[200]!),
                             borderRadius: BorderRadius.circular(4),
                             image: DecorationImage(
                               fit: BoxFit.contain,
@@ -162,8 +162,10 @@ abstract class AbstractOrderItem extends StatelessWidget {
               ),
             ),
             Divider(
-              color: AppColors.themeColor,
+              color: AppColors.themeColor.withOpacity(0.6),
               height: 8,
+              indent: 8,
+              endIndent: 8,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),

@@ -68,13 +68,13 @@ class OrderDetailsPage extends StatelessWidget {
                       title: 'Phương thức vận chuyển',
                       content: orderData.transport,
                     ),
-                    const Divider(color: Colors.grey),
+                    Divider(color: Colors.grey[300]!),
                     OrderDetailsRowInfoSpace(
                       title: 'Địa chỉ',
                       content: orderData.address,
                       maxLines: 5,
                       contentStyle: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -90,7 +90,7 @@ class OrderDetailsPage extends StatelessWidget {
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    const Divider(color: Colors.grey),
+                    Divider(color: Colors.grey[300]!),
                     OrderDetailsRowInfoSpace(
                       title: 'Phương thức',
                       content: orderData.paymentMethod,
@@ -104,7 +104,7 @@ class OrderDetailsPage extends StatelessWidget {
                         color: orderData.paid ? Colors.green : Colors.red,
                       ),
                     ),
-                    const Divider(color: Colors.grey),
+                    Divider(color: Colors.grey[300]!),
                     const OrderStatus(),
                   ],
                 ),
@@ -126,7 +126,7 @@ class OrderDetailsPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) {
-                        return const Divider(color: Colors.grey, height: 10);
+                        return Divider(color: Colors.grey[300], height: 10);
                       },
                       itemBuilder: (context, index) {
                         return OrderDetailsProductItem(
@@ -164,7 +164,7 @@ class OrderDetailsPage extends StatelessWidget {
                       content:
                           "${CurrencyUtils.convertDoubleToCurrency(productPrice(orderData.products) - orderData.productPrice)}đ",
                     ),
-                    const Divider(color: Colors.grey),
+                    Divider(color: Colors.grey[300]!),
                     Row(
                       children: [
                         const Text(
