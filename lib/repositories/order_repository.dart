@@ -65,4 +65,8 @@ class OrderRepository {
   Future<List<OrderModel>> getDoneOrdersOfMonth(DateTime month) async {
     return _orderService.getDoneOrdersOfMonth(month);
   }
+
+  Future<OrderModel> getOrderInformation(String orderId) async {
+    return _orderService.getOrderInformation(orderId);
+  }
 }

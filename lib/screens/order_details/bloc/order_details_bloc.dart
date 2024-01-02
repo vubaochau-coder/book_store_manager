@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/order_repository.dart';
 import 'package:book_store_manager/utils/converter.dart';
 import 'package:book_store_manager/utils/dialog_utils.dart';
@@ -17,7 +18,7 @@ class OrderDetailsBloc extends Bloc<OrderDetailsEvent, OrderDetailsState> {
 
   OrderDetailsBloc(this._orderRepository) : super(const OrderDetailsState()) {
     on<InitialDetailEvent>(_onInit);
-    on<UpdateOrderStatusEvent>(_onUpdateStatus);
+    on<UpdateOrderEvent>(_onUpdateStatus);
     on<ConfirmOrderEvent>(_onConfirm);
     on<CancelOrderEvent>(_onCancel);
     on<PrepareConfirmOrderEvent>(_onPrepareConfirm);
@@ -31,17 +32,32 @@ class OrderDetailsBloc extends Bloc<OrderDetailsEvent, OrderDetailsState> {
     super.close();
   }
 
-  _onInit(InitialDetailEvent event, Emitter emit) {
-    _orderDetailsStream =
-        _orderRepository.orderStream(event.orderId).listen((snapshotEvent) {
+  _onInit(InitialDetailEvent event, Emitter emit) async {
+    final order = await _orderRepository.getOrderInformation(event.orderId);
+    emit(state.copyWith(orderData: order));
+
+    _orderDetailsStream = _orderRepository
+        .orderStream(event.orderId)
+        .listen((snapshotEvent) async {
       int status = cvToInt(snapshotEvent.data()!['status']);
 
-      add(UpdateOrderStatusEvent(status: status));
+      // List<OrderProductModel> products =
+      //     await _orderRepository.getAllProductInOrder(
+      //   List.from(snapshotEvent.data()!['products']),
+      // );
+
+      // OrderModel order = OrderModel.fromJson(
+      //     snapshotEvent.id, snapshotEvent.data()!, products);
+
+      if (!isClosed) {
+        add(UpdateOrderEvent(status: status));
+      }
     });
   }
 
-  _onUpdateStatus(UpdateOrderStatusEvent event, Emitter emit) {
+  _onUpdateStatus(UpdateOrderEvent event, Emitter emit) {
     emit(state.copyWith(isLoading: false, status: event.status));
+    // emit(state.copyWith(isLoading: false, status: event.status));
   }
 
   _onConfirm(ConfirmOrderEvent event, Emitter emit) async {

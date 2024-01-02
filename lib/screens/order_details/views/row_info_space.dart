@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class OrderDetailsRowInfoSpace extends StatelessWidget {
   final String title;
-  final String content;
+  final String? content;
   final TextStyle? contentStyle;
   final int? maxLines;
 
@@ -30,7 +30,7 @@ class OrderDetailsRowInfoSpace extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              content,
+              content ?? '-/-',
               maxLines: maxLines ?? 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.right,

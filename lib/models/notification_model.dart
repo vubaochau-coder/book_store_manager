@@ -5,22 +5,22 @@ class NotificationModel {
   final String userId;
   final String userName;
   final String userAvatar;
-  final String content;
   final String type;
-  final String code;
   final DateTime date;
   final bool isRead;
+  final int status;
+  final String orderId;
 
   NotificationModel({
     required this.id,
     required this.userId,
     required this.userName,
     required this.userAvatar,
-    required this.content,
     required this.type,
-    required this.code,
     required this.date,
     required this.isRead,
+    required this.status,
+    required this.orderId,
   });
 
   factory NotificationModel.fromJson(String id, String userName,
@@ -30,11 +30,11 @@ class NotificationModel {
       userId: cvToString(json['userId']),
       userName: userName,
       userAvatar: userAvatar,
-      content: json['content'],
       type: cvToString(json['type']),
-      code: cvToString(json['actionCode']),
       date: cvToDate(json['date']),
       isRead: cvToBool(json['isRead']),
+      orderId: cvToString(json['orderId']),
+      status: cvToInt(json['status']),
     );
   }
 }

@@ -1,9 +1,11 @@
-import 'package:book_store_manager/models/notification_model.dart';
-import 'package:book_store_manager/screens/notification/views/notification_item.dart';
-import 'package:book_store_manager/themes/colors.dart';
+import 'package:book_store_manager/constant/enum.dart';
+import 'views/notifications_list.dart';
 import 'package:book_store_manager/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
+import 'bloc/notification_bloc.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -11,7 +13,7 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: 'Thông báo',
         color: Colors.orangeAccent[700]!,
@@ -24,30 +26,71 @@ class NotificationPage extends StatelessWidget {
                 const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 4),
             child: Row(
               children: [
-                ChoiceChip(
-                  label: const Text('Tất cả'),
-                  labelStyle: TextStyle(color: Colors.blue[900]!),
-                  selected: true,
-                  selectedColor: Colors.blue[100],
-                  checkmarkColor: Colors.blue,
-                  side: BorderSide.none,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+                BlocBuilder<NotificationBloc, NotificationState>(
+                  buildWhen: (previous, current) {
+                    return previous.viewType != current.viewType;
+                  },
+                  builder: (context, state) {
+                    bool isSelect = state.viewType == NotiViewType.all;
+
+                    return ChoiceChip(
+                      onSelected: (value) {
+                        context.read<NotificationBloc>().add(
+                              const LoadNotificationEvent(
+                                type: NotiViewType.all,
+                              ),
+                            );
+                      },
+                      label: const Text('Tất cả'),
+                      labelStyle: TextStyle(
+                        color: isSelect ? Colors.blue[900]! : Colors.black,
+                        fontWeight:
+                            isSelect ? FontWeight.w600 : FontWeight.normal,
+                      ),
+                      selected: isSelect,
+                      selectedColor: Colors.blue[100],
+                      checkmarkColor: Colors.blue,
+                      side: BorderSide.none,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    );
+                  },
                 ),
                 const Gap(4),
-                ChoiceChip(
-                  label: const Text('Chưa đọc'),
-                  labelStyle: const TextStyle(color: Colors.black),
-                  selected: false,
-                  selectedColor: Colors.blue[100],
-                  checkmarkColor: Colors.blue,
-                  side: BorderSide.none,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+                BlocBuilder<NotificationBloc, NotificationState>(
+                  buildWhen: (previous, current) {
+                    return previous.viewType != current.viewType;
+                  },
+                  builder: (context, state) {
+                    bool isSelect = state.viewType == NotiViewType.unRead;
+
+                    return ChoiceChip(
+                      onSelected: (value) {
+                        context.read<NotificationBloc>().add(
+                              const LoadNotificationEvent(
+                                type: NotiViewType.unRead,
+                              ),
+                            );
+                      },
+                      label: const Text('Chưa đọc'),
+                      labelStyle: TextStyle(
+                        color: isSelect ? Colors.blue[900]! : Colors.black,
+                        fontWeight:
+                            isSelect ? FontWeight.w600 : FontWeight.normal,
+                      ),
+                      selected: isSelect,
+                      selectedColor: Colors.blue[100],
+                      checkmarkColor: Colors.blue,
+                      surfaceTintColor: Colors.white,
+                      side: BorderSide.none,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -80,33 +123,7 @@ class NotificationPage extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: 10,
-              separatorBuilder: (context, index) {
-                return Divider(
-                  color: AppColors.background,
-                  height: 4,
-                );
-              },
-              itemBuilder: (context, index) {
-                return NotificationItem(
-                  notiModel: NotificationModel(
-                    id: 'id noti',
-                    userId: 'idUser',
-                    userName: 'Vu Bao Chau',
-                    userAvatar:
-                        'https://e0.pxfuel.com/wallpapers/480/654/desktop-wallpaper-gwen-league-of-legends.jpg',
-                    content: 'Đã tạo một đơn hàng',
-                    type: 'order',
-                    code: 'order_0',
-                    date: DateTime.now(),
-                    isRead: index % 3 == 1,
-                  ),
-                );
-              },
-            ),
-          ),
+          const Expanded(child: NotificationList()),
         ],
       ),
     );

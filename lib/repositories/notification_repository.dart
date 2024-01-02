@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../constant/enum.dart';
 import 'services/notification_service.dart';
 
 class NotificationRepository {
@@ -5,5 +8,26 @@ class NotificationRepository {
 
   NotificationRepository() {
     _notiService = NotificationService();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> notiStream(
+      NotiViewType type, int limit) {
+    return _notiService.notiStream(type, limit);
+  }
+
+  Future<void> updateIsReadNoti(String notiId, bool isRead) async {
+    return _notiService.updateIsReadNoti(notiId, isRead);
+  }
+
+  Future<void> createConfirmOrderNoti(String userId, String orderId) async {
+    return _notiService.createConfirmOrderNoti(userId, orderId);
+  }
+
+  Future<void> createPreparedOrderNoti(String userId, String orderId) async {
+    return _notiService.createPreparedOrderNoti(userId, orderId);
+  }
+
+  Future<void> createDeliverOrderNoti(String userId, String orderId) async {
+    return _notiService.createDeliverOrderNoti(userId, orderId);
   }
 }

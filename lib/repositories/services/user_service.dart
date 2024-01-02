@@ -84,4 +84,13 @@ class UserService {
       return 0;
     }
   }
+
+  Future<UserLiteModel> getUserLiteModel(String userId) async {
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.user)
+        .doc(userId)
+        .get();
+
+    return UserLiteModel.fromJson(query.id, query.data()!);
+  }
 }

@@ -28,3 +28,19 @@ class UserModel {
     );
   }
 }
+
+class UserLiteModel {
+  final String id;
+  final String name;
+  final String avatar;
+
+  UserLiteModel({required this.id, required this.name, required this.avatar});
+
+  factory UserLiteModel.fromJson(String id, Map<String, dynamic> json) {
+    return UserLiteModel(
+      id: id,
+      name: cvToString(json['name']),
+      avatar: cvToString(json['avatar']),
+    );
+  }
+}

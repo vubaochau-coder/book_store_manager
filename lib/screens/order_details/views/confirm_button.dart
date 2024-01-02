@@ -90,7 +90,7 @@ class ConfirmOrderButton extends StatelessWidget {
                 borderRadius: BorderRadius.zero,
                 side: BorderSide(
                   color: AppColors.themeColor,
-                  width: 2,
+                  width: 1,
                 ),
               ),
             ),
@@ -103,7 +103,7 @@ class ConfirmOrderButton extends StatelessWidget {
             ),
           ),
         ),
-        const Gap(10),
+        const Gap(6),
         Expanded(
           child: ElevatedButton(
             onPressed: () {

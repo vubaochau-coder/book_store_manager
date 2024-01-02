@@ -28,7 +28,7 @@ abstract class AbstractOrderItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             PageRouteSlideTransition(
-              child: OrderDetailsPage(orderData: order),
+              child: OrderDetailsPage(orderId: order.orderId),
             ),
           );
         },

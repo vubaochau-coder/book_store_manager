@@ -5,4 +5,6 @@ class DataCollection {
   static String orders = "Orders";
   static String user = "User";
   static String import = "Import";
+  static String adminNoti = "AdminNotification";
+  static String userNoti = "Notification";
 }

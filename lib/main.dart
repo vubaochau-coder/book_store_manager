@@ -1,5 +1,7 @@
+import 'package:book_store_manager/constant/enum.dart';
 import 'package:book_store_manager/firebase_options.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/notification/bloc/notification_bloc.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/utils/dialog_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +28,12 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => RootBloc()),
+          BlocProvider(
+            create: (context) => NotificationBloc(
+              RepositoryProvider.of<AppRepository>(context).notiRepository,
+              RepositoryProvider.of<AppRepository>(context).userRepository,
+            )..add(const LoadNotificationEvent(type: NotiViewType.all)),
+          )
         ],
         child: MaterialApp(
           title: 'IBOO Manager',

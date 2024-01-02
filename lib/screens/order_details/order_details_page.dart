@@ -1,5 +1,6 @@
-import 'package:book_store_manager/models/order_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'views/order_status.dart';
+import 'views/overview_information.dart';
 import 'views/deliver_button.dart';
 import 'views/prepare_button.dart';
 import 'views/confirm_button.dart';
@@ -7,8 +8,7 @@ import 'package:book_store_manager/utils/currency_utils.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../models/order_product_model.dart';
 import 'bloc/order_details_bloc.dart';
-import 'views/order_status.dart';
-import 'package:book_store_manager/utils/date_time.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'views/product_item.dart';
@@ -23,16 +23,17 @@ import '../../themes/colors.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class OrderDetailsPage extends StatelessWidget {
-  final OrderModel orderData;
+  // final OrderModel orderData;
+  final String orderId;
 
-  const OrderDetailsPage({super.key, required this.orderData});
+  const OrderDetailsPage({super.key, required this.orderId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OrderDetailsBloc(
         RepositoryProvider.of<AppRepository>(context).orderRepository,
-      )..add(InitialDetailEvent(orderId: orderData.orderId)),
+      )..add(InitialDetailEvent(orderId: orderId)),
       child: Scaffold(
         backgroundColor: AppColors.background,
         appBar: CustomAppBar(
@@ -44,93 +45,47 @@ class OrderDetailsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const DataForm(
+                  child: Column(
+                children: [
+                  OrderDetailsOverview(),
+                  OrderStatus(),
+                ],
+              )),
               DataForm(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    OrderDetailsRowInfoSpace(
-                      title: 'Mã đơn',
-                      content: orderData.orderId,
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Khách hàng',
-                      content: orderData.userName,
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Số điện thoại',
-                      content: orderData.phone,
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Thời gian đặt',
-                      content: DateTimeUtils.orderTime(orderData.dateCreated),
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Phương thức vận chuyển',
-                      content: orderData.transport,
-                    ),
-                    Divider(color: Colors.grey[300]!),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Địa chỉ',
-                      content: orderData.address,
-                      maxLines: 5,
-                      contentStyle: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Ghi chú',
-                      content: orderData.note.isNotEmpty
-                          ? '"${orderData.note}"'
-                          : '',
-                      maxLines: 5,
-                      contentStyle: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                    Divider(color: Colors.grey[300]!),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Phương thức',
-                      content: orderData.paymentMethod,
-                    ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Trạng thái',
-                      content:
-                          orderData.paid ? 'Đã thanh toán' : 'Chưa thanh toán',
-                      contentStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: orderData.paid ? Colors.green : Colors.red,
-                      ),
-                    ),
-                    Divider(color: Colors.grey[300]!),
-                    const OrderStatus(),
-                  ],
-                ),
-              ),
-              DataForm(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Sản phẩm (${orderData.products.length.toStringAsFixed(0)})',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+                    BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.orderData != null
+                              ? 'Sản phẩm (${state.orderData!.products.length.toStringAsFixed(0)})'
+                              : "Sản phẩm",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        );
+                      },
                     ),
                     const Gap(10),
-                    ListView.separated(
-                      itemCount: orderData.products.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) {
-                        return Divider(color: Colors.grey[300], height: 10);
-                      },
-                      itemBuilder: (context, index) {
-                        return OrderDetailsProductItem(
-                          product: orderData.products[index],
+                    BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                      builder: (context, state) {
+                        return ListView.separated(
+                          itemCount: state.orderData != null
+                              ? state.orderData!.products.length
+                              : 0,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) {
+                            return Divider(color: Colors.grey[300], height: 10);
+                          },
+                          itemBuilder: (context, index) {
+                            return OrderDetailsProductItem(
+                              product: state.orderData!.products[index],
+                            );
+                          },
                         );
                       },
                     ),
@@ -149,20 +104,35 @@ class OrderDetailsPage extends StatelessWidget {
                       ),
                     ),
                     const Gap(6),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Phí vận chuyển',
-                      content:
-                          "${CurrencyUtils.convertDoubleToCurrency(orderData.transportPrice)}đ",
+                    BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                      builder: (context, state) {
+                        return OrderDetailsRowInfoSpace(
+                          title: 'Phí vận chuyển',
+                          content: state.orderData != null
+                              ? "${CurrencyUtils.convertDoubleToCurrency(state.orderData!.transportPrice)}đ"
+                              : null,
+                        );
+                      },
                     ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Sản phẩm',
-                      content:
-                          "${CurrencyUtils.convertDoubleToCurrency(productPrice(orderData.products))}đ",
+                    BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                      builder: (context, state) {
+                        return OrderDetailsRowInfoSpace(
+                          title: 'Sản phẩm',
+                          content: state.orderData != null
+                              ? "${CurrencyUtils.convertDoubleToCurrency(productPrice(state.orderData!.products))}đ"
+                              : null,
+                        );
+                      },
                     ),
-                    OrderDetailsRowInfoSpace(
-                      title: 'Giảm',
-                      content:
-                          "${CurrencyUtils.convertDoubleToCurrency(productPrice(orderData.products) - orderData.productPrice)}đ",
+                    BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                      builder: (context, state) {
+                        return OrderDetailsRowInfoSpace(
+                          title: 'Giảm',
+                          content: state.orderData != null
+                              ? "${CurrencyUtils.convertDoubleToCurrency(productPrice(state.orderData!.products) - state.orderData!.productPrice)}đ"
+                              : null,
+                        );
+                      },
                     ),
                     Divider(color: Colors.grey[300]!),
                     Row(
@@ -175,16 +145,23 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: Text(
-                            "${CurrencyUtils.convertDoubleToCurrency(orderData.totalPrice)}đ",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child:
+                              BlocBuilder<OrderDetailsBloc, OrderDetailsState>(
+                            builder: (context, state) {
+                              return Text(
+                                state.orderData != null
+                                    ? "${CurrencyUtils.convertDoubleToCurrency(state.orderData!.totalPrice)}đ"
+                                    : '-/-',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.right,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -234,15 +211,15 @@ class OrderDetailsPage extends StatelessWidget {
                       }
 
                       if (state.status == 0) {
-                        return ConfirmOrderButton(order: orderData);
+                        return ConfirmOrderButton(order: state.orderData!);
                       }
 
                       if (state.status == 1) {
-                        return PrepareOrderButton(orderId: orderData.orderId);
+                        return PrepareOrderButton(orderId: orderId);
                       }
 
                       if (state.status == 2) {
-                        return DeliverButton(orderId: orderData.orderId);
+                        return DeliverButton(orderId: orderId);
                       }
 
                       if (state.status == 3) {
@@ -266,7 +243,7 @@ class OrderDetailsPage extends StatelessWidget {
                           height: double.infinity,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Colors.green[400],
+                            color: Colors.green[300],
                           ),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,

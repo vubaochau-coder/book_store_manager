@@ -5,12 +5,14 @@ import 'package:book_store_manager/screens/notification/notification_page.dart';
 import 'package:book_store_manager/screens/statistic/statistic_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../manage_feedback/manage_feedback_page.dart';
 import '../manage_order/manage_order_page.dart';
 import '../manage_product/manage_product_page.dart';
 import '../manage_user/manage_user_page.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
+import '../notification/bloc/notification_bloc.dart';
 import 'views/home_background.dart';
 import 'views/home_statistic.dart';
 import 'package:gap/gap.dart';
@@ -37,10 +39,17 @@ class HomePage extends StatelessWidget {
                 PageRouteSlideTransition(child: const NotificationPage()),
               );
             },
-            icon: Badge(
-              smallSize: 8,
-              backgroundColor: AppColors.themeColor,
-              child: Icon(MdiIcons.bellOutline, color: Colors.black),
+            icon: BlocBuilder<NotificationBloc, NotificationState>(
+              builder: (context, state) {
+                return Badge(
+                  smallSize: 8,
+                  backgroundColor: AppColors.themeColor,
+                  isLabelVisible: state.notis
+                      .where((element) => element.isRead == false)
+                      .isNotEmpty,
+                  child: Icon(MdiIcons.bellOutline, color: Colors.black),
+                );
+              },
             ),
           ),
           IconButton(

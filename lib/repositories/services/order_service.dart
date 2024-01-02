@@ -172,4 +172,17 @@ class OrderService {
 
     return res;
   }
+
+  Future<OrderModel> getOrderInformation(String orderId) async {
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .doc(orderId)
+        .get();
+
+    var products = await getAllProductInOrder(
+      List.from(query.data()!['products']),
+    );
+
+    return OrderModel.fromJson(query.id, query.data()!, products);
+  }
 }

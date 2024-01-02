@@ -13,10 +13,11 @@ class InitialDetailEvent extends OrderDetailsEvent {
   const InitialDetailEvent({required this.orderId});
 }
 
-class UpdateOrderStatusEvent extends OrderDetailsEvent {
+class UpdateOrderEvent extends OrderDetailsEvent {
   final int status;
+  // final OrderModel orderData;
 
-  const UpdateOrderStatusEvent({required this.status});
+  const UpdateOrderEvent({required this.status});
 }
 
 class ConfirmOrderEvent extends OrderDetailsEvent {

@@ -34,4 +34,8 @@ class UserRepository {
   Future<int> getUserCancelOrder(String userId) async {
     return _userService.getUserCancelOrder(userId);
   }
+
+  Future<UserLiteModel> getUserLiteModel(String userId) async {
+    return _userService.getUserLiteModel(userId);
+  }
 }
