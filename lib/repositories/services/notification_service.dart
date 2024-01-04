@@ -73,4 +73,15 @@ class NotificationService {
       'actionCode': 'order_2',
     });
   }
+
+  Future<void> readAllNoti() async {
+    final allNotis = await _notiRef.where('isRead', isEqualTo: false).get();
+
+    var batch = FirebaseFirestore.instance.batch();
+    for (var ele in allNotis.docs) {
+      batch.update(ele.reference, {'isRead': true});
+    }
+
+    await batch.commit();
+  }
 }

@@ -31,12 +31,16 @@ class StatisticPieChart extends StatelessWidget {
                 );
               }
 
-              int complete =
-                  state.orders.where((element) => element.status == 4).length;
+              int complete = state.completeOrders
+                  .where((element) => element.status == 4)
+                  .length;
+
+              int cancel = state.completeOrders.length - complete;
               return PieChart(
                 mainData(
                   complete,
-                  state.orders.length - complete,
+                  cancel,
+                  state.orders.length,
                 ),
               );
             },
@@ -61,6 +65,13 @@ class StatisticPieChart extends StatelessWidget {
                 isSquare: true,
                 size: 14,
               ),
+              Gap(8),
+              Indicator(
+                color: Colors.grey,
+                text: 'Chưa xong',
+                isSquare: true,
+                size: 14,
+              ),
             ],
           ),
         ),
@@ -68,24 +79,22 @@ class StatisticPieChart extends StatelessWidget {
     );
   }
 
-  PieChartData mainData(int complete, int cancel) {
+  PieChartData mainData(int complete, int cancel, int all) {
     return PieChartData(
       pieTouchData: PieTouchData(
         touchCallback: (FlTouchEvent event, pieTouchResponse) {},
       ),
       centerSpaceRadius: 0,
       sectionsSpace: 1,
-      borderData: FlBorderData(
-        show: false,
-      ),
+      borderData: FlBorderData(show: false),
       sections: (complete + cancel == 0)
           ? [
               PieChartSectionData(
-                value: 1,
+                value: (all - complete - cancel).toDouble(),
                 radius: 70,
-                title: "0 đơn",
-                color: Colors.grey,
+                title: "${(all - complete - cancel).toStringAsFixed(0)} đơn",
                 titleStyle: const TextStyle(color: Colors.white, fontSize: 12),
+                color: Colors.grey,
               ),
             ]
           : [
@@ -102,6 +111,13 @@ class StatisticPieChart extends StatelessWidget {
                 title: "${cancel.toStringAsFixed(0)} đơn",
                 color: const Color(0xFF2196F3),
                 titleStyle: const TextStyle(color: Colors.white, fontSize: 12),
+              ),
+              PieChartSectionData(
+                value: (all - complete - cancel).toDouble(),
+                radius: 70,
+                title: "${(all - complete - cancel).toStringAsFixed(0)} đơn",
+                titleStyle: const TextStyle(color: Colors.white, fontSize: 12),
+                color: Colors.grey,
               ),
             ],
     );

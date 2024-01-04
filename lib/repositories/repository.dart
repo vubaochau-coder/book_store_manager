@@ -1,7 +1,8 @@
-import 'package:book_store_manager/repositories/import_repository.dart';
-import 'package:book_store_manager/repositories/notification_repository.dart';
-import 'package:book_store_manager/repositories/user_repository.dart';
+import 'import_repository.dart';
+import 'notification_repository.dart';
+import 'user_repository.dart';
 
+import 'feedback_repository.dart';
 import 'order_repository.dart';
 import 'product_repository.dart';
 
@@ -11,6 +12,7 @@ class AppRepository {
   late UserRepository userRepository;
   late ImportRepository importRepository;
   late NotificationRepository notiRepository;
+  late FeedbackRepository feedbackRepository;
 
   AppRepository() {
     productRepository = ProductRepository();
@@ -18,5 +20,6 @@ class AppRepository {
     userRepository = UserRepository();
     importRepository = ImportRepository();
     notiRepository = NotificationRepository();
+    feedbackRepository = FeedbackRepository();
   }
 }

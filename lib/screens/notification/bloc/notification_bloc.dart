@@ -5,6 +5,7 @@ import 'package:book_store_manager/constant/enum.dart';
 import 'package:book_store_manager/models/notification_model.dart';
 import 'package:book_store_manager/repositories/notification_repository.dart';
 import 'package:book_store_manager/repositories/user_repository.dart';
+import 'package:book_store_manager/utils/dialog_utils.dart';
 import 'package:equatable/equatable.dart';
 
 part 'notification_event.dart';
@@ -70,13 +71,58 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     });
   }
 
-  _onLoadMore(LoadMoreNotiEvent event, Emitter emit) {}
+  _onLoadMore(LoadMoreNotiEvent event, Emitter emit) {
+    if (state.notis.length >= state.number) {
+      int newLength = state.number + 20;
+      emit(state.copyWith(number: newLength));
+
+      _notiStream?.cancel();
+      _notiStream = null;
+      _notiStream = _notiRepository
+          .notiStream(state.viewType, state.number)
+          .listen((streamEvent) async {
+        if (streamEvent.docs.isNotEmpty) {
+          List<NotificationModel> notis = [];
+
+          final futureGroups = await Future.wait(streamEvent.docs.map(
+            (e) => _userRepository.getUserLiteModel(e.data()['userId']),
+          ));
+
+          for (int i = 0; i < streamEvent.size; i++) {
+            var docData = streamEvent.docs[i];
+            notis.add(
+              NotificationModel.fromJson(
+                docData.id,
+                futureGroups[i].name,
+                futureGroups[i].avatar,
+                docData.data(),
+              ),
+            );
+          }
+
+          if (!isClosed) {
+            add(StreamUpdateEvent(notis: notis));
+          }
+        } else {
+          if (!isClosed) {
+            add(const StreamUpdateEvent(notis: []));
+          }
+        }
+      });
+    }
+  }
 
   _onStreamUpdate(StreamUpdateEvent event, Emitter emit) {
     emit(state.copyWith(notis: event.notis, isLoading: false));
   }
 
-  _onMarkAllAsRead(MarkAllAsReadEvent event, Emitter emit) {}
+  _onMarkAllAsRead(MarkAllAsReadEvent event, Emitter emit) async {
+    DialogUtils.showLoading();
+
+    await _notiRepository.readAllNoti();
+
+    DialogUtils.hideLoading();
+  }
 
   _onReadNoti(ReadNotificationEvent event, Emitter emit) async {
     await _notiRepository.updateIsReadNoti(event.notiId, event.isRead);

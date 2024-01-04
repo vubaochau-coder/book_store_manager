@@ -1,6 +1,8 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/models/product_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/product_feedback/product_feedback_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'bloc/product_detail_bloc.dart';
 import 'views/image_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,13 +27,14 @@ class ProductDetailPage extends StatelessWidget {
       create: (context) => ProductDetailBloc(
         RepositoryProvider.of<AppRepository>(context).productRepository,
       )..add(InitialEvent(productId: product.id, callAfterDataChange: false)),
-      child: const _ProductDetailContent(),
+      child: _ProductDetailContent(product.id),
     );
   }
 }
 
 class _ProductDetailContent extends StatelessWidget {
-  const _ProductDetailContent();
+  final String productId;
+  const _ProductDetailContent(this.productId);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +102,14 @@ class _ProductDetailContent extends StatelessWidget {
                         height: 44,
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              PageRouteSlideTransition(
+                                child:
+                                    ProductFeedbackPage(productId: productId),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

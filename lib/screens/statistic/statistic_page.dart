@@ -213,7 +213,7 @@ class _StatisticContent extends StatelessWidget {
                         }
                         int count = 0;
                         double percent = 0;
-                        if (state.orders.isNotEmpty) {
+                        if (state.completeOrders.isNotEmpty) {
                           for (var ele in state.orders) {
                             if (ele.status != 4) count++;
                           }

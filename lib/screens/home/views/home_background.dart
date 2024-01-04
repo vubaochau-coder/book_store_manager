@@ -16,7 +16,7 @@ class HomeBackground extends StatelessWidget {
         image: DecorationImage(
           image: AssetImage(AppImages.homeBackground),
           fit: BoxFit.cover,
-          opacity: 0.2,
+          opacity: 0.1,
         ),
       ),
       child: child,

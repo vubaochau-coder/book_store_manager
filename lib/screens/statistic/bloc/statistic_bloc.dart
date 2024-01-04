@@ -18,9 +18,19 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
       emit(state.copyWith(isLoading: true, selectedMonth: event.selectedMonth));
 
       final List<OrderModel> orders =
-          await _orderRepository.getDoneOrdersOfMonth(state.selectedMonth!);
+          await _orderRepository.getAllOrdersOfMonth(state.selectedMonth!);
 
-      emit(state.copyWith(isLoading: false, orders: orders));
+      List<int> allowedStatus = [-2, -1, 4];
+
+      List<OrderModel> completeOrders = orders
+          .where((order) => allowedStatus.contains(order.status))
+          .toList();
+
+      emit(state.copyWith(
+        isLoading: false,
+        orders: orders,
+        completeOrders: completeOrders,
+      ));
     }
   }
 }

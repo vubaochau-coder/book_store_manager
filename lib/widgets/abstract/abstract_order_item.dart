@@ -55,14 +55,17 @@ abstract class AbstractOrderItem extends StatelessWidget {
                         "Khách hàng: ",
                         style: TextStyle(fontSize: 12),
                       ),
-                      Text(
-                        order.userName,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Text(
+                          order.userName,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                      const Spacer(),
+                      const Gap(4),
                       Text(
                         " (${order.phone})",
                         style: const TextStyle(

@@ -30,4 +30,8 @@ class NotificationRepository {
   Future<void> createDeliverOrderNoti(String userId, String orderId) async {
     return _notiService.createDeliverOrderNoti(userId, orderId);
   }
+
+  Future<void> readAllNoti() async {
+    return _notiService.readAllNoti();
+  }
 }

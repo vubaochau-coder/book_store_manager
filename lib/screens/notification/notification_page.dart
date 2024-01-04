@@ -28,7 +28,8 @@ class NotificationPage extends StatelessWidget {
               children: [
                 BlocBuilder<NotificationBloc, NotificationState>(
                   buildWhen: (previous, current) {
-                    return previous.viewType != current.viewType;
+                    return previous.viewType != current.viewType ||
+                        previous.number != current.number;
                   },
                   builder: (context, state) {
                     bool isSelect = state.viewType == NotiViewType.all;
@@ -61,7 +62,8 @@ class NotificationPage extends StatelessWidget {
                 const Gap(4),
                 BlocBuilder<NotificationBloc, NotificationState>(
                   buildWhen: (previous, current) {
-                    return previous.viewType != current.viewType;
+                    return previous.viewType != current.viewType ||
+                        previous.number != current.number;
                   },
                   builder: (context, state) {
                     bool isSelect = state.viewType == NotiViewType.unRead;
@@ -105,7 +107,9 @@ class NotificationPage extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<NotificationBloc>().add(MarkAllAsReadEvent());
+                  },
                   style: TextButton.styleFrom(
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),

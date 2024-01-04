@@ -21,32 +21,29 @@ class OrderPreparedPage extends StatelessWidget {
           return const EmptyOrdersList();
         }
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: ListView.separated(
-            itemCount: state.preparedOrders.length,
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            physics: const ClampingScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.grey[200],
-                thickness: 4,
-                height: 4,
-              );
-            },
-            itemBuilder: (context, index) {
-              return PreparedOrderItem(
-                order: state.preparedOrders[index],
-                onAction: () {
-                  context.read<PreparedOrderBloc>().add(
-                        PreparedConfirmEvent(
-                          orderId: state.preparedOrders[index].orderId,
-                        ),
-                      );
-                },
-              );
-            },
-          ),
+        return ListView.separated(
+          itemCount: state.preparedOrders.length,
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          physics: const ClampingScrollPhysics(),
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey[200],
+              thickness: 4,
+              height: 4,
+            );
+          },
+          itemBuilder: (context, index) {
+            return PreparedOrderItem(
+              order: state.preparedOrders[index],
+              onAction: () {
+                context.read<PreparedOrderBloc>().add(
+                      PreparedConfirmEvent(
+                        orderId: state.preparedOrders[index].orderId,
+                      ),
+                    );
+              },
+            );
+          },
         );
       },
     );

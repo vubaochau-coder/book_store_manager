@@ -185,4 +185,34 @@ class OrderService {
 
     return OrderModel.fromJson(query.id, query.data()!, products);
   }
+
+  Future<List<OrderModel>> getAllOrdersOfMonth(DateTime month) async {
+    List<OrderModel> res = [];
+
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.orders)
+        .where('dateCreated', isGreaterThanOrEqualTo: month.startOfMonth())
+        .where('dateCreated', isLessThanOrEqualTo: month.endOfMonth())
+        .get();
+
+    final test = await Future.wait(
+      query.docs.map(
+        (e) => getAllProductInOrder(
+          List.from(e.data()['products']),
+        ),
+      ),
+    );
+
+    for (int i = 0; i < query.docs.length; i++) {
+      res.add(
+        OrderModel.fromJson(
+          query.docs[i].id,
+          query.docs[i].data(),
+          test[i],
+        ),
+      );
+    }
+
+    return res;
+  }
 }

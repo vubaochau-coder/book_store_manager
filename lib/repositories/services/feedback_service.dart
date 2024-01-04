@@ -1,0 +1,122 @@
+import 'package:book_store_manager/constant/data_collections.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../models/feedback_model.dart';
+import '../../models/user_model.dart';
+
+class FeedbackService {
+  final _ref = FirebaseFirestore.instance.collection(DataCollection.feedback);
+
+  Future<List<FeedbackModel>> getFeedback() async {
+    List<FeedbackModel> res = [];
+    final query = await _ref
+        .where('isHide', isEqualTo: false)
+        .where('isRead', isEqualTo: false)
+        .get();
+
+    final futureGroups = await Future.wait(query.docs.map(
+      (e) => getUserLiteModel(e.data()['userId']),
+    ));
+
+    for (int i = 0; i < query.size; i++) {
+      var docData = query.docs[i];
+      res.add(
+        FeedbackModel.fromJson(
+          docData.id,
+          query.docs[i].data(),
+          futureGroups[i].name,
+          futureGroups[i].avatar,
+        ),
+      );
+    }
+
+    return res;
+  }
+
+  Future<UserLiteModel> getUserLiteModel(String userId) async {
+    final query = await FirebaseFirestore.instance
+        .collection(DataCollection.user)
+        .doc(userId)
+        .get();
+
+    return UserLiteModel.fromJson(query.id, query.data()!);
+  }
+
+  Future<void> likeFeedback(String feedbackId, bool like) async {
+    final doc = _ref.doc(feedbackId);
+    await doc.set({'isLiked': like}, SetOptions(merge: true));
+  }
+
+  Future<void> readFeedback(String feedbackId, bool read) async {
+    final doc = _ref.doc(feedbackId);
+    await doc.set({'isRead': read}, SetOptions(merge: true));
+  }
+
+  Future<void> hideFeedback(String feedbackId, bool hide) async {
+    final doc = _ref.doc(feedbackId);
+    await doc.set({'isHide': hide, 'isRead': true}, SetOptions(merge: true));
+  }
+
+  Future<void> unHideFeedback(String feedbackId) async {
+    final doc = _ref.doc(feedbackId);
+    await doc.set({'isHide': false}, SetOptions(merge: true));
+  }
+
+  Future<void> replyFeedback(String feedbackId, String reply) async {
+    final doc = _ref.doc(feedbackId);
+    await doc.set({
+      'isReply': true,
+      'adminReply': reply,
+    }, SetOptions(merge: true));
+  }
+
+  Future<List<FeedbackModel>> getHideFeedback() async {
+    List<FeedbackModel> feedbacks = [];
+    final query = await _ref.where('isHide', isEqualTo: true).get();
+
+    final futureGroups = await Future.wait(query.docs.map(
+      (e) => getUserLiteModel(e.data()['userId']),
+    ));
+
+    for (int i = 0; i < query.size; i++) {
+      var docData = query.docs[i];
+      feedbacks.add(
+        FeedbackModel.fromJson(
+          docData.id,
+          query.docs[i].data(),
+          futureGroups[i].name,
+          futureGroups[i].avatar,
+        ),
+      );
+    }
+
+    return feedbacks;
+  }
+
+  Future<List<FeedbackModel>> getFeedbackOfProduct(String productId) async {
+    List<FeedbackModel> res = [];
+    final query = await _ref
+        .where('isHide', isEqualTo: false)
+        .where('isRead', isEqualTo: false)
+        .where('bookID', isEqualTo: productId)
+        .get();
+
+    final futureGroups = await Future.wait(query.docs.map(
+      (e) => getUserLiteModel(e.data()['userId']),
+    ));
+
+    for (int i = 0; i < query.size; i++) {
+      var docData = query.docs[i];
+      res.add(
+        FeedbackModel.fromJson(
+          docData.id,
+          query.docs[i].data(),
+          futureGroups[i].name,
+          futureGroups[i].avatar,
+        ),
+      );
+    }
+
+    return res;
+  }
+}

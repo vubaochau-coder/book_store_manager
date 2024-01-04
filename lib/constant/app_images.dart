@@ -10,4 +10,5 @@ class AppImages {
 
   static String clipboard = "${_prePath}clipboard.png";
   static String bell = "${_prePath}bell.png";
+  static String feedback = "${_prePath}feedback.png";
 }

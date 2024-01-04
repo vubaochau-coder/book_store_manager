@@ -22,25 +22,22 @@ class OrderDeliveringPage extends StatelessWidget {
           return const EmptyOrdersList();
         }
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: ListView.separated(
-            itemCount: state.deliveringOrders.length,
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            physics: const ClampingScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.grey[200],
-                thickness: 4,
-                height: 4,
-              );
-            },
-            itemBuilder: (context, index) {
-              return DeliveringOrderItem(
-                order: state.deliveringOrders[index],
-              );
-            },
-          ),
+        return ListView.separated(
+          itemCount: state.deliveringOrders.length,
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          physics: const ClampingScrollPhysics(),
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey[200],
+              thickness: 4,
+              height: 4,
+            );
+          },
+          itemBuilder: (context, index) {
+            return DeliveringOrderItem(
+              order: state.deliveringOrders[index],
+            );
+          },
         );
       },
     );

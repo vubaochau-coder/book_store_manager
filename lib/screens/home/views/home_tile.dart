@@ -20,6 +20,8 @@ class HomeTile extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       color: Colors.white,
+      surfaceTintColor: Colors.white,
+      elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -28,7 +30,7 @@ class HomeTile extends StatelessWidget {
         splashColor: Colors.grey[100],
         borderRadius: BorderRadius.circular(10),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Row(
             children: [
               Image.asset(

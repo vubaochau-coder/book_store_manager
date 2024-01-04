@@ -7,4 +7,5 @@ class DataCollection {
   static String import = "Import";
   static String adminNoti = "AdminNotification";
   static String userNoti = "Notification";
+  static String feedback = "Feedback";
 }
