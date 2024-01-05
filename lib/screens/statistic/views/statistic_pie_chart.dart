@@ -67,7 +67,7 @@ class StatisticPieChart extends StatelessWidget {
               ),
               Gap(8),
               Indicator(
-                color: Colors.grey,
+                color: Colors.green,
                 text: 'Chưa xong',
                 isSquare: true,
                 size: 14,
@@ -88,15 +88,26 @@ class StatisticPieChart extends StatelessWidget {
       sectionsSpace: 1,
       borderData: FlBorderData(show: false),
       sections: (complete + cancel == 0)
-          ? [
-              PieChartSectionData(
-                value: (all - complete - cancel).toDouble(),
-                radius: 70,
-                title: "${(all - complete - cancel).toStringAsFixed(0)} đơn",
-                titleStyle: const TextStyle(color: Colors.white, fontSize: 12),
-                color: Colors.grey,
-              ),
-            ]
+          ? all == 0
+              ? [
+                  PieChartSectionData(
+                    value: 1,
+                    radius: 70,
+                    showTitle: false,
+                    color: Colors.grey,
+                  ),
+                ]
+              : [
+                  PieChartSectionData(
+                    value: (all - complete - cancel).toDouble(),
+                    radius: 70,
+                    title:
+                        "${(all - complete - cancel).toStringAsFixed(0)} đơn",
+                    titleStyle:
+                        const TextStyle(color: Colors.white, fontSize: 12),
+                    color: Colors.green,
+                  ),
+                ]
           : [
               PieChartSectionData(
                 value: complete.toDouble(),
@@ -117,7 +128,7 @@ class StatisticPieChart extends StatelessWidget {
                 radius: 70,
                 title: "${(all - complete - cancel).toStringAsFixed(0)} đơn",
                 titleStyle: const TextStyle(color: Colors.white, fontSize: 12),
-                color: Colors.grey,
+                color: Colors.green,
               ),
             ],
     );

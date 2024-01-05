@@ -4,6 +4,8 @@ import 'package:book_store_manager/repositories/feedback_repository.dart';
 import 'package:book_store_manager/utils/dialog_utils.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../constant/enum.dart';
+
 part 'feedback_event.dart';
 part 'feedback_state.dart';
 
@@ -12,7 +14,6 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
 
   FeedbackBloc(this._feedbackRepository) : super(const FeedbackState()) {
     on<FeedbackLoadEvent>(_onLoad);
-    on<FeedbackLoadMoreEvent>(_onLoadMore);
     on<FeedbackLikeEvent>(_onLike);
     on<FeedbackReadEvent>(_onRead);
     on<FeedbackHideEvent>(_onHide);
@@ -20,15 +21,15 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   }
 
   _onLoad(FeedbackLoadEvent event, Emitter emit) async {
-    emit(state.copyWith(isLoading: true));
+    if (event.type != state.type) {
+      emit(state.copyWith(isLoading: true, type: event.type));
 
-    final feedbacks = await _feedbackRepository.getFeedback();
-    feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
+      final feedbacks = await _feedbackRepository.getFeedback(event.type);
+      feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
 
-    emit(state.copyWith(isLoading: false, feedback: feedbacks));
+      emit(state.copyWith(isLoading: false, feedback: feedbacks));
+    }
   }
-
-  _onLoadMore(FeedbackLoadMoreEvent event, Emitter emit) async {}
 
   _onLike(FeedbackLikeEvent event, Emitter emit) async {
     DialogUtils.showLoading();

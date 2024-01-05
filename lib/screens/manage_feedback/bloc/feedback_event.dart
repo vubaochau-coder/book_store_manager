@@ -7,9 +7,11 @@ sealed class FeedbackEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FeedbackLoadEvent extends FeedbackEvent {}
+class FeedbackLoadEvent extends FeedbackEvent {
+  final ManageFeedbackType type;
 
-class FeedbackLoadMoreEvent extends FeedbackEvent {}
+  const FeedbackLoadEvent({required this.type});
+}
 
 class FeedbackLikeEvent extends FeedbackEvent {
   final String feedbackId;

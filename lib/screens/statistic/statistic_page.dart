@@ -3,6 +3,7 @@ import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/screens/statistic/views/row_data.dart';
 import 'package:book_store_manager/utils/currency_utils.dart';
 import 'package:book_store_manager/widgets/dialogs/sales_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../themes/texts.dart';
 import '../../widgets/statistic_item.dart';
 import 'bloc/statistic_bloc.dart';
@@ -314,15 +315,21 @@ class _StatisticContent extends StatelessWidget {
 
                         return TextButton(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return SalesDialog(
-                                  orders: state.orders,
-                                  selectedMonth: state.selectedMonth!,
-                                );
-                              },
-                            );
+                            if (state.orders.isEmpty) {
+                              Fluttertoast.showToast(
+                                msg: 'Không có dữ liệu để thống kê',
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return SalesDialog(
+                                    orders: state.orders,
+                                    selectedMonth: state.selectedMonth!,
+                                  );
+                                },
+                              );
+                            }
                           },
                           child: Text(
                             'Xem doanh số',

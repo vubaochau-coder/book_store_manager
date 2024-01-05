@@ -21,7 +21,7 @@ class HomeTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       color: Colors.white,
       surfaceTintColor: Colors.white,
-      elevation: 2,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

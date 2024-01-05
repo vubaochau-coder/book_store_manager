@@ -1,25 +1,32 @@
 import 'package:book_store_manager/constant/data_collections.dart';
+import 'package:book_store_manager/extensions/datetime_ex.dart';
 import 'package:book_store_manager/models/home_statistic_model.dart';
-import 'package:book_store_manager/utils/date_time.dart';
+import 'package:book_store_manager/utils/converter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TransactionService {
   Future<HomeStatisticModel> getMonthStatistic(DateTime date) async {
-    String docId = DateTimeUtils.monthCollection(date);
-
     final query = await FirebaseFirestore.instance
-        .collection(DataCollection.transaction)
-        .doc(docId)
+        .collection(DataCollection.orders)
+        .where('dateCreated', isGreaterThanOrEqualTo: date.startOfMonth())
+        .where('dateCreated', isLessThanOrEqualTo: date.endOfMonth())
         .get();
-    if (query.exists) {
-      return HomeStatisticModel.fromJson(query.id, query.data()!);
-    } else {
-      return HomeStatisticModel(
-        id: docId,
-        totalOrder: 0,
-        completeOrder: 0,
-        revenue: 0,
-      );
+
+    int total = query.size;
+    int complete = query.docs
+        .where((element) => cvToInt(element.data()['status']) == 4)
+        .length;
+    double revenue = 0;
+    for (var ele in query.docs) {
+      if (cvToInt(ele.data()['status']) == 4) {
+        revenue += cvToDouble(ele.data()['totalPrice']);
+      }
     }
+
+    return HomeStatisticModel(
+      totalOrder: total,
+      completeOrder: complete,
+      revenue: revenue,
+    );
   }
 }

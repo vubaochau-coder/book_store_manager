@@ -1,3 +1,4 @@
+import 'package:book_store_manager/constant/enum.dart';
 import 'package:book_store_manager/repositories/services/feedback_service.dart';
 
 import '../models/feedback_model.dart';
@@ -9,8 +10,8 @@ class FeedbackRepository {
     _feedbackService = FeedbackService();
   }
 
-  Future<List<FeedbackModel>> getFeedback() async {
-    return _feedbackService.getFeedback();
+  Future<List<FeedbackModel>> getFeedback(ManageFeedbackType type) async {
+    return _feedbackService.getFeedback(type);
   }
 
   Future<void> likeFeedback(String feedbackId, bool like) async {

@@ -18,3 +18,9 @@ class UpdateFeedbackViewType extends ProductFeedbackEvent {
 
   const UpdateFeedbackViewType({required this.type});
 }
+
+class ProductHideFeedback extends ProductFeedbackEvent {
+  final String feedbackId;
+
+  const ProductHideFeedback({required this.feedbackId});
+}

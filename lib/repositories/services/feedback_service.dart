@@ -1,4 +1,5 @@
 import 'package:book_store_manager/constant/data_collections.dart';
+import 'package:book_store_manager/constant/enum.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../models/feedback_model.dart';
@@ -7,11 +8,13 @@ import '../../models/user_model.dart';
 class FeedbackService {
   final _ref = FirebaseFirestore.instance.collection(DataCollection.feedback);
 
-  Future<List<FeedbackModel>> getFeedback() async {
+  Future<List<FeedbackModel>> getFeedback(ManageFeedbackType type) async {
     List<FeedbackModel> res = [];
+    final bool isRead = (type == ManageFeedbackType.read);
+
     final query = await _ref
         .where('isHide', isEqualTo: false)
-        .where('isRead', isEqualTo: false)
+        .where('isRead', isEqualTo: isRead)
         .get();
 
     final futureGroups = await Future.wait(query.docs.map(
@@ -97,7 +100,6 @@ class FeedbackService {
     List<FeedbackModel> res = [];
     final query = await _ref
         .where('isHide', isEqualTo: false)
-        .where('isRead', isEqualTo: false)
         .where('bookID', isEqualTo: productId)
         .get();
 

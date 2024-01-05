@@ -28,6 +28,8 @@ class ProductInformation extends StatelessWidget {
           Expanded(
             child: Text(
               product.title,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 13),
             ),
           ),

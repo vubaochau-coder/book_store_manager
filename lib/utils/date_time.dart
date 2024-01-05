@@ -27,6 +27,11 @@ class DateTimeUtils {
     return dateFormat.format(dateTime);
   }
 
+  static String feedbackTime(DateTime dateTime) {
+    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    return dateFormat.format(dateTime);
+  }
+
   static String getYear(DateTime dateTime) {
     DateFormat dateFormat = DateFormat('yyyy');
     return dateFormat.format(dateTime);

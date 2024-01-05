@@ -1,6 +1,7 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/constant/enum.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'views/product_feedback_item.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/utils/enum_convert.dart';
 import 'package:book_store_manager/widgets/empty_feedback_list.dart';
@@ -142,10 +143,23 @@ class ProductFeedbackPage extends StatelessWidget {
                     return const EmptyFeedbackList();
                   }
 
-                  return ListView.builder(
+                  return ListView.separated(
                     itemCount: state.showedFeedbacks.length,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        indent: 12,
+                        endIndent: 12,
+                        color: Colors.grey,
+                        thickness: 0,
+                        height: 8,
+                      );
+                    },
                     itemBuilder: (context, index) {
-                      return SizedBox();
+                      return ProductFeedbackItem(
+                        key: ObjectKey(state.showedFeedbacks[index].id),
+                        feedback: state.showedFeedbacks[index],
+                      );
                     },
                   );
                 },

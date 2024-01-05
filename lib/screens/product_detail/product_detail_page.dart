@@ -3,12 +3,12 @@ import 'package:book_store_manager/models/product_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/screens/product_feedback/product_feedback_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
+import '../../widgets/custom_app_bar.dart';
 import 'bloc/product_detail_bloc.dart';
 import 'views/image_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'views/orther_information_product.dart';
 import 'views/overview_product.dart';
-import 'package:book_store_manager/themes/texts.dart';
 import '../../widgets/title.dart';
 import '../../widgets/data_form.dart';
 import 'package:book_store_manager/themes/colors.dart';
@@ -49,90 +49,61 @@ class _ProductDetailContent extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: AppColors.background,
-        body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                centerTitle: true,
-                elevation: 0,
-                floating: true,
-                snap: true,
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.white,
-                title: Text('Thông tin sản phẩm', style: AppTexts.appbarTitle),
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(AppIcons.inventoryFill),
-                      fit: BoxFit.contain,
-                      alignment: Alignment.bottomRight,
-                      opacity: 0.2,
+        appBar: CustomAppBar(
+          title: 'Thông tin sản phẩm',
+          color: Colors.orangeAccent[700]!,
+          imgBg: AppIcons.inventoryFill,
+        ),
+        body: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const OverviewProduct(),
+              const ImageProduct(),
+              const OrderInformationProduct(),
+              DataForm(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const MyTitle(
+                      text: 'Đánh giá về sản phẩm',
+                      padding: EdgeInsets.only(bottom: 4),
                     ),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.orangeAccent[700]!,
-                        Colors.orangeAccent[700]!.withOpacity(0.6),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                ),
-              ),
-            ];
-          },
-          body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const OverviewProduct(),
-                const ImageProduct(),
-                const OrderInformationProduct(),
-                DataForm(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const MyTitle(
-                        text: 'Đánh giá về sản phẩm',
-                        padding: EdgeInsets.only(bottom: 4),
-                      ),
-                      const Gap(8),
-                      SizedBox(
-                        height: 44,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              PageRouteSlideTransition(
-                                child:
-                                    ProductFeedbackPage(productId: productId),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: BorderSide(
-                                color: AppColors.themeColor,
-                              ),
+                    const Gap(8),
+                    SizedBox(
+                      height: 44,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            PageRouteSlideTransition(
+                              child: ProductFeedbackPage(productId: productId),
                             ),
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                          ),
-                          child: Text(
-                            'Bấm để xem đánh giá về sản phẩm',
-                            style: TextStyle(
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
                               color: AppColors.themeColor,
                             ),
                           ),
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Bấm để xem đánh giá về sản phẩm',
+                          style: TextStyle(
+                            color: AppColors.themeColor,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
