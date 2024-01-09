@@ -70,14 +70,9 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Gap(12),
-                  Text(
+                  const Text(
                     'Theo dõi đơn hàng',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.orangeAccent[700],
-                      // color: Colors.lightBlueAccent[700],
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                   ),
                   const Gap(6),
                   Row(
@@ -144,9 +139,8 @@ class _ManageOrderPageState extends State<ManageOrderPage>
                                 state.isLoading
                                     ? 'Đơn chờ duyệt'
                                     : 'Đơn chờ duyệt (${state.orders.length.toStringAsFixed(0)})',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
-                                  color: Colors.orangeAccent[700],
                                   fontWeight: FontWeight.w600,
                                 ),
                               );

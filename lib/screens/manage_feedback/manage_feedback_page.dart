@@ -15,6 +15,8 @@ import 'views/feedback_item.dart';
 import 'package:book_store_manager/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'views/month_selector.dart';
+
 class ManageFeedbackPage extends StatelessWidget {
   const ManageFeedbackPage({super.key});
 
@@ -23,7 +25,8 @@ class ManageFeedbackPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => FeedbackBloc(
         RepositoryProvider.of<AppRepository>(context).feedbackRepository,
-      )..add(const FeedbackLoadEvent(type: ManageFeedbackType.unread)),
+        RepositoryProvider.of<AppRepository>(context).notiRepository,
+      )..add(FeedbackLoadEvent()),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
@@ -38,14 +41,15 @@ class ManageFeedbackPage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Row(
                 children: [
-                  Text(
-                    'Gần đây',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: Colors.orangeAccent[700],
-                    ),
-                  ),
+                  const MonthSelector(),
+                  // Text(
+                  //   'Gần đây',
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w600,
+                  //     fontSize: 14,
+                  //     color: Colors.orangeAccent[700],
+                  //   ),
+                  // ),
                   const Spacer(),
                   TextButton(
                     onPressed: () {
@@ -75,7 +79,8 @@ class ManageFeedbackPage extends StatelessWidget {
                 const Gap(8),
                 BlocBuilder<FeedbackBloc, FeedbackState>(
                   buildWhen: (previous, current) {
-                    return previous.type != current.type;
+                    return previous.type != current.type ||
+                        previous.selectedMonth != current.selectedMonth;
                   },
                   builder: (context, state) {
                     bool isSelect = state.type == ManageFeedbackType.unread;
@@ -83,7 +88,7 @@ class ManageFeedbackPage extends StatelessWidget {
                     return ChoiceChip(
                       onSelected: (value) {
                         context.read<FeedbackBloc>().add(
-                              const FeedbackLoadEvent(
+                              const FeedbackUpdateTypeEvent(
                                 type: ManageFeedbackType.unread,
                               ),
                             );
@@ -108,7 +113,8 @@ class ManageFeedbackPage extends StatelessWidget {
                 const Gap(8),
                 BlocBuilder<FeedbackBloc, FeedbackState>(
                   buildWhen: (previous, current) {
-                    return previous.type != current.type;
+                    return previous.type != current.type ||
+                        previous.selectedMonth != current.selectedMonth;
                   },
                   builder: (context, state) {
                     bool isSelect = state.type == ManageFeedbackType.read;
@@ -116,7 +122,7 @@ class ManageFeedbackPage extends StatelessWidget {
                     return ChoiceChip(
                       onSelected: (value) {
                         context.read<FeedbackBloc>().add(
-                              const FeedbackLoadEvent(
+                              const FeedbackUpdateTypeEvent(
                                 type: ManageFeedbackType.read,
                               ),
                             );

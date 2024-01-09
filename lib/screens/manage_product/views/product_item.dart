@@ -33,7 +33,7 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context)
             .push(PageRouteSlideTransition(
-          child: ProductDetailPage(product: productModel),
+          child: ProductDetailPage(productId: productModel.id),
         ))
             .then(
           (value) {

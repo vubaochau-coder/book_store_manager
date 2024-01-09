@@ -8,4 +8,5 @@ class DataCollection {
   static String adminNoti = "AdminNotification";
   static String userNoti = "Notification";
   static String feedback = "Feedback";
+  static String report = "Report";
 }

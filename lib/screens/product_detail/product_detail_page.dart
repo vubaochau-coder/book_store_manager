@@ -1,5 +1,4 @@
 import 'package:book_store_manager/constant/app_icons.dart';
-import 'package:book_store_manager/models/product_model.dart';
 import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/screens/product_feedback/product_feedback_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
@@ -17,17 +16,18 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final ProductModel product;
+  // final ProductModel product;
+  final String productId;
 
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProductDetailBloc(
         RepositoryProvider.of<AppRepository>(context).productRepository,
-      )..add(InitialEvent(productId: product.id, callAfterDataChange: false)),
-      child: _ProductDetailContent(product.id),
+      )..add(InitialEvent(productId: productId, callAfterDataChange: false)),
+      child: _ProductDetailContent(productId),
     );
   }
 }

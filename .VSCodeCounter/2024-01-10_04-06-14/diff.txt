@@ -1,0 +1,79 @@
+Date : 2024-01-10 04:06:14
+Directory : d:\Flutter Application\book_store_manager\lib
+Total : 28 files,  691 codes, 9 comments, 74 blanks, all 774 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         28 |        691 |          9 |         74 |        774 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         28 |        691 |          9 |         74 |        774 |
+| models                                                                                                |          2 |         12 |          0 |          1 |         13 |
+| repositories                                                                                          |          5 |         25 |          0 |          3 |         28 |
+| repositories (Files)                                                                                  |          2 |          6 |          0 |          1 |          7 |
+| repositories\services                                                                                 |          3 |         19 |          0 |          2 |         21 |
+| screens                                                                                               |         20 |        653 |          9 |         69 |        731 |
+| screens\change_password                                                                               |          5 |        278 |          0 |         39 |        317 |
+| screens\change_password (Files)                                                                       |          1 |        159 |          0 |          6 |        165 |
+| screens\change_password\bloc                                                                          |          3 |         95 |          0 |         27 |        122 |
+| screens\change_password\views                                                                         |          1 |         24 |          0 |          6 |         30 |
+| screens\chat                                                                                          |          1 |          9 |          0 |          3 |         12 |
+| screens\home                                                                                          |          2 |         12 |          0 |          0 |         12 |
+| screens\home (Files)                                                                                  |          1 |          6 |          0 |          0 |          6 |
+| screens\home\views                                                                                    |          1 |          6 |          0 |          0 |          6 |
+| screens\import_product                                                                                |          3 |        220 |          0 |         10 |        230 |
+| screens\import_product (Files)                                                                        |          1 |        136 |          0 |          6 |        142 |
+| screens\import_product\views                                                                          |          2 |         84 |          0 |          4 |         88 |
+| screens\manage_feedback                                                                               |          5 |        120 |          8 |         17 |        145 |
+| screens\manage_feedback (Files)                                                                       |          1 |         -3 |          8 |          1 |          6 |
+| screens\manage_feedback\bloc                                                                          |          3 |         47 |          0 |         12 |         59 |
+| screens\manage_feedback\views                                                                         |          1 |         76 |          0 |          4 |         80 |
+| screens\manage_user                                                                                   |          1 |         -3 |          0 |          0 |         -3 |
+| screens\manage_user\views                                                                             |          1 |         -3 |          0 |          0 |         -3 |
+| screens\product_detail                                                                                |          1 |         -1 |          1 |          0 |          0 |
+| screens\statistic                                                                                     |          2 |         18 |          0 |          0 |         18 |
+| screens\statistic (Files)                                                                             |          1 |          7 |          0 |          0 |          7 |
+| screens\statistic\views                                                                               |          1 |         11 |          0 |          0 |         11 |
+| utils                                                                                                 |          1 |          1 |          0 |          1 |          2 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                              | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\Flutter Application\book_store_manager\lib\models\home_statistic_model.dart                        | Dart     |        -11 |          0 |         -2 |        -13 |
+| d:\Flutter Application\book_store_manager\lib\models\reply_notification_model.dart                    | Dart     |         23 |          0 |          3 |         26 |
+| d:\Flutter Application\book_store_manager\lib\repositories\feedback_repository.dart                   | Dart     |          1 |          0 |          0 |          1 |
+| d:\Flutter Application\book_store_manager\lib\repositories\notification_repository.dart               | Dart     |          5 |          0 |          1 |          6 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\feedback_service.dart             | Dart     |          4 |          0 |          0 |          4 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\notification_service.dart         | Dart     |          9 |          0 |          1 |         10 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\transaction_service.dart          | Dart     |          6 |          0 |          1 |          7 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_bloc.dart  | Dart     |         39 |          0 |         11 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_event.dart | Dart     |         19 |          0 |         10 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_state.dart | Dart     |         37 |          0 |          6 |         43 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\change_password_page.dart       | Dart     |        159 |          0 |          6 |        165 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\views\styles.dart               | Dart     |         24 |          0 |          6 |         30 |
+| d:\Flutter Application\book_store_manager\lib\screens\chat\chat_page.dart                             | Dart     |          9 |          0 |          3 |         12 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\home_page.dart                             | Dart     |          6 |          0 |          0 |          6 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_drawer.dart                     | Dart     |          6 |          0 |          0 |          6 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\import_product_detail.dart       | Dart     |        136 |          0 |          6 |        142 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\views\import_detail_item.dart    | Dart     |         71 |          0 |          4 |         75 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\views\import_history_item.dart   | Dart     |         13 |          0 |          0 |         13 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_bloc.dart         | Dart     |         38 |          0 |          9 |         47 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_event.dart        | Dart     |          5 |          0 |          3 |          8 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_state.dart        | Dart     |          4 |          0 |          0 |          4 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\manage_feedback_page.dart       | Dart     |         -3 |          8 |          1 |          6 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\views\month_selector.dart       | Dart     |         76 |          0 |          4 |         80 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\user_list.dart                | Dart     |         -3 |          0 |          0 |         -3 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\product_detail_page.dart         | Dart     |         -1 |          1 |          0 |          0 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\statistic_page.dart                   | Dart     |          7 |          0 |          0 |          7 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\statistic_pie_chart.dart        | Dart     |         11 |          0 |          0 |         11 |
+| d:\Flutter Application\book_store_manager\lib\utils\chat_utils.dart                                   | Dart     |          1 |          0 |          1 |          2 |
+| Total                                                                                                 |          |        691 |          9 |         74 |        774 |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

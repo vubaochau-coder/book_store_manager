@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:book_store_manager/extensions/datetime_ex.dart';
 import 'package:book_store_manager/models/feedback_model.dart';
+import 'package:book_store_manager/models/reply_notification_model.dart';
 import 'package:book_store_manager/repositories/feedback_repository.dart';
+import 'package:book_store_manager/repositories/notification_repository.dart';
 import 'package:book_store_manager/utils/dialog_utils.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,9 +14,13 @@ part 'feedback_state.dart';
 
 class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   final FeedbackRepository _feedbackRepository;
+  final NotificationRepository _notiRepository;
 
-  FeedbackBloc(this._feedbackRepository) : super(const FeedbackState()) {
+  FeedbackBloc(this._feedbackRepository, this._notiRepository)
+      : super(const FeedbackState()) {
     on<FeedbackLoadEvent>(_onLoad);
+    on<FeedbackUpdateTypeEvent>(_onUpdateType);
+    on<FeedbackUpdateMonthEvent>(_onUpdateMonth);
     on<FeedbackLikeEvent>(_onLike);
     on<FeedbackReadEvent>(_onRead);
     on<FeedbackHideEvent>(_onHide);
@@ -21,14 +28,20 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   }
 
   _onLoad(FeedbackLoadEvent event, Emitter emit) async {
-    if (event.type != state.type) {
-      emit(state.copyWith(isLoading: true, type: event.type));
+    ManageFeedbackType initType = ManageFeedbackType.unread;
+    DateTime initMonth = DateTime.now().getMonthAndYear();
 
-      final feedbacks = await _feedbackRepository.getFeedback(event.type);
-      feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
+    emit(state.copyWith(
+      isLoading: true,
+      type: initType,
+      selectedMonth: initMonth,
+    ));
 
-      emit(state.copyWith(isLoading: false, feedback: feedbacks));
-    }
+    final feedbacks =
+        await _feedbackRepository.getFeedback(initType, initMonth);
+    feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
+
+    emit(state.copyWith(isLoading: false, feedback: feedbacks));
   }
 
   _onLike(FeedbackLikeEvent event, Emitter emit) async {
@@ -98,6 +111,16 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         state.feedback.indexWhere((element) => element.id == event.feedbackId);
     if (index != -1) {
       List<FeedbackModel> newState = List.from(state.feedback);
+
+      ReplyNotificationModel model = ReplyNotificationModel(
+        actionCode: 'feedback_reply',
+        content: event.reply,
+        title: 'Chủ shop đã phản hồi đánh giá của bạn',
+        isRead: false,
+        date: DateTime.now(),
+      );
+      await _notiRepository.createReplyNoti(newState[index].userId, model);
+
       newState[index] = FeedbackModel(
         id: newState[index].id,
         userId: newState[index].userId,
@@ -117,5 +140,29 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       emit(state.copyWith(feedback: newState));
     }
     DialogUtils.hideLoading();
+  }
+
+  _onUpdateType(FeedbackUpdateTypeEvent event, Emitter emit) async {
+    if (state.type != event.type) {
+      emit(state.copyWith(isLoading: true, type: event.type));
+
+      final feedbacks = await _feedbackRepository.getFeedback(
+          event.type, state.selectedMonth!);
+      feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
+
+      emit(state.copyWith(isLoading: false, feedback: feedbacks));
+    }
+  }
+
+  _onUpdateMonth(FeedbackUpdateMonthEvent event, Emitter emit) async {
+    if (state.selectedMonth != event.month) {
+      emit(state.copyWith(isLoading: true, selectedMonth: event.month));
+
+      final feedbacks =
+          await _feedbackRepository.getFeedback(state.type!, event.month);
+      feedbacks.sort((a, b) => b.dateSubmit.compareTo(a.dateSubmit));
+
+      emit(state.copyWith(isLoading: false, feedback: feedbacks));
+    }
   }
 }

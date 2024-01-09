@@ -13,11 +13,7 @@ class TotalUser extends StatelessWidget {
         builder: (context, state) {
           return Text(
             '${state.showedUsers.length.toStringAsFixed(0)} khách hàng',
-            style: TextStyle(
-              color: Colors.orangeAccent[700],
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           );
         },
       ),

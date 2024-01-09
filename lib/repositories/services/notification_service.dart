@@ -1,5 +1,6 @@
 import 'package:book_store_manager/constant/data_collections.dart';
 import 'package:book_store_manager/constant/enum.dart';
+import 'package:book_store_manager/models/reply_notification_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NotificationService {
@@ -83,5 +84,14 @@ class NotificationService {
     }
 
     await batch.commit();
+  }
+
+  Future<void> createReplyNoti(
+      String userId, ReplyNotificationModel noti) async {
+    final colRef = FirebaseFirestore.instance
+        .collection(DataCollection.user)
+        .doc(userId)
+        .collection(DataCollection.userNoti);
+    await colRef.add(noti.toJson());
   }
 }

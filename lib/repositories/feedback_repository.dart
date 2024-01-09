@@ -10,8 +10,9 @@ class FeedbackRepository {
     _feedbackService = FeedbackService();
   }
 
-  Future<List<FeedbackModel>> getFeedback(ManageFeedbackType type) async {
-    return _feedbackService.getFeedback(type);
+  Future<List<FeedbackModel>> getFeedback(
+      ManageFeedbackType type, DateTime month) async {
+    return _feedbackService.getFeedback(type, month);
   }
 
   Future<void> likeFeedback(String feedbackId, bool like) async {

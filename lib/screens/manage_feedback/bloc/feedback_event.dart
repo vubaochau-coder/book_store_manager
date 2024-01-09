@@ -7,10 +7,18 @@ sealed class FeedbackEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FeedbackLoadEvent extends FeedbackEvent {
+class FeedbackLoadEvent extends FeedbackEvent {}
+
+class FeedbackUpdateTypeEvent extends FeedbackEvent {
   final ManageFeedbackType type;
 
-  const FeedbackLoadEvent({required this.type});
+  const FeedbackUpdateTypeEvent({required this.type});
+}
+
+class FeedbackUpdateMonthEvent extends FeedbackEvent {
+  final DateTime month;
+
+  const FeedbackUpdateMonthEvent({required this.month});
 }
 
 class FeedbackLikeEvent extends FeedbackEvent {

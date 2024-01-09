@@ -1,4 +1,5 @@
 import 'package:book_store_manager/constant/app_icons.dart';
+import 'package:book_store_manager/screens/chat/chat_page.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
 import 'package:book_store_manager/screens/import_product/import_product_page.dart';
 import 'package:book_store_manager/screens/notification/notification_page.dart';
@@ -13,6 +14,7 @@ import '../manage_user/manage_user_page.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
 import '../notification/bloc/notification_bloc.dart';
+import '../user_report/user_report_page.dart';
 import 'views/home_background.dart';
 import 'views/home_statistic.dart';
 import 'package:gap/gap.dart';
@@ -53,7 +55,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteSlideTransition(child: const ChatPage()),
+              );
+            },
             icon: Badge(
               smallSize: 8,
               backgroundColor: AppColors.themeColor,
@@ -195,13 +201,17 @@ class HomePage extends StatelessWidget {
                     );
                   },
                 ),
-                // const Gap(8),
-                // HomeTile(
-                //   title: 'Báo cáo của khách hàng',
-                //   img: AppIcons.exclamation,
-                //   color: Colors.redAccent,
-                //   onTap: () {},
-                // ),
+                const Gap(8),
+                HomeTile(
+                  title: 'Báo cáo vi phạm',
+                  img: AppIcons.exclamation,
+                  color: Colors.redAccent,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(child: const UserReportPage()),
+                    );
+                  },
+                ),
               ],
             ),
           ),

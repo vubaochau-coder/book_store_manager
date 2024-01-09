@@ -17,11 +17,7 @@ class TotalProduct extends StatelessWidget {
         builder: (context, state) {
           return Text(
             '${state.showedProducts.length} sản phẩm',
-            style: TextStyle(
-              color: Colors.orangeAccent[700],
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           );
         },
       ),
