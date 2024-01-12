@@ -39,45 +39,25 @@ class FeedbackItem extends StatelessWidget {
                 ),
               ),
               const Gap(8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          feedback.userName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            for (int i = 0; i < feedback.rating; i++)
-                              const Icon(Icons.star,
-                                  size: 14, color: Colors.amber),
-                          ],
-                        ),
-                      ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    feedback.userName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
                     ),
-                    const Gap(2),
-                    ExpandableText(
-                      feedback.review,
-                      expandText: 'Xem thêm',
-                      collapseText: 'Ẩn bớt',
-                      maxLines: 1,
-                      linkColor: Colors.blue,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontStyle: FontStyle.italic,
-                        color: feedback.isRead ? Colors.grey : Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  Row(
+                    children: [
+                      for (int i = 0; i < feedback.rating; i++)
+                        const Icon(Icons.star, size: 14, color: Colors.amber),
+                    ],
+                  ),
+                ],
               ),
+              const Spacer(),
               Text(
                 DateTimeUtils.feedbackTime(feedback.dateSubmit),
                 style: const TextStyle(
@@ -86,7 +66,26 @@ class FeedbackItem extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              const Gap(4),
+            ],
+          ),
+          const Gap(4),
+          Row(
+            children: [
+              const SizedBox(width: 32),
+              Expanded(
+                child: ExpandableText(
+                  feedback.review,
+                  expandText: 'Xem thêm',
+                  collapseText: 'Ẩn bớt',
+                  maxLines: 2,
+                  linkColor: Colors.blue,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontStyle: FontStyle.italic,
+                    color: feedback.isRead ? Colors.grey : Colors.black,
+                  ),
+                ),
+              ),
             ],
           ),
           if (feedback.isReply)

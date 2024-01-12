@@ -4,7 +4,10 @@ import 'package:book_store_manager/utils/date_time.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
+import '../bloc/user_report_bloc.dart';
 
 class ReportItem extends StatelessWidget {
   final UserReportModel reportModel;
@@ -111,7 +114,11 @@ class ReportItem extends StatelessWidget {
               SizedBox(
                 height: 32,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<UserReportBloc>().add(
+                          ReadReportEvent(reportId: reportModel.id),
+                        );
+                  },
                   child: const Text(
                     'Bỏ qua',
                     style: TextStyle(
@@ -125,7 +132,11 @@ class ReportItem extends StatelessWidget {
               SizedBox(
                 height: 32,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<UserReportBloc>().add(
+                          HideFeedbackEvent(feedbackId: reportModel.feedbackId),
+                        );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.themeColor.withOpacity(0.1),
                     elevation: 0,

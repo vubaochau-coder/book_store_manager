@@ -96,19 +96,13 @@ class ProductFeedbackItem extends StatelessWidget {
             children: [
               const SizedBox(width: 32),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ExpandableText(
-                      feedback.review,
-                      expandText: 'Xem thêm',
-                      collapseText: 'Ẩn bớt',
-                      linkColor: AppColors.themeColor,
-                      maxLines: 2,
-                      style:
-                          const TextStyle(fontSize: 13, color: Colors.black87),
-                    ),
-                  ],
+                child: ExpandableText(
+                  feedback.review,
+                  expandText: 'Xem thêm',
+                  collapseText: 'Ẩn bớt',
+                  linkColor: AppColors.themeColor,
+                  maxLines: 2,
+                  style: const TextStyle(fontSize: 13, color: Colors.black87),
                 ),
               ),
             ],

@@ -7,12 +7,6 @@ sealed class ChangePasswordEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class UpdateCurrentPassword extends ChangePasswordEvent {
-  final String currentPass;
-
-  const UpdateCurrentPassword({required this.currentPass});
-}
-
 class UpdateNewPassword extends ChangePasswordEvent {
   final String newPass;
 

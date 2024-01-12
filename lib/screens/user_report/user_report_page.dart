@@ -3,6 +3,7 @@ import 'package:book_store_manager/repositories/repository.dart';
 import 'package:book_store_manager/screens/user_report/views/report_item.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/widgets/custom_app_bar.dart';
+import 'package:book_store_manager/widgets/empty_report_list.dart';
 import 'package:book_store_manager/widgets/loading/loading_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,10 @@ class UserReportPage extends StatelessWidget {
                 builder: (context, state) {
                   if (state.isLoading) {
                     return const LoadingList();
+                  }
+
+                  if (state.reports.isEmpty) {
+                    return const EmptyReportList();
                   }
 
                   return ListView.builder(

@@ -12,7 +12,7 @@ class UserReportState extends Equatable {
   @override
   List<Object> get props => [isLoading, reports];
 
-  UserReportState copyWith(bool? isLoading, List<UserReportModel>? reports) {
+  UserReportState copyWith({bool? isLoading, List<UserReportModel>? reports}) {
     return UserReportState(
       isLoading: isLoading ?? this.isLoading,
       reports: reports ?? this.reports,

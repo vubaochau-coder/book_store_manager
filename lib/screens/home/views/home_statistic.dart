@@ -32,8 +32,7 @@ class HomeStatistic extends StatelessWidget {
                   title: 'Đơn xong',
                   content: state.isLoading
                       ? "-/-"
-                      : calcuteCompleteRate(state.homeStatistic!.totalOrder,
-                          state.homeStatistic!.completeOrder),
+                      : state.homeStatistic!.completeOrder.toString(),
                   color: Colors.lightBlueAccent[700],
                   imgPath: AppIcons.complete,
                 ),

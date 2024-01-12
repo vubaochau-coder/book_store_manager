@@ -53,4 +53,30 @@ class UserReportService {
       'rating': rating,
     };
   }
+
+  Future<void> readReport(String reportId) async {
+    final query = _ref.doc(reportId);
+
+    await query.set({'status': -1}, SetOptions(merge: true));
+  }
+
+  Future<void> hideFeedback(String feedbackId) async {
+    final ref = FirebaseFirestore.instance
+        .collection(DataCollection.feedback)
+        .doc(feedbackId);
+
+    final futureGroup = await Future.wait([
+      ref.set({'isHide': true}, SetOptions(merge: true)),
+      _ref
+          .where('feedbackId', isEqualTo: feedbackId)
+          .where('status', isEqualTo: 0)
+          .get(),
+    ]);
+    QuerySnapshot<Map<String, dynamic>> temp =
+        futureGroup[1] as QuerySnapshot<Map<String, dynamic>>;
+
+    await Future.wait(temp.docs.map(
+      (e) => e.reference.set({'status': -1}, SetOptions(merge: true)),
+    ));
+  }
 }

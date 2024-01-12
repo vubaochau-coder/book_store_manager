@@ -14,7 +14,12 @@ class FeedbackState extends Equatable {
   });
 
   @override
-  List<Object?> get props => [isLoading, feedback, type, selectedMonth];
+  List<Object?> get props => [
+        isLoading,
+        feedback,
+        type,
+        selectedMonth,
+      ];
 
   FeedbackState copyWith({
     bool? isLoading,
