@@ -21,7 +21,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
     String uid = event.uid;
     bool isAdmin = await Future.delayed(
       const Duration(seconds: 0),
-      () => _adminAccService.isAdminAccount(uid),
+      () => _adminAccService.checkIsAdminUsingId(uid),
     );
 
     emit(state.copyWith(isAdmin: isAdmin, isLoading: false));

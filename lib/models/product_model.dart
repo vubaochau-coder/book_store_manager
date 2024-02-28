@@ -12,8 +12,12 @@ class ProductModel {
 
   final double price;
   final double discount;
-  final List<String> images;
   final int stock;
+  final int totalSold;
+
+  final List<String> allImages;
+  final List<String> showImages;
+  final String mainImage;
 
   ProductModel({
     required this.id,
@@ -25,13 +29,17 @@ class ProductModel {
     required this.publishingYear,
     required this.price,
     required this.discount,
-    required this.images,
+    required this.allImages,
+    required this.showImages,
+    required this.mainImage,
     required this.searchKey,
     required this.stock,
+    required this.totalSold,
   });
 
   factory ProductModel.fromJson(String id, Map<String, dynamic> json) {
     List<String> img = List.from(json['listURL']);
+    List<String> showImg = List.from(json['showedURL']);
 
     return ProductModel(
       id: id,
@@ -43,8 +51,34 @@ class ProductModel {
       publishingYear: cvToString(json['publishingYear']),
       price: cvToDouble(json['price']),
       discount: cvToDouble(json['discount']),
-      images: img,
+      allImages: img,
+      showImages: showImg,
+      mainImage: cvToString(json['mainURL']),
       searchKey: cvToString(json['searchKey']),
+      stock: cvToInt(json['stock']),
+      totalSold: cvToInt(json['totalSold']),
+    );
+  }
+}
+
+class ProductLiteModel {
+  final String productId;
+  final String productName;
+  final String mainUrl;
+  final int stock;
+
+  ProductLiteModel({
+    required this.productId,
+    required this.productName,
+    required this.mainUrl,
+    required this.stock,
+  });
+
+  factory ProductLiteModel.fromJson(String id, Map<String, dynamic> json) {
+    return ProductLiteModel(
+      productId: id,
+      productName: cvToString(json['title']),
+      mainUrl: cvToString(json['mainURL']),
       stock: cvToInt(json['stock']),
     );
   }

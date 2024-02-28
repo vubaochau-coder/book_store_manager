@@ -1,11 +1,20 @@
 import 'package:book_store_manager/constant/app_icons.dart';
+import 'package:book_store_manager/screens/chat/chat_page.dart';
 import 'package:book_store_manager/screens/home/views/home_tile.dart';
+import 'package:book_store_manager/screens/import_product/import_product_page.dart';
+import 'package:book_store_manager/screens/notification/notification_page.dart';
+import 'package:book_store_manager/screens/statistic/statistic_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../manage_feedback/manage_feedback_page.dart';
 import '../manage_order/manage_order_page.dart';
 import '../manage_product/manage_product_page.dart';
 import '../manage_user/manage_user_page.dart';
 import 'package:book_store_manager/themes/colors.dart';
 import 'package:book_store_manager/themes/texts.dart';
+import '../notification/bloc/notification_bloc.dart';
+import '../user_report/user_report_page.dart';
 import 'views/home_background.dart';
 import 'views/home_statistic.dart';
 import 'package:gap/gap.dart';
@@ -24,17 +33,33 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Badge(
-              smallSize: 8,
-              backgroundColor: AppColors.themeColor,
-              child: Icon(MdiIcons.bellOutline, color: Colors.black),
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteSlideTransition(child: const NotificationPage()),
+              );
+            },
+            icon: BlocBuilder<NotificationBloc, NotificationState>(
+              builder: (context, state) {
+                return Badge(
+                  smallSize: 8,
+                  backgroundColor: AppColors.themeColor,
+                  isLabelVisible: state.notis
+                      .where((element) => element.isRead == false)
+                      .isNotEmpty,
+                  child: Icon(MdiIcons.bellOutline, color: Colors.black),
+                );
+              },
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteSlideTransition(child: const ChatPage()),
+              );
+            },
             icon: Badge(
               smallSize: 8,
               backgroundColor: AppColors.themeColor,
@@ -157,21 +182,35 @@ class HomePage extends StatelessWidget {
                   title: 'Nhập hàng',
                   img: AppIcons.add,
                   color: Colors.orangeAccent[700]!,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(
+                        child: const ImportProductPage(),
+                      ),
+                    );
+                  },
                 ),
                 const Gap(8),
                 HomeTile(
                   title: 'Thống kê',
                   img: AppIcons.chart,
                   color: Colors.blue[700]!,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(child: const StatisticPage()),
+                    );
+                  },
                 ),
                 const Gap(8),
                 HomeTile(
-                  title: 'Báo cáo của khách hàng',
+                  title: 'Báo cáo vi phạm',
                   img: AppIcons.exclamation,
                   color: Colors.redAccent,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteSlideTransition(child: const UserReportPage()),
+                    );
+                  },
                 ),
               ],
             ),

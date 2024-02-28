@@ -1,10 +1,28 @@
 part of 'manage_user_bloc.dart';
 
-sealed class ManageUserState extends Equatable {
-  const ManageUserState();
-  
-  @override
-  List<Object> get props => [];
-}
+class ManageUserState extends Equatable {
+  final bool isLoading;
+  final List<UserModel> allUsers;
+  final List<UserModel> showedUsers;
 
-final class ManageUserInitial extends ManageUserState {}
+  const ManageUserState({
+    this.isLoading = true,
+    this.allUsers = const [],
+    this.showedUsers = const [],
+  });
+
+  @override
+  List<Object> get props => [isLoading, allUsers, showedUsers];
+
+  ManageUserState copyWith({
+    bool? isLoading,
+    List<UserModel>? allUsers,
+    List<UserModel>? showedUsers,
+  }) {
+    return ManageUserState(
+      isLoading: isLoading ?? this.isLoading,
+      allUsers: allUsers ?? this.allUsers,
+      showedUsers: showedUsers ?? this.showedUsers,
+    );
+  }
+}

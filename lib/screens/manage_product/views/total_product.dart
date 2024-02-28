@@ -8,7 +8,7 @@ class TotalProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
       child: BlocBuilder<ManageProductBloc, ManageProductState>(
         buildWhen: (previous, current) {
           return previous.showedProducts.length !=
@@ -17,11 +17,7 @@ class TotalProduct extends StatelessWidget {
         builder: (context, state) {
           return Text(
             '${state.showedProducts.length} sản phẩm',
-            style: TextStyle(
-              color: Colors.orangeAccent[700],
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           );
         },
       ),

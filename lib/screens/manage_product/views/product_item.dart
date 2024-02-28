@@ -1,5 +1,7 @@
 import 'package:book_store_manager/models/product_model.dart';
+import '../bloc/manage_product_bloc.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../product_detail/product_detail_page.dart';
 import 'package:book_store_manager/utils/number_utils.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +18,29 @@ class ProductItem extends StatelessWidget {
     required this.productModel,
   });
 
+  static const Map<String, String> bookTypes = {
+    'bt001': 'Sách giáo khoa',
+    'bt002': 'Văn học',
+    'bt003': 'Truyện tranh',
+    'bt004': 'Trẻ em',
+    'bt005': 'KH - KT',
+    'bt006': 'Khác',
+  };
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          PageRouteSlideTransition(
-            child: ProductDetailPage(product: productModel),
-          ),
+        Navigator.of(context)
+            .push(PageRouteSlideTransition(
+          child: ProductDetailPage(productId: productModel.id),
+        ))
+            .then(
+          (value) {
+            if (value == true) {
+              context.read<ManageProductBloc>().add(ManageProductLoading());
+            }
+          },
         );
       },
       child: Container(
@@ -47,7 +64,7 @@ class ProductItem extends StatelessWidget {
                     height: 42,
                     width: 42,
                     child: CachedNetworkImage(
-                      imageUrl: productModel.images[0],
+                      imageUrl: productModel.mainImage,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -60,19 +77,31 @@ class ProductItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            productModel.title,
+                            "${productModel.title}\n",
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),
                           ),
                           const Gap(2),
-                          Text(
-                            'Kho: ${productModel.stock}',
-                            style: TextStyle(
-                              color: Colors.redAccent[400],
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Kho: ${productModel.stock}',
+                                style: TextStyle(
+                                  color: Colors.redAccent[400],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                bookTypes[productModel.type] ?? 'NullType',
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

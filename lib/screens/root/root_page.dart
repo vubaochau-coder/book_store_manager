@@ -3,7 +3,7 @@ import 'package:book_store_manager/screens/home/bloc/home_bloc.dart';
 import 'package:book_store_manager/screens/home/home_page.dart';
 
 import 'require_sign_out_page.dart';
-import 'package:book_store_manager/widgets/home_loading_page.dart';
+import 'package:book_store_manager/widgets/loading/home_loading_page.dart';
 
 import '../../repositories/services/authentication_service.dart';
 import 'bloc/root_bloc.dart';

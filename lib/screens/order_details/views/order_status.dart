@@ -20,7 +20,7 @@ class OrderStatus extends StatelessWidget {
                   : state.status == 1
                       ? 'Đang chuẩn bị'
                       : state.status == 2
-                          ? 'Chuẩn bị xong'
+                          ? 'Chờ vận chuyển'
                           : state.status == 3
                               ? 'Đang vận chuyển'
                               : state.status == 4
@@ -28,13 +28,15 @@ class OrderStatus extends StatelessWidget {
                                   : 'Đã hủy',
           contentStyle: TextStyle(
             fontWeight: FontWeight.w600,
-            color: state.status == 0
+            color: state.status < 0
                 ? Colors.red
-                : state.status < 4
-                    ? Colors.blue
-                    : state.status == 4
-                        ? Colors.green
-                        : Colors.red,
+                : state.status == 0
+                    ? Colors.amber
+                    : state.status < 4
+                        ? Colors.blue
+                        : state.status == 4
+                            ? Colors.green
+                            : Colors.red,
           ),
         );
       },

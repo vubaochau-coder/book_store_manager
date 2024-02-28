@@ -20,6 +20,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.1.1 <4.0.0'
+  flutter: ^3.16.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -27,7 +28,7 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-dependencies:
+dependencies: 
   flutter:
     sdk: flutter
 
@@ -54,6 +55,16 @@ dependencies:
   expandable_text: ^2.3.0
   dropdown_button2: ^2.3.9
   fluttertoast: ^8.2.4
+  rxdart: ^0.27.7
+  url_launcher: ^6.2.1
+  fl_chart: ^0.65.0
+  flutter_date_pickers: ^0.4.2
+  photo_view: ^0.14.0
+  dotted_border: ^2.1.0
+  image_picker: ^1.0.5
+  flutter_slidable: ^3.0.1
+  shimmer: ^3.0.0
+  flutter_popup: ^3.1.8
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +76,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.13.1"
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_color.png"
+  min_sdk_android: 21
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

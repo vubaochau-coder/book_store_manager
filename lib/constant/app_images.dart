@@ -9,4 +9,8 @@ class AppImages {
   static String homeBackground = "${_prePath}home_background.png";
 
   static String clipboard = "${_prePath}clipboard.png";
+  static String bell = "${_prePath}bell.png";
+  static String feedback = "${_prePath}feedback.png";
+  static String bug = "${_prePath}bug.png";
+  static String forgotPassword = "${_prePath}forgot_password.png";
 }

@@ -1,10 +1,8 @@
 part of 'manage_order_bloc.dart';
 
-enum SortType { newest, oldest }
-
 class ManageOrderState extends Equatable {
   final bool isLoading;
-  final SortType sortType;
+  final ManageOrderSortType sortType;
   final List<OrderModel> orders;
   final List<OrderModel> expressOrders;
   final List<OrderModel> fastOrders;
@@ -12,7 +10,7 @@ class ManageOrderState extends Equatable {
 
   const ManageOrderState({
     this.isLoading = true,
-    this.sortType = SortType.newest,
+    this.sortType = ManageOrderSortType.newest,
     this.orders = const [],
     this.expressOrders = const [],
     this.fastOrders = const [],
@@ -24,7 +22,7 @@ class ManageOrderState extends Equatable {
 
   ManageOrderState copyWith({
     bool? isLoading,
-    SortType? sortType,
+    ManageOrderSortType? sortType,
     List<OrderModel>? orders,
     List<OrderModel>? expressOrders,
     List<OrderModel>? fastOrders,

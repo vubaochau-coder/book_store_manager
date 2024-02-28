@@ -1,5 +1,6 @@
 import 'package:book_store_manager/constant/app_icons.dart';
 import 'package:book_store_manager/repositories/repository.dart';
+import 'package:book_store_manager/screens/order_done/order_done_page.dart';
 import 'package:book_store_manager/screens/order_status/order_status_page.dart';
 import 'package:book_store_manager/widgets/page_route_transition.dart';
 import 'views/basic_orders.dart';
@@ -61,109 +62,114 @@ class _ManageOrderPageState extends State<ManageOrderPage>
           color: Colors.orangeAccent[700]!,
           // color: Colors.purpleAccent[700]!,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Gap(12),
-              Text(
-                'Theo dõi đơn hàng',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.lightBlueAccent[700],
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Gap(6),
-              Row(
-                mainAxisSize: MainAxisSize.max,
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  OrderStatusItem(
-                    icon: MdiIcons.cartArrowDown,
-                    title: "Đang chuẩn bị",
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteSlideTransition(
-                          child: const OrderStatusPage(tabIndex: 0),
-                        ),
-                      );
-                    },
+                  const Gap(12),
+                  const Text(
+                    'Theo dõi đơn hàng',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                   ),
                   const Gap(6),
-                  OrderStatusItem(
-                    icon: MdiIcons.cartCheck,
-                    title: "Chuẩn bị xong",
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteSlideTransition(
-                          child: const OrderStatusPage(tabIndex: 1),
-                        ),
-                      );
-                    },
-                  ),
-                  const Gap(6),
-                  OrderStatusItem(
-                    icon: MdiIcons.truckFastOutline,
-                    title: "Đang vận chuyển",
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteSlideTransition(
-                          child: const OrderStatusPage(tabIndex: 2),
-                        ),
-                      );
-                    },
-                  ),
-                  const Gap(6),
-                  OrderStatusItem(
-                    icon: MdiIcons.clipboardCheckOutline,
-                    title: "Đơn đã xong",
-                    onTap: () {},
-                  ),
-                ],
-              ),
-              const Gap(12),
-              SizedBox(
-                height: 42,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: BlocBuilder<ManageOrderBloc, ManageOrderState>(
-                        builder: (context, state) {
-                          return Text(
-                            state.isLoading
-                                ? 'Đơn chờ duyệt'
-                                : 'Đơn chờ duyệt (${state.orders.length.toStringAsFixed(0)})',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.lightBlueAccent[700],
-                              fontWeight: FontWeight.w600,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      OrderStatusItem(
+                        icon: MdiIcons.cartArrowDown,
+                        title: "Đang chuẩn bị",
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteSlideTransition(
+                              child: const OrderStatusPage(tabIndex: 0),
                             ),
                           );
                         },
                       ),
+                      const Gap(6),
+                      OrderStatusItem(
+                        icon: MdiIcons.cartCheck,
+                        title: "Chuẩn bị xong",
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteSlideTransition(
+                              child: const OrderStatusPage(tabIndex: 1),
+                            ),
+                          );
+                        },
+                      ),
+                      const Gap(6),
+                      OrderStatusItem(
+                        icon: MdiIcons.truckFastOutline,
+                        title: "Đang vận chuyển",
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteSlideTransition(
+                              child: const OrderStatusPage(tabIndex: 2),
+                            ),
+                          );
+                        },
+                      ),
+                      const Gap(6),
+                      OrderStatusItem(
+                        icon: MdiIcons.clipboardCheckOutline,
+                        title: "Đơn đã xong",
+                        onTap: () {
+                          Navigator.of(context).push(
+                            PageRouteSlideTransition(
+                              child: const OrderDonePage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const Gap(12),
+                  SizedBox(
+                    height: 42,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: BlocBuilder<ManageOrderBloc, ManageOrderState>(
+                            builder: (context, state) {
+                              return Text(
+                                state.isLoading
+                                    ? 'Đơn chờ duyệt'
+                                    : 'Đơn chờ duyệt (${state.orders.length.toStringAsFixed(0)})',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Text(
+                          'Sắp xếp: ',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        const SortDropdownButton(),
+                      ],
                     ),
-                    const Text(
-                      'Sắp xếp: ',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    const SortDropdownButton(),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              OrderTabBar(tabController: tabController),
-              Expanded(
-                child: TabBarView(
-                  controller: tabController,
-                  children: const [
-                    ExpressOrders(),
-                    FastOrders(),
-                    BasicOrders(),
-                  ],
-                ),
+            ),
+            OrderTabBar(tabController: tabController),
+            Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: const [
+                  ExpressOrders(),
+                  FastOrders(),
+                  BasicOrders(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

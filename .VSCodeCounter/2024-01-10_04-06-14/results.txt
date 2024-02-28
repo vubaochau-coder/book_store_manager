@@ -1,0 +1,397 @@
+Date : 2024-01-10 04:06:14
+Directory : d:\Flutter Application\book_store_manager\lib
+Total : 262 files,  17601 codes, 170 comments, 1903 blanks, all 19674 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |        262 |     17,601 |        170 |      1,903 |     19,674 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                              | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                 |        262 |     17,601 |        170 |      1,903 |     19,674 |
+| . (Files)                                                                                                         |          2 |        102 |         12 |         10 |        124 |
+| constant                                                                                                          |          6 |         59 |          0 |         14 |         73 |
+| extensions                                                                                                        |          2 |         63 |          0 |         12 |         75 |
+| models                                                                                                            |         11 |        406 |          0 |         53 |        459 |
+| repositories                                                                                                      |         16 |        942 |          0 |        213 |      1,155 |
+| repositories (Files)                                                                                              |          7 |        247 |          0 |         75 |        322 |
+| repositories\services                                                                                             |          9 |        695 |          0 |        138 |        833 |
+| screens                                                                                                           |        190 |     14,162 |        140 |      1,432 |     15,734 |
+| screens\change_password                                                                                           |          5 |        278 |          0 |         39 |        317 |
+| screens\change_password (Files)                                                                                   |          1 |        159 |          0 |          6 |        165 |
+| screens\change_password\bloc                                                                                      |          3 |         95 |          0 |         27 |        122 |
+| screens\change_password\views                                                                                     |          1 |         24 |          0 |          6 |         30 |
+| screens\chat                                                                                                      |          1 |          9 |          0 |          3 |         12 |
+| screens\feedback_hide                                                                                             |          5 |        289 |          1 |         30 |        320 |
+| screens\feedback_hide (Files)                                                                                     |          1 |         68 |          0 |          6 |         74 |
+| screens\feedback_hide\bloc                                                                                        |          3 |         63 |          0 |         20 |         83 |
+| screens\feedback_hide\views                                                                                       |          1 |        158 |          1 |          4 |        163 |
+| screens\home                                                                                                      |          9 |        532 |          8 |         40 |        580 |
+| screens\home (Files)                                                                                              |          1 |        209 |          7 |          3 |        219 |
+| screens\home\bloc                                                                                                 |          3 |         45 |          0 |         16 |         61 |
+| screens\home\views                                                                                                |          5 |        278 |          1 |         21 |        300 |
+| screens\import_product                                                                                            |          8 |        639 |          0 |         51 |        690 |
+| screens\import_product (Files)                                                                                    |          2 |        254 |          0 |         12 |        266 |
+| screens\import_product\bloc                                                                                       |          3 |         94 |          0 |         25 |        119 |
+| screens\import_product\views                                                                                      |          3 |        291 |          0 |         14 |        305 |
+| screens\import_product_create                                                                                     |          7 |        646 |          0 |         59 |        705 |
+| screens\import_product_create (Files)                                                                             |          1 |        208 |          0 |          8 |        216 |
+| screens\import_product_create\bloc                                                                                |          3 |        113 |          0 |         31 |        144 |
+| screens\import_product_create\views                                                                               |          3 |        325 |          0 |         20 |        345 |
+| screens\login                                                                                                     |          8 |        370 |          0 |         45 |        415 |
+| screens\login (Files)                                                                                             |          1 |        119 |          0 |          4 |        123 |
+| screens\login\bloc                                                                                                |          3 |         94 |          0 |         22 |        116 |
+| screens\login\views                                                                                               |          4 |        157 |          0 |         19 |        176 |
+| screens\manage_feedback                                                                                           |          7 |        902 |          8 |         76 |        986 |
+| screens\manage_feedback (Files)                                                                                   |          1 |        180 |          8 |          9 |        197 |
+| screens\manage_feedback\bloc                                                                                      |          3 |        202 |          0 |         50 |        252 |
+| screens\manage_feedback\views                                                                                     |          3 |        520 |          0 |         17 |        537 |
+| screens\manage_order                                                                                              |         11 |        705 |         21 |         81 |        807 |
+| screens\manage_order (Files)                                                                                      |          1 |        175 |          2 |          7 |        184 |
+| screens\manage_order\bloc                                                                                         |          3 |        173 |         19 |         39 |        231 |
+| screens\manage_order\views                                                                                        |          7 |        357 |          0 |         35 |        392 |
+| screens\manage_product                                                                                            |         10 |        911 |          0 |         71 |        982 |
+| screens\manage_product (Files)                                                                                    |          1 |        122 |          0 |          8 |        130 |
+| screens\manage_product\bloc                                                                                       |          3 |        165 |          0 |         35 |        200 |
+| screens\manage_product\views                                                                                      |          6 |        624 |          0 |         28 |        652 |
+| screens\manage_user                                                                                               |          9 |        387 |          0 |         49 |        436 |
+| screens\manage_user (Files)                                                                                       |          1 |         41 |          0 |          3 |         44 |
+| screens\manage_user\bloc                                                                                          |          3 |         74 |          0 |         21 |         95 |
+| screens\manage_user\views                                                                                         |          5 |        272 |          0 |         25 |        297 |
+| screens\notification                                                                                              |          7 |        593 |          0 |         69 |        662 |
+| screens\notification (Files)                                                                                      |          1 |        130 |          0 |          6 |        136 |
+| screens\notification\bloc                                                                                         |          3 |        158 |          0 |         38 |        196 |
+| screens\notification\views                                                                                        |          3 |        305 |          0 |         25 |        330 |
+| screens\order_details                                                                                             |         12 |        977 |         14 |         86 |      1,077 |
+| screens\order_details (Files)                                                                                     |          1 |        268 |          1 |         16 |        285 |
+| screens\order_details\bloc                                                                                        |          3 |        138 |          8 |         36 |        182 |
+| screens\order_details\views                                                                                       |          8 |        571 |          5 |         34 |        610 |
+| screens\order_done                                                                                                |         10 |        766 |          1 |         78 |        845 |
+| screens\order_done (Files)                                                                                        |          1 |        224 |          0 |          6 |        230 |
+| screens\order_done\bloc                                                                                           |          3 |        186 |          0 |         40 |        226 |
+| screens\order_done\views                                                                                          |          6 |        356 |          1 |         32 |        389 |
+| screens\order_status                                                                                              |         14 |        587 |         57 |        123 |        767 |
+| screens\order_status (Files)                                                                                      |          1 |        130 |          0 |         10 |        140 |
+| screens\order_status\delivering                                                                                   |          4 |        131 |         19 |         35 |        185 |
+| screens\order_status\delivering (Files)                                                                           |          1 |         39 |          0 |          7 |         46 |
+| screens\order_status\delivering\bloc                                                                              |          3 |         92 |         19 |         28 |        139 |
+| screens\order_status\prepared                                                                                     |          4 |        154 |         19 |         37 |        210 |
+| screens\order_status\prepared (Files)                                                                             |          1 |         46 |          0 |          6 |         52 |
+| screens\order_status\prepared\bloc                                                                                |          3 |        108 |         19 |         31 |        158 |
+| screens\order_status\preparing                                                                                    |          4 |        156 |         19 |         37 |        212 |
+| screens\order_status\preparing (Files)                                                                            |          1 |         46 |          0 |          6 |         52 |
+| screens\order_status\preparing\bloc                                                                               |          3 |        110 |         19 |         31 |        160 |
+| screens\order_status\views                                                                                        |          1 |         16 |          0 |          4 |         20 |
+| screens\product_create                                                                                            |          9 |        967 |          0 |         94 |      1,061 |
+| screens\product_create (Files)                                                                                    |          1 |        322 |          0 |          7 |        329 |
+| screens\product_create\bloc                                                                                       |          3 |        265 |          0 |         60 |        325 |
+| screens\product_create\views                                                                                      |          5 |        380 |          0 |         27 |        407 |
+| screens\product_detail                                                                                            |         11 |        932 |          1 |         75 |      1,008 |
+| screens\product_detail (Files)                                                                                    |          2 |        177 |          1 |         16 |        194 |
+| screens\product_detail\bloc                                                                                       |          3 |         85 |          0 |         22 |        107 |
+| screens\product_detail\views                                                                                      |          6 |        670 |          0 |         37 |        707 |
+| screens\product_edit_overview                                                                                     |          7 |        764 |          0 |         80 |        844 |
+| screens\product_edit_overview (Files)                                                                             |          1 |        304 |          0 |         16 |        320 |
+| screens\product_edit_overview\bloc                                                                                |          3 |        209 |          0 |         45 |        254 |
+| screens\product_edit_overview\views                                                                               |          3 |        251 |          0 |         19 |        270 |
+| screens\product_feedback                                                                                          |          7 |        528 |          0 |         53 |        581 |
+| screens\product_feedback (Files)                                                                                  |          1 |        165 |          0 |          9 |        174 |
+| screens\product_feedback\bloc                                                                                     |          3 |        131 |          0 |         33 |        164 |
+| screens\product_feedback\views                                                                                    |          3 |        232 |          0 |         11 |        243 |
+| screens\root                                                                                                      |          5 |        179 |          0 |         28 |        207 |
+| screens\root (Files)                                                                                              |          2 |        129 |          0 |         11 |        140 |
+| screens\root\bloc                                                                                                 |          3 |         50 |          0 |         17 |         67 |
+| screens\statistic                                                                                                 |         11 |        938 |          0 |         78 |      1,016 |
+| screens\statistic (Files)                                                                                         |          1 |        345 |          0 |         10 |        355 |
+| screens\statistic\bloc                                                                                            |          3 |         66 |          0 |         19 |         85 |
+| screens\statistic\views                                                                                           |          7 |        527 |          0 |         49 |        576 |
+| screens\user_details                                                                                              |          8 |        566 |         27 |         65 |        658 |
+| screens\user_details (Files)                                                                                      |          1 |        193 |          1 |          5 |        199 |
+| screens\user_details\bloc                                                                                         |          3 |        177 |         26 |         45 |        248 |
+| screens\user_details\views                                                                                        |          4 |        196 |          0 |         15 |        211 |
+| screens\user_order_history                                                                                        |          9 |        697 |          2 |         59 |        758 |
+| screens\user_order_history (Files)                                                                                |          1 |        318 |          1 |         11 |        330 |
+| screens\user_order_history\bloc                                                                                   |          3 |        140 |          0 |         27 |        167 |
+| screens\user_order_history\views                                                                                  |          5 |        239 |          1 |         21 |        261 |
+| themes                                                                                                            |          2 |         34 |          0 |          8 |         42 |
+| utils                                                                                                             |          8 |        192 |          0 |         32 |        224 |
+| widgets                                                                                                           |         25 |      1,641 |         18 |        129 |      1,788 |
+| widgets (Files)                                                                                                   |         11 |        491 |          0 |         55 |        546 |
+| widgets\abstract                                                                                                  |          7 |        585 |          0 |         40 |        625 |
+| widgets\dialogs                                                                                                   |          5 |        530 |         18 |         27 |        575 |
+| widgets\loading                                                                                                   |          2 |         35 |          0 |          7 |         42 |
++-------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                          | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\Flutter Application\book_store_manager\lib\constant\app_fonts.dart                                             | Dart     |          4 |          0 |          1 |          5 |
+| d:\Flutter Application\book_store_manager\lib\constant\app_icons.dart                                             | Dart     |         21 |          0 |          2 |         23 |
+| d:\Flutter Application\book_store_manager\lib\constant\app_images.dart                                            | Dart     |         12 |          0 |          3 |         15 |
+| d:\Flutter Application\book_store_manager\lib\constant\data_collections.dart                                      | Dart     |         11 |          0 |          1 |         12 |
+| d:\Flutter Application\book_store_manager\lib\constant\data_document.dart                                         | Dart     |          5 |          0 |          1 |          6 |
+| d:\Flutter Application\book_store_manager\lib\constant\enum.dart                                                  | Dart     |          6 |          0 |          6 |         12 |
+| d:\Flutter Application\book_store_manager\lib\extensions\datetime_ex.dart                                         | Dart     |         63 |          0 |         10 |         73 |
+| d:\Flutter Application\book_store_manager\lib\extensions\string_ex.dart                                           | Dart     |          0 |          0 |          2 |          2 |
+| d:\Flutter Application\book_store_manager\lib\firebase_options.dart                                               | Dart     |         55 |         12 |          4 |         71 |
+| d:\Flutter Application\book_store_manager\lib\main.dart                                                           | Dart     |         47 |          0 |          6 |         53 |
+| d:\Flutter Application\book_store_manager\lib\models\book_type_model.dart                                         | Dart     |         35 |          0 |          5 |         40 |
+| d:\Flutter Application\book_store_manager\lib\models\feedback_model.dart                                          | Dart     |         49 |          0 |          4 |         53 |
+| d:\Flutter Application\book_store_manager\lib\models\home_statistic_model.dart                                    | Dart     |         10 |          0 |          2 |         12 |
+| d:\Flutter Application\book_store_manager\lib\models\import_product_model.dart                                    | Dart     |         11 |          0 |          3 |         14 |
+| d:\Flutter Application\book_store_manager\lib\models\notification_model.dart                                      | Dart     |         37 |          0 |          4 |         41 |
+| d:\Flutter Application\book_store_manager\lib\models\order_model.dart                                             | Dart     |         62 |          0 |          8 |         70 |
+| d:\Flutter Application\book_store_manager\lib\models\order_product_model.dart                                     | Dart     |         31 |          0 |          4 |         35 |
+| d:\Flutter Application\book_store_manager\lib\models\product_create_model.dart                                    | Dart     |         32 |          0 |          3 |         35 |
+| d:\Flutter Application\book_store_manager\lib\models\product_model.dart                                           | Dart     |         76 |          0 |         10 |         86 |
+| d:\Flutter Application\book_store_manager\lib\models\reply_notification_model.dart                                | Dart     |         23 |          0 |          3 |         26 |
+| d:\Flutter Application\book_store_manager\lib\models\user_model.dart                                              | Dart     |         40 |          0 |          7 |         47 |
+| d:\Flutter Application\book_store_manager\lib\repositories\feedback_repository.dart                               | Dart     |         31 |          0 |         11 |         42 |
+| d:\Flutter Application\book_store_manager\lib\repositories\import_repository.dart                                 | Dart     |         24 |          0 |          8 |         32 |
+| d:\Flutter Application\book_store_manager\lib\repositories\notification_repository.dart                           | Dart     |         33 |          0 |         11 |         44 |
+| d:\Flutter Application\book_store_manager\lib\repositories\order_repository.dart                                  | Dart     |         58 |          0 |         19 |         77 |
+| d:\Flutter Application\book_store_manager\lib\repositories\product_repository.dart                                | Dart     |         48 |          0 |         11 |         59 |
+| d:\Flutter Application\book_store_manager\lib\repositories\repository.dart                                        | Dart     |         22 |          0 |          4 |         26 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\admin_account_service.dart                    | Dart     |         12 |          0 |          4 |         16 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\authentication_service.dart                   | Dart     |         13 |          0 |          4 |         17 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\feedback_service.dart                         | Dart     |        106 |          0 |         23 |        129 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\import_service.dart                           | Dart     |         74 |          0 |         14 |         88 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\notification_service.dart                     | Dart     |         86 |          0 |         12 |         98 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\order_service.dart                            | Dart     |        183 |          0 |         36 |        219 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\product_service.dart                          | Dart     |        110 |          0 |         26 |        136 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\transaction_service.dart                      | Dart     |         29 |          0 |          4 |         33 |
+| d:\Flutter Application\book_store_manager\lib\repositories\services\user_service.dart                             | Dart     |         82 |          0 |         15 |         97 |
+| d:\Flutter Application\book_store_manager\lib\repositories\user_repository.dart                                   | Dart     |         31 |          0 |         11 |         42 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_bloc.dart              | Dart     |         39 |          0 |         11 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_event.dart             | Dart     |         19 |          0 |         10 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\bloc\change_password_state.dart             | Dart     |         37 |          0 |          6 |         43 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\change_password_page.dart                   | Dart     |        159 |          0 |          6 |        165 |
+| d:\Flutter Application\book_store_manager\lib\screens\change_password\views\styles.dart                           | Dart     |         24 |          0 |          6 |         30 |
+| d:\Flutter Application\book_store_manager\lib\screens\chat\chat_page.dart                                         | Dart     |          9 |          0 |          3 |         12 |
+| d:\Flutter Application\book_store_manager\lib\screens\feedback_hide\bloc\feedback_hide_bloc.dart                  | Dart     |         32 |          0 |          9 |         41 |
+| d:\Flutter Application\book_store_manager\lib\screens\feedback_hide\bloc\feedback_hide_event.dart                 | Dart     |         11 |          0 |          6 |         17 |
+| d:\Flutter Application\book_store_manager\lib\screens\feedback_hide\bloc\feedback_hide_state.dart                 | Dart     |         20 |          0 |          5 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\feedback_hide\feedback_hide_page.dart                       | Dart     |         68 |          0 |          6 |         74 |
+| d:\Flutter Application\book_store_manager\lib\screens\feedback_hide\views\feedback_hide_item.dart                 | Dart     |        158 |          1 |          4 |        163 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\bloc\home_bloc.dart                                    | Dart     |         18 |          0 |          7 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\bloc\home_event.dart                                   | Dart     |          7 |          0 |          4 |         11 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\bloc\home_state.dart                                   | Dart     |         20 |          0 |          5 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\home_page.dart                                         | Dart     |        209 |          7 |          3 |        219 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_background.dart                             | Dart     |         22 |          0 |          4 |         26 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_cell.dart                                   | Dart     |         71 |          0 |          4 |         75 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_drawer.dart                                 | Dart     |         69 |          0 |          4 |         73 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_statistic.dart                              | Dart     |         60 |          0 |          5 |         65 |
+| d:\Flutter Application\book_store_manager\lib\screens\home\views\home_tile.dart                                   | Dart     |         56 |          1 |          4 |         61 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\bloc\import_product_bloc.dart                | Dart     |         56 |          0 |         13 |         69 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\bloc\import_product_event.dart               | Dart     |         14 |          0 |          7 |         21 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\bloc\import_product_state.dart               | Dart     |         24 |          0 |          5 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\import_product_detail.dart                   | Dart     |        136 |          0 |          6 |        142 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\import_product_page.dart                     | Dart     |        118 |          0 |          6 |        124 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\views\calendar_button.dart                   | Dart     |         72 |          0 |          4 |         76 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\views\import_detail_item.dart                | Dart     |         71 |          0 |          4 |         75 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product\views\import_history_item.dart               | Dart     |        148 |          0 |          6 |        154 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_bloc.dart  | Dart     |         64 |          0 |         14 |         78 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_event.dart | Dart     |         24 |          0 |         11 |         35 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\bloc\create_import_product_state.dart | Dart     |         25 |          0 |          6 |         31 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\create_import_product_page.dart       | Dart     |        208 |          0 |          8 |        216 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\create_import_item.dart         | Dart     |        160 |          0 |          8 |        168 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\dialog_item.dart                | Dart     |         61 |          0 |          5 |         66 |
+| d:\Flutter Application\book_store_manager\lib\screens\import_product_create\views\product_picker_dialog.dart      | Dart     |        104 |          0 |          7 |        111 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\bloc\login_bloc.dart                                  | Dart     |         53 |          0 |         11 |         64 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\bloc\login_event.dart                                 | Dart     |         11 |          0 |          7 |         18 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\bloc\login_state.dart                                 | Dart     |         30 |          0 |          4 |         34 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\login_page.dart                                       | Dart     |        119 |          0 |          4 |        123 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\views\login_button.dart                               | Dart     |         46 |          0 |          4 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\views\password_tf.dart                                | Dart     |         59 |          0 |          7 |         66 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\views\styles.dart                                     | Dart     |          7 |          0 |          2 |          9 |
+| d:\Flutter Application\book_store_manager\lib\screens\login\views\username_tf.dart                                | Dart     |         45 |          0 |          6 |         51 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_bloc.dart                     | Dart     |        140 |          0 |         29 |        169 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_event.dart                    | Dart     |         34 |          0 |         16 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\bloc\feedback_state.dart                    | Dart     |         28 |          0 |          5 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\manage_feedback_page.dart                   | Dart     |        180 |          8 |          9 |        197 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\views\feedback_item.dart                    | Dart     |        244 |          0 |          5 |        249 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\views\month_selector.dart                   | Dart     |         76 |          0 |          4 |         80 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_feedback\views\reply_bottom_sheet.dart               | Dart     |        200 |          0 |          8 |        208 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\bloc\manage_order_bloc.dart                    | Dart     |        118 |         19 |         24 |        161 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\bloc\manage_order_event.dart                   | Dart     |         19 |          0 |         10 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\bloc\manage_order_state.dart                   | Dart     |         36 |          0 |          5 |         41 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\manage_order_page.dart                         | Dart     |        175 |          2 |          7 |        184 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\basic_orders.dart                        | Dart     |         27 |          0 |          6 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\express_orders.dart                      | Dart     |         27 |          0 |          7 |         34 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\fast_orders.dart                         | Dart     |         27 |          0 |          6 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\order_status_item.dart                   | Dart     |         51 |          0 |          4 |         55 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\order_tab_bar.dart                       | Dart     |         98 |          0 |          5 |        103 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\orders_list.dart                         | Dart     |         34 |          0 |          4 |         38 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_order\views\sort_dropdown_button.dart                | Dart     |         93 |          0 |          3 |         96 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\bloc\manage_product_bloc.dart                | Dart     |        101 |          0 |         22 |        123 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\bloc\manage_product_event.dart               | Dart     |         19 |          0 |          8 |         27 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\bloc\manage_product_state.dart               | Dart     |         45 |          0 |          5 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\manage_product_page.dart                     | Dart     |        122 |          0 |          8 |        130 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\filter_product_dialog.dart             | Dart     |        317 |          0 |          8 |        325 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\product_item.dart                      | Dart     |        115 |          0 |          5 |        120 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\product_list.dart                      | Dart     |         79 |          0 |          3 |         82 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\search_field.dart                      | Dart     |         80 |          0 |          7 |         87 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\styles.dart                            | Dart     |          5 |          0 |          2 |          7 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_product\views\total_product.dart                     | Dart     |         28 |          0 |          3 |         31 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\bloc\manage_user_bloc.dart                      | Dart     |         39 |          0 |         10 |         49 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\bloc\manage_user_event.dart                     | Dart     |         11 |          0 |          6 |         17 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\bloc\manage_user_state.dart                     | Dart     |         24 |          0 |          5 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\manage_user_page.dart                           | Dart     |         41 |          0 |          3 |         44 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\styles.dart                               | Dart     |          5 |          0 |          2 |          7 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\total_user.dart                           | Dart     |         24 |          0 |          3 |         27 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\user_item.dart                            | Dart     |         80 |          0 |          5 |         85 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\user_list.dart                            | Dart     |         82 |          0 |          7 |         89 |
+| d:\Flutter Application\book_store_manager\lib\screens\manage_user\views\user_search_field.dart                    | Dart     |         81 |          0 |          8 |         89 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\bloc\notification_bloc.dart                    | Dart     |        109 |          0 |         22 |        131 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\bloc\notification_event.dart                   | Dart     |         21 |          0 |         11 |         32 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\bloc\notification_state.dart                   | Dart     |         28 |          0 |          5 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\notification_page.dart                         | Dart     |        130 |          0 |          6 |        136 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\views\empty_page.dart                          | Dart     |         34 |          0 |          4 |         38 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\views\notification_item.dart                   | Dart     |        195 |          0 |          7 |        202 |
+| d:\Flutter Application\book_store_manager\lib\screens\notification\views\notifications_list.dart                  | Dart     |         76 |          0 |         14 |         90 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\bloc\order_details_bloc.dart                  | Dart     |         84 |          7 |         16 |        107 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\bloc\order_details_event.dart                 | Dart     |         30 |          1 |         15 |         46 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\bloc\order_details_state.dart                 | Dart     |         24 |          0 |          5 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\order_details_page.dart                       | Dart     |        268 |          1 |         16 |        285 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\confirm_button.dart                     | Dart     |        159 |          0 |          5 |        164 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\deliver_button.dart                     | Dart     |         64 |          0 |          4 |         68 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\order_status.dart                       | Dart     |         42 |          0 |          4 |         46 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\overview_information.dart               | Dart     |         88 |          0 |          4 |         92 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\prepare_button.dart                     | Dart     |         64 |          0 |          4 |         68 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\product_item.dart                       | Dart     |         76 |          5 |          5 |         86 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\row_info.dart                           | Dart     |         33 |          0 |          4 |         37 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_details\views\row_info_space.dart                     | Dart     |         45 |          0 |          4 |         49 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\bloc\order_done_bloc.dart                        | Dart     |        122 |          0 |         25 |        147 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\bloc\order_done_event.dart                       | Dart     |         19 |          0 |         10 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\bloc\order_done_state.dart                       | Dart     |         45 |          0 |          5 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\order_done_page.dart                             | Dart     |        224 |          0 |          6 |        230 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\calendar_button.dart                       | Dart     |         79 |          0 |          5 |         84 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\filter_button.dart                         | Dart     |        107 |          1 |          5 |        113 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\indicator.dart                             | Dart     |         41 |          0 |          4 |         45 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\order_creator.dart                         | Dart     |         12 |          0 |          3 |         15 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\order_list.dart                            | Dart     |         41 |          0 |          7 |         48 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_done\views\search_order_field.dart                    | Dart     |         76 |          0 |          8 |         84 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\delivering\bloc\delivering_order_bloc.dart     | Dart     |         61 |         19 |         17 |         97 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\delivering\bloc\delivering_order_event.dart    | Dart     |         11 |          0 |          6 |         17 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\delivering\bloc\delivering_order_state.dart    | Dart     |         20 |          0 |          5 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\delivering\order_delivering_page.dart          | Dart     |         39 |          0 |          7 |         46 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\order_status_page.dart                         | Dart     |        130 |          0 |         10 |        140 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\prepared\bloc\prepared_order_bloc.dart         | Dart     |         73 |         19 |         18 |        110 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\prepared\bloc\prepared_order_event.dart        | Dart     |         15 |          0 |          8 |         23 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\prepared\bloc\prepared_order_state.dart        | Dart     |         20 |          0 |          5 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\prepared\order_prepared_page.dart              | Dart     |         46 |          0 |          6 |         52 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\preparing\bloc\preparing_order_bloc.dart       | Dart     |         75 |         19 |         18 |        112 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\preparing\bloc\preparing_order_event.dart      | Dart     |         15 |          0 |          8 |         23 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\preparing\bloc\preparing_order_state.dart      | Dart     |         20 |          0 |          5 |         25 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\preparing\order_preparing_page.dart            | Dart     |         46 |          0 |          6 |         52 |
+| d:\Flutter Application\book_store_manager\lib\screens\order_status\views\order_status_tab.dart                    | Dart     |         16 |          0 |          4 |         20 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\bloc\create_product_bloc.dart                | Dart     |        124 |          0 |         30 |        154 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\bloc\create_product_event.dart               | Dart     |         47 |          0 |         24 |         71 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\bloc\create_product_state.dart               | Dart     |         94 |          0 |          6 |        100 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\create_product_page.dart                     | Dart     |        322 |          0 |          7 |        329 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\views\booktype_selector.dart                 | Dart     |         81 |          0 |          4 |         85 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\views\custom_textfield.dart                  | Dart     |         76 |          0 |          6 |         82 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\views\images_grid.dart                       | Dart     |        119 |          0 |          9 |        128 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\views\publishing_year_selector.dart          | Dart     |         78 |          0 |          4 |         82 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_create\views\textfield_title.dart                   | Dart     |         26 |          0 |          4 |         30 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\bloc\product_detail_bloc.dart                | Dart     |         39 |          0 |         10 |         49 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\bloc\product_detail_event.dart               | Dart     |         22 |          0 |          7 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\bloc\product_detail_state.dart               | Dart     |         24 |          0 |          5 |         29 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\photo_gallery_view.dart                      | Dart     |         73 |          0 |          8 |         81 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\product_detail_page.dart                     | Dart     |        104 |          1 |          8 |        113 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\image_product.dart                     | Dart     |         76 |          0 |          6 |         82 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\orther_information_product.dart        | Dart     |        134 |          0 |          7 |        141 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\overview_product.dart                  | Dart     |        170 |          0 |          5 |        175 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\row_data.dart                          | Dart     |         39 |          0 |          4 |         43 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\styles.dart                            | Dart     |         12 |          0 |          3 |         15 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_detail\views\update_orther_infor_dialog.dart        | Dart     |        239 |          0 |         12 |        251 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\bloc\product_edit_overview_bloc.dart  | Dart     |        100 |          0 |         20 |        120 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\bloc\product_edit_overview_event.dart | Dart     |         35 |          0 |         18 |         53 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\bloc\product_edit_overview_state.dart | Dart     |         74 |          0 |          7 |         81 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\edit_overview_product_page.dart       | Dart     |        304 |          0 |         16 |        320 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\views\booktype_selector.dart          | Dart     |         79 |          0 |          3 |         82 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\views\confirm_update_button.dart      | Dart     |         95 |          0 |          7 |        102 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_edit_overview\views\year_selector_textfield.dart    | Dart     |         77 |          0 |          9 |         86 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\bloc\product_feedback_bloc.dart            | Dart     |         75 |          0 |         19 |         94 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\bloc\product_feedback_event.dart           | Dart     |         18 |          0 |          9 |         27 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\bloc\product_feedback_state.dart           | Dart     |         38 |          0 |          5 |         43 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\product_feedback_page.dart                 | Dart     |        165 |          0 |          9 |        174 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\views\product_feedback_item.dart           | Dart     |        140 |          0 |          4 |        144 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\views\product_information.dart             | Dart     |         37 |          0 |          4 |         41 |
+| d:\Flutter Application\book_store_manager\lib\screens\product_feedback\views\product_information_loading.dart     | Dart     |         55 |          0 |          3 |         58 |
+| d:\Flutter Application\book_store_manager\lib\screens\root\bloc\root_bloc.dart                                    | Dart     |         28 |          0 |          8 |         36 |
+| d:\Flutter Application\book_store_manager\lib\screens\root\bloc\root_event.dart                                   | Dart     |          7 |          0 |          5 |         12 |
+| d:\Flutter Application\book_store_manager\lib\screens\root\bloc\root_state.dart                                   | Dart     |         15 |          0 |          4 |         19 |
+| d:\Flutter Application\book_store_manager\lib\screens\root\require_sign_out_page.dart                             | Dart     |         78 |          0 |          3 |         81 |
+| d:\Flutter Application\book_store_manager\lib\screens\root\root_page.dart                                         | Dart     |         51 |          0 |          8 |         59 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\bloc\statistic_bloc.dart                          | Dart     |         28 |          0 |          9 |         37 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\bloc\statistic_event.dart                         | Dart     |         10 |          0 |          5 |         15 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\bloc\statistic_state.dart                         | Dart     |         28 |          0 |          5 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\statistic_page.dart                               | Dart     |        345 |          0 |         10 |        355 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\custom_cell.dart                            | Dart     |         28 |          0 |          4 |         32 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\indicator.dart                              | Dart     |         41 |          0 |          4 |         45 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\month_selector.dart                         | Dart     |         72 |          0 |          5 |         77 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\row_data.dart                               | Dart     |         38 |          0 |          4 |         42 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\statistic_line_chart.dart                   | Dart     |        211 |          0 |         21 |        232 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\statistic_pie_chart.dart                    | Dart     |        129 |          0 |          8 |        137 |
+| d:\Flutter Application\book_store_manager\lib\screens\statistic\views\statistic_table.dart                        | Dart     |          8 |          0 |          3 |         11 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\bloc\user_details_bloc.dart                    | Dart     |        117 |         26 |         27 |        170 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\bloc\user_details_event.dart                   | Dart     |         32 |          0 |         13 |         45 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\bloc\user_details_state.dart                   | Dart     |         28 |          0 |          5 |         33 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\user_details_page.dart                         | Dart     |        193 |          1 |          5 |        199 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\views\user_information.dart                    | Dart     |         74 |          0 |          3 |         77 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\views\user_order_item_creator.dart             | Dart     |         46 |          0 |          2 |         48 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\views\user_orders_list.dart                    | Dart     |         44 |          0 |          6 |         50 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_details\views\user_statistic_item.dart                 | Dart     |         32 |          0 |          4 |         36 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\bloc\user_order_history_bloc.dart        | Dart     |         73 |          0 |         13 |         86 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\bloc\user_order_history_event.dart       | Dart     |         14 |          0 |          7 |         21 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\bloc\user_order_history_state.dart       | Dart     |         53 |          0 |          7 |         60 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\user_order_history_page.dart             | Dart     |        318 |          1 |         11 |        330 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\views\filter_button.dart                 | Dart     |        110 |          1 |          4 |        115 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\views\order_creator.dart                 | Dart     |         12 |          0 |          3 |         15 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\views\order_history_list.dart            | Dart     |         40 |          0 |          6 |         46 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\views\statistic_1.dart                   | Dart     |         40 |          0 |          4 |         44 |
+| d:\Flutter Application\book_store_manager\lib\screens\user_order_history\views\statistic_item.dart                | Dart     |         37 |          0 |          4 |         41 |
+| d:\Flutter Application\book_store_manager\lib\themes\colors.dart                                                  | Dart     |         11 |          0 |          3 |         14 |
+| d:\Flutter Application\book_store_manager\lib\themes\texts.dart                                                   | Dart     |         23 |          0 |          5 |         28 |
+| d:\Flutter Application\book_store_manager\lib\utils\chat_utils.dart                                               | Dart     |          1 |          0 |          1 |          2 |
+| d:\Flutter Application\book_store_manager\lib\utils\converter.dart                                                | Dart     |         56 |          0 |          6 |         62 |
+| d:\Flutter Application\book_store_manager\lib\utils\currency_utils.dart                                           | Dart     |         22 |          0 |          4 |         26 |
+| d:\Flutter Application\book_store_manager\lib\utils\date_time.dart                                                | Dart     |         31 |          0 |          9 |         40 |
+| d:\Flutter Application\book_store_manager\lib\utils\dialog_utils.dart                                             | Dart     |         27 |          0 |          6 |         33 |
+| d:\Flutter Application\book_store_manager\lib\utils\email_validator.dart                                          | Dart     |          6 |          0 |          2 |          8 |
+| d:\Flutter Application\book_store_manager\lib\utils\enum_convert.dart                                             | Dart     |         37 |          0 |          3 |         40 |
+| d:\Flutter Application\book_store_manager\lib\utils\number_utils.dart                                             | Dart     |         12 |          0 |          1 |         13 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\abstract_order_item.dart                           | Dart     |        228 |          0 |          9 |        237 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\await_confirm_order_item.dart                      | Dart     |         74 |          0 |          5 |         79 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\cancel_order_item.dart                             | Dart     |         48 |          0 |          6 |         54 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\complete_order_item.dart                           | Dart     |         48 |          0 |          6 |         54 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\delivering_order_item.dart                         | Dart     |         39 |          0 |          4 |         43 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\prepared_order_item.dart                           | Dart     |         74 |          0 |          5 |         79 |
+| d:\Flutter Application\book_store_manager\lib\widgets\abstract\preparing_order_item.dart                          | Dart     |         74 |          0 |          5 |         79 |
+| d:\Flutter Application\book_store_manager\lib\widgets\custom_app_bar.dart                                         | Dart     |         47 |          0 |          5 |         52 |
+| d:\Flutter Application\book_store_manager\lib\widgets\data_form.dart                                              | Dart     |         21 |          0 |          4 |         25 |
+| d:\Flutter Application\book_store_manager\lib\widgets\dialogs\confirm_dialog.dart                                 | Dart     |        106 |          0 |          4 |        110 |
+| d:\Flutter Application\book_store_manager\lib\widgets\dialogs\loading_dialog.dart                                 | Dart     |         28 |          0 |          3 |         31 |
+| d:\Flutter Application\book_store_manager\lib\widgets\dialogs\pick_image_option_dialog.dart                       | Dart     |         67 |         18 |          4 |         89 |
+| d:\Flutter Application\book_store_manager\lib\widgets\dialogs\sales_dialog.dart                                   | Dart     |        263 |          0 |         11 |        274 |
+| d:\Flutter Application\book_store_manager\lib\widgets\dialogs\warning_dialog.dart                                 | Dart     |         66 |          0 |          5 |         71 |
+| d:\Flutter Application\book_store_manager\lib\widgets\empty_feedback_list.dart                                    | Dart     |         34 |          0 |          4 |         38 |
+| d:\Flutter Application\book_store_manager\lib\widgets\empty_import_list.dart                                      | Dart     |         34 |          0 |          3 |         37 |
+| d:\Flutter Application\book_store_manager\lib\widgets\empty_orders_list.dart                                      | Dart     |         34 |          0 |          3 |         37 |
+| d:\Flutter Application\book_store_manager\lib\widgets\flag_cllip_path.dart                                        | Dart     |         17 |          0 |          5 |         22 |
+| d:\Flutter Application\book_store_manager\lib\widgets\loading\home_loading_page.dart                              | Dart     |         17 |          0 |          3 |         20 |
+| d:\Flutter Application\book_store_manager\lib\widgets\loading\loading_list.dart                                   | Dart     |         18 |          0 |          4 |         22 |
+| d:\Flutter Application\book_store_manager\lib\widgets\month_picker.dart                                           | Dart     |         99 |          0 |          9 |        108 |
+| d:\Flutter Application\book_store_manager\lib\widgets\page_route_transition.dart                                  | Dart     |         18 |          0 |          4 |         22 |
+| d:\Flutter Application\book_store_manager\lib\widgets\statistic_item.dart                                         | Dart     |         66 |          0 |          4 |         70 |
+| d:\Flutter Application\book_store_manager\lib\widgets\title.dart                                                  | Dart     |         18 |          0 |          4 |         22 |
+| d:\Flutter Application\book_store_manager\lib\widgets\year_picker.dart                                            | Dart     |        103 |          0 |         10 |        113 |
+| Total                                                                                                             |          |     17,601 |        170 |      1,903 |     19,674 |
++-------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

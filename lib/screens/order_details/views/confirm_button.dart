@@ -1,11 +1,17 @@
+import 'package:book_store_manager/models/order_model.dart';
+import 'package:book_store_manager/widgets/dialogs/warning_dialog.dart';
+
+import '../bloc/order_details_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../themes/colors.dart';
 import '../../../widgets/dialogs/confirm_dialog.dart';
 
 class ConfirmOrderButton extends StatelessWidget {
-  const ConfirmOrderButton({super.key});
+  final OrderModel order;
+  const ConfirmOrderButton({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -14,35 +20,68 @@ class ConfirmOrderButton extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const ConfirmDialog(
-                    cancelString: 'Thoát',
-                    confirmString: 'Hủy đơn',
-                    child: Column(
-                      children: [
-                        Text(
-                          'Hủy đơn hàng',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+              if (order.paid) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const WarningDialog(
+                      cancelString: 'Thoát',
+                      child: Column(
+                        children: [
+                          Text(
+                            'Hủy đơn thất bại',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                        Gap(12),
-                        Text(
-                          'Xác nhận hủy đơn hàng?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(),
-                        ),
-                        Gap(12),
-                      ],
-                    ),
-                  );
-                },
-              ).then((value) {
-                if (value != null && value == true) {}
-              });
+                          Gap(12),
+                          Text(
+                            'Không thể hủy đơn hàng đã thanh toán',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          Gap(12),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const ConfirmDialog(
+                      cancelString: 'Thoát',
+                      confirmString: 'Hủy đơn',
+                      child: Column(
+                        children: [
+                          Text(
+                            'Hủy đơn hàng',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Gap(12),
+                          Text(
+                            'Xác nhận hủy đơn hàng?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          Gap(12),
+                        ],
+                      ),
+                    );
+                  },
+                ).then((value) {
+                  if (value != null && value == true) {
+                    context.read<OrderDetailsBloc>().add(
+                          CancelOrderEvent(orderId: order.orderId),
+                        );
+                  }
+                });
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
@@ -51,7 +90,7 @@ class ConfirmOrderButton extends StatelessWidget {
                 borderRadius: BorderRadius.zero,
                 side: BorderSide(
                   color: AppColors.themeColor,
-                  width: 2,
+                  width: 1,
                 ),
               ),
             ),
@@ -64,7 +103,7 @@ class ConfirmOrderButton extends StatelessWidget {
             ),
           ),
         ),
-        const Gap(10),
+        const Gap(6),
         Expanded(
           child: ElevatedButton(
             onPressed: () {
@@ -95,7 +134,11 @@ class ConfirmOrderButton extends StatelessWidget {
                   );
                 },
               ).then((value) {
-                if (value != null && value == true) {}
+                if (value != null && value == true) {
+                  context.read<OrderDetailsBloc>().add(
+                        ConfirmOrderEvent(orderId: order.orderId),
+                      );
+                }
               });
             },
             style: ElevatedButton.styleFrom(

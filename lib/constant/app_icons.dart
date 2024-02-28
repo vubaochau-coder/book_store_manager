@@ -16,4 +16,7 @@ class AppIcons {
   static String exclamationFill = "${_prePath}exclamation_fill.png";
   static String up = "${_prePath}up.png";
   static String add = "${_prePath}add.png";
+  static String cartAdd = "${_prePath}cart_add.png";
+  static String cartAddDone = "${_prePath}cart_add_done.png";
+  static String cartAddCreate = "${_prePath}cart_add_create.png";
 }

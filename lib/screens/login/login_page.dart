@@ -1,3 +1,6 @@
+import '../forgot_password/forgot_password_page.dart';
+import 'package:book_store_manager/widgets/page_route_transition.dart';
+
 import 'bloc/login_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -88,7 +91,13 @@ class LoginPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteSlideTransition(
+                                    child: const ForgotPasswordPage(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Quên mật khẩu?',
                                 style: TextStyle(

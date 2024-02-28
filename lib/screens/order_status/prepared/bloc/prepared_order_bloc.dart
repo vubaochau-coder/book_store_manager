@@ -8,8 +8,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../../models/order_product_model.dart';
-
 part 'prepared_order_event.dart';
 part 'prepared_order_state.dart';
 
@@ -36,29 +34,47 @@ class PreparedOrderBloc extends Bloc<PreparedOrderEvent, PreparedOrderState> {
       if (streamEvent.docs.isNotEmpty) {
         List<OrderModel> orders = [];
 
-        for (var ele in streamEvent.docs) {
-          List<OrderProductModel> products = [];
+        final test = await Future.wait(
+          streamEvent.docs.map(
+            (e) => _orderRepository.getAllProductInOrder(
+              List.from(e.data()['products']),
+            ),
+          ),
+        );
 
-          List<Map<String, dynamic>> rawJson =
-              List.from(ele.data()['products']);
-
-          final productsInfo = await Future.wait(
-            rawJson.map(
-              (e) => _orderRepository.getProductInOrder(e['productID']),
+        for (int i = 0; i < streamEvent.docs.length; i++) {
+          orders.add(
+            OrderModel.fromJson(
+              streamEvent.docs[i].id,
+              streamEvent.docs[i].data(),
+              test[i],
             ),
           );
-
-          for (int i = 0; i < rawJson.length; i++) {
-            OrderProductModel temp = OrderProductModel.fromJson(
-              rawJson[i],
-              productsInfo[i]['productName'],
-              productsInfo[i]['imgURL'],
-            );
-            products.add(temp);
-          }
-
-          orders.add(OrderModel.fromJson(ele.id, ele.data(), products));
         }
+
+        // for (var ele in streamEvent.docs) {
+        //   List<OrderProductModel> products = [];
+
+        //   List<Map<String, dynamic>> rawJson =
+        //       List.from(ele.data()['products']);
+
+        //   final productsInfo = await Future.wait(
+        //     rawJson.map(
+        //       (e) => _orderRepository.getProductInOrder(e['productID']),
+        //     ),
+        //   );
+
+        //   for (int i = 0; i < rawJson.length; i++) {
+        //     OrderProductModel temp = OrderProductModel.fromJson(
+        //       rawJson[i],
+        //       productsInfo[i]['productName'],
+        //       productsInfo[i]['imgURL'],
+        //     );
+        //     products.add(temp);
+        //   }
+
+        //   orders.add(OrderModel.fromJson(ele.id, ele.data(), products));
+        // }
 
         orders.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
 

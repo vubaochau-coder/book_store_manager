@@ -44,7 +44,6 @@ class OrderDetailsProductItem extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "${CurrencyUtils.convertDoubleToCurrency(product.price)}đ",
@@ -55,6 +54,17 @@ class OrderDetailsProductItem extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+                    const Gap(8),
+                    Text(
+                      "${CurrencyUtils.convertDoubleToCurrency(product.priceBPDiscount)}đ",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        height: 1.2,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    const Spacer(),
                     Text(
                       'x${product.count.toStringAsFixed(0)}',
                       style: const TextStyle(

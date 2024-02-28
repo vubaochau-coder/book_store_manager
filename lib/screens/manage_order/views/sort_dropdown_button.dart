@@ -1,3 +1,4 @@
+import '../../../constant/enum.dart';
 import '../bloc/manage_order_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,9 @@ class SortDropdownButton extends StatelessWidget {
                 },
                 builder: (context, state) {
                   return Text(
-                    state.sortType == SortType.newest ? "Mới nhất" : "Cũ nhất",
+                    state.sortType == ManageOrderSortType.newest
+                        ? "Mới nhất"
+                        : "Cũ nhất",
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 12,
@@ -62,7 +65,7 @@ class SortDropdownButton extends StatelessWidget {
         },
         items: const [
           DropdownMenuItem(
-            value: SortType.newest,
+            value: ManageOrderSortType.newest,
             alignment: Alignment.center,
             child: Text(
               'Mới nhất',
@@ -74,7 +77,7 @@ class SortDropdownButton extends StatelessWidget {
             ),
           ),
           DropdownMenuItem(
-            value: SortType.oldest,
+            value: ManageOrderSortType.oldest,
             alignment: Alignment.center,
             child: Text(
               'Cũ nhất',

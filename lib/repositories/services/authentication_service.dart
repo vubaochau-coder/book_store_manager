@@ -13,4 +13,8 @@ class AuthenticationService {
   static Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+  static Future<void> updatePassword(String password) async {
+    await FirebaseAuth.instance.currentUser!.updatePassword(password);
+  }
 }

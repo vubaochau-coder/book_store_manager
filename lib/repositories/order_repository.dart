@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/order_model.dart';
+import '../models/order_product_model.dart';
 import 'services/order_service.dart';
 import 'services/transaction_service.dart';
 
@@ -26,6 +28,11 @@ class OrderRepository {
     return _orderService.orderStream(orderId);
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> userOrderStream(
+      String userId, List<int> status) {
+    return _orderService.userOrderStream(userId, status);
+  }
+
   Future<Map<String, dynamic>> getProductInOrder(String productId) async {
     return _orderService.getProductInOrder(productId);
   }
@@ -40,5 +47,30 @@ class OrderRepository {
 
   Future<void> preparedConfirmOrder(String orderId) async {
     return _orderService.preparedConfirmOrder(orderId);
+  }
+
+  Future<void> cancelOrder(String orderId) async {
+    return _orderService.cancelOrder(orderId);
+  }
+
+  Future<List<OrderProductModel>> getAllProductInOrder(
+      List<Map<String, dynamic>> productRaw) async {
+    return _orderService.getAllProductInOrder(productRaw);
+  }
+
+  Future<List<OrderModel>> getUserDoneOrders(String userId) async {
+    return _orderService.getUserDoneOrders(userId);
+  }
+
+  Future<List<OrderModel>> getDoneOrdersOfMonth(DateTime month) async {
+    return _orderService.getDoneOrdersOfMonth(month);
+  }
+
+  Future<List<OrderModel>> getAllOrdersOfMonth(DateTime month) async {
+    return _orderService.getAllOrdersOfMonth(month);
+  }
+
+  Future<OrderModel> getOrderInformation(String orderId) async {
+    return _orderService.getOrderInformation(orderId);
   }
 }

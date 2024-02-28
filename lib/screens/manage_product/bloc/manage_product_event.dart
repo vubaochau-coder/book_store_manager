@@ -14,3 +14,13 @@ class SearchProductEvent extends ManageProductEvent {
 
   const SearchProductEvent({required this.query});
 }
+
+class FilterProductEvent extends ManageProductEvent {
+  final List<String> bookType;
+  final bool? inStockDescending;
+
+  const FilterProductEvent({
+    required this.bookType,
+    required this.inStockDescending,
+  });
+}
